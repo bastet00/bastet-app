@@ -64,6 +64,8 @@ class ButtonWidget extends StatelessWidget {
                 onPressed!();
               }
             },
+            borderRadius:
+                borderRadiusObject ?? BorderRadius.circular(borderRadius ?? 40),
             child: Container(
               padding: EdgeInsets.symmetric(
                   horizontal: horizontalPadding, vertical: verticalPadding),
@@ -76,7 +78,10 @@ class ButtonWidget extends StatelessWidget {
                     gradient: const LinearGradient(
                       begin: Alignment(1, 0),
                       end: Alignment(-1, 0),
-                      colors: [AppColors.buttonGradient1, AppColors.buttonGradient2],
+                      colors: [
+                        AppColors.buttonGradient1,
+                        AppColors.buttonGradient2
+                      ],
                     ),
                   ),
               child: child ??
