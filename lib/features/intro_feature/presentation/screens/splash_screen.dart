@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
+import '../../../../app/utils/helper.dart';
+import 'on_boarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       DeviceOrientation.portraitUp,
     ]);
     Future.delayed(const Duration(seconds: 2), () {
-      // navigateTo(, removeAll: true);
+      navigateTo(OnBoardingScreen(), removeAll: true);
     });
   }
 
@@ -37,7 +39,6 @@ class _SplashScreenState extends State<SplashScreen> {
             imageUrl: AppAssets.logo,
             width: 90.w,
             height: 150.h,
-            fit: BoxFit.contain,
           ),
         ),
       ),

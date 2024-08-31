@@ -52,7 +52,7 @@ import '../utils/app_colors.dart';
       /// App bar theme
     appBarTheme: AppBarTheme(
       systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarColor: AppColors.primaryColor,
+        statusBarColor: AppColors.scaffoldBackGround,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.light,
       ),

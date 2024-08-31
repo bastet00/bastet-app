@@ -13,11 +13,10 @@ class AppFonts{
   static const String semiBold='Montserrat-SemiBold';
 
   static double size12= 12.sp;
-  static const double size13=13;
+  static double size13= 13.sp;
   static double size14= 14.sp;
-  static const double size16=16;
-  static const double size18=18;
-  static const double size20=20;
-
-
+  static double size16= 16.sp;
+  static double size18= 18.sp;
+  static double size20= 20.sp;
+  static double size28= 28.sp;
 }
