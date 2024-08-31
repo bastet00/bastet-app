@@ -26,7 +26,7 @@ class ButtonWidget extends StatelessWidget {
     this.outlined = false,
     this.align,
     this.fontFamily,
-    this.leadingIcon =false,
+    this.leadingIcon = false,
   });
 
   final String? text;
@@ -68,68 +68,63 @@ class ButtonWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: horizontalPadding, vertical: verticalPadding),
               width: width,
-              height: height ?? 48.h,
+              height: height ?? 53.h,
               decoration: decoration ??
                   BoxDecoration(
-                      color: outlined
-                          ? AppColors.white
-                          : color ?? AppColors.primaryColor,
-                      borderRadius: borderRadiusObject ??
-                          BorderRadius.circular(borderRadius ?? 12),
-                      border: outlined
-                          ? Border.all(
-                              color: color ?? AppColors.primaryColor,
-                            )
-                          : border),
-              child: child ??
-                  (leadingIcon
-                      ?
-                  Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Spacer(),
-                  Text(
-                    text ?? "",
-                    textAlign: align,
-                    style: TextStyle(
-                      color: outlined
-                          ? textColor ?? AppColors.primaryColor
-                          : textColor ?? AppColors.white,
-                      fontSize: textSize ?? 16.sp,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: fontFamily,
+                    borderRadius: borderRadiusObject ??
+                        BorderRadius.circular(borderRadius ?? 40),
+                    gradient: const LinearGradient(
+                      begin: Alignment(1, 0),
+                      end: Alignment(-1, 0),
+                      colors: [AppColors.buttonGradient1, AppColors.buttonGradient2],
                     ),
                   ),
-                  const Spacer(),
-                  icon ?? const SizedBox(),
-                ],
-              )
-                      :
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      icon ?? const SizedBox(),
-                      if (icon != null && (text?.isNotEmpty ?? false))
-                        const SizedBox(
-                          width: 8,
+              child: child ??
+                  (leadingIcon
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Spacer(),
+                            Text(
+                              text ?? "",
+                              textAlign: align,
+                              style: TextStyle(
+                                color: outlined
+                                    ? textColor ?? AppColors.primaryColor
+                                    : textColor ?? AppColors.white,
+                                fontSize: textSize ?? 16.sp,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: fontFamily,
+                              ),
+                            ),
+                            const Spacer(),
+                            icon ?? const SizedBox(),
+                          ],
                         )
-                      else
-                        Container(),
-                      Text(
-                        text ?? "",
-                        textAlign: align,
-                        style: TextStyle(
-                            color: outlined
-                                ? textColor ?? AppColors.primaryColor
-                                : textColor ?? AppColors.white,
-                            fontSize: textSize ?? 18.sp,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: fontFamily,
-                        ),
-                      ),
-                    ],
-                  )
-              ),
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            icon ?? const SizedBox(),
+                            if (icon != null && (text?.isNotEmpty ?? false))
+                              const SizedBox(
+                                width: 8,
+                              )
+                            else
+                              Container(),
+                            Text(
+                              text ?? "",
+                              textAlign: align,
+                              style: TextStyle(
+                                color: outlined
+                                    ? textColor ?? AppColors.primaryColor
+                                    : textColor ?? AppColors.white,
+                                fontSize: textSize ?? 18.sp,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: fontFamily,
+                              ),
+                            ),
+                          ],
+                        )),
             ),
           );
   }

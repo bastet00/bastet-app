@@ -4,7 +4,9 @@ class AppColors{
   static const white = Color(0xFFFFFFFF);
   static const primaryColor = Color(0xFFE7B133);
   static const secondaryColor = Color(0xFF62A54B);
-  static const scaffoldBackGround = Color(0xff1c1c1c);
+  static const scaffoldBackGround = Color(0xFF1C1C1C);
+  static const buttonGradient1 = Color(0xFFD5844A);
+  static const buttonGradient2 = Color(0xFF6F4426);
 
   static const red = Color(0xffEB5757);
   static const hint = Color(0xFF828282);
