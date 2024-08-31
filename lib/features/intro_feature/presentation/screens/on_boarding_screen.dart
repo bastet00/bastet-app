@@ -54,14 +54,14 @@ class OnBoardingScreen extends StatelessWidget {
                     title: 'تخطي',
                   ),
                   4.verticalSpace,
-                  index == 0 ? Center(
+                  if (index == 0) Center(
                     child: ImageWidget(
                       imageUrl: AppAssets.logo,
                       width: 60.w,
                       height: 100.h,
                     ),
-                  ) : const SizedBox(),
-                  120.verticalSpace,
+                  ),
+                  index == 0 ? 120.verticalSpace : 200.verticalSpace,
                   index == 0 ? Center(
                     child: TextWidget(
                       title: 'أهلا بيك',
@@ -116,13 +116,13 @@ class OnBoardingScreen extends StatelessWidget {
                   ],
                   const Spacer(),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomTextButton(
+                      if (index != 2)CustomTextButton(
                         title: 'التالي',
                         onPressed: ()=> controller.nextPage(duration: const Duration(milliseconds: 1), curve: Curves.ease),
                       ),
-                      index == 0 ? const SizedBox() : CustomTextButton(
+                      const Spacer(),
+                      if (index != 0) CustomTextButton(
                         title: 'السابق',
                         onPressed: ()=> controller.previousPage(duration: const Duration(milliseconds: 1), curve: Curves.ease),
                       ),
