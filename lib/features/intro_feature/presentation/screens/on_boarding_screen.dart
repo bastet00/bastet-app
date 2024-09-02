@@ -43,25 +43,38 @@ class OnBoardingScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(images[index],),
-                  fit: BoxFit.cover,
-                  opacity: 0.67,
+                  fit: BoxFit.fill,
                 ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const CustomTextButton(
+                  if (index != 2) const CustomTextButton(
                     title: 'تخطي',
                   ),
-                  4.verticalSpace,
-                  if (index == 0) Center(
-                    child: ImageWidget(
-                      imageUrl: AppAssets.logo,
-                      width: 60.w,
-                      height: 100.h,
+                  const Spacer(),
+                  if (index == 0) ...[
+                    Center(
+                      child: ImageWidget(
+                        imageUrl: AppAssets.logo,
+                        width: 60.w,
+                        height: 100.h,
+                      ),
                     ),
-                  ),
-                  index == 0 ? 120.verticalSpace : 200.verticalSpace,
+                    65.verticalSpace,
+                  ],
+                  if (index == 1) ...[
+                    Center(
+                      child: ImageWidget(
+                        imageUrl: AppImages.ab,
+                        width: 92.w,
+                        height: 73.h,
+                        opacity: 0.2,
+                      ),
+                    ),
+                    64.verticalSpace,
+                  ],
                   index == 0 ? Center(
                     child: TextWidget(
                       title: 'أهلا بيك',
@@ -79,15 +92,16 @@ class OnBoardingScreen extends StatelessWidget {
                     title: titles[index],
                     maxLines: 7,
                   ),
+                  25.verticalSpace,
                   if (index == 1) Padding(
                     padding: EdgeInsets.only(left: 160.w),
                     child: ImageWidget(
                       imageUrl: AppImages.egypt,
                       width: 108.w,
-                      height: 84.h,
+                      height: 85.h,
                     ),
                   ),
-                  80.verticalSpace,
+                  index == 1 ? 35.verticalSpace : 95.verticalSpace,
                   Center(
                     child: SmoothPageIndicator(
                       controller: controller,
@@ -114,7 +128,7 @@ class OnBoardingScreen extends StatelessWidget {
                       ),
                     )
                   ],
-                  const Spacer(),
+                  index == 2 ? 57.verticalSpace : 140.verticalSpace,
                   Row(
                     children: [
                       if (index != 2)CustomTextButton(
