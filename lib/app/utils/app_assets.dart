@@ -12,4 +12,5 @@ class AppImages{
   static const String onBoarding2 = "${imagesBase}on_boarding2.png";
   static const String onBoarding3 = "${imagesBase}on_boarding3.png";
   static const String egypt = "${imagesBase}egypt.png";
+  static const String ab = "${imagesBase}ab.png";
 }
