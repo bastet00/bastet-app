@@ -14,6 +14,7 @@ class ImageWidget extends StatelessWidget {
     this.fit,
     this.color,
     this.colorFilter,
+    this.opacity,
   });
   final String imageUrl;
   final double? width;
@@ -21,6 +22,7 @@ class ImageWidget extends StatelessWidget {
   final BoxFit? fit;
   final Color? color;
   final ColorFilter? colorFilter;
+  final double? opacity;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class ImageWidget extends StatelessWidget {
         height: height,
         fit: fit ?? BoxFit.fill,
         color: color,
+        opacity: AlwaysStoppedAnimation(opacity?? 1.0),
         loadStateChanged: (state) {
           switch (state.extendedImageLoadState) {
             case LoadState.completed:
@@ -63,6 +66,7 @@ class ImageWidget extends StatelessWidget {
       height: height,
       fit: fit?? BoxFit.fill,
       color: color,
+      opacity: AlwaysStoppedAnimation(opacity?? 1.0),
     );
   }
 }
