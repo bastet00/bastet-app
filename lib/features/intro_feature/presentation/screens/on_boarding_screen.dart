@@ -1,4 +1,5 @@
 import 'package:bastet_app/app/utils/app_colors.dart';
+import 'package:bastet_app/app/utils/helper.dart';
 import 'package:bastet_app/app/widgets/button_widget.dart';
 import 'package:bastet_app/app/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_fonts.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
+import '../../../translate_feature/presentation/screens/translate_screen.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({super.key});
@@ -47,11 +49,12 @@ class OnBoardingScreen extends StatelessWidget {
                 ),
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  if (index != 2) const CustomTextButton(
+                  if (index != 2) CustomTextButton(
                     title: 'تخطي',
+                    onPressed: ()=> navigateTo(const TranslateScreen(), removeAll: true),
                   ),
                   const Spacer(),
                   if (index == 0) ...[
@@ -124,21 +127,21 @@ class OnBoardingScreen extends StatelessWidget {
                       child: ButtonWidget(
                         width: 160.w,
                         text: 'ابدأ',
-                        onPressed: () {},
+                        onPressed: ()=> navigateTo(const TranslateScreen(), removeAll: true),
                       ),
                     )
                   ],
                   index == 2 ? 57.verticalSpace : 140.verticalSpace,
                   Row(
                     children: [
-                      if (index != 2)CustomTextButton(
-                        title: 'التالي',
-                        onPressed: ()=> controller.nextPage(duration: const Duration(milliseconds: 1), curve: Curves.ease),
-                      ),
-                      const Spacer(),
                       if (index != 0) CustomTextButton(
                         title: 'السابق',
                         onPressed: ()=> controller.previousPage(duration: const Duration(milliseconds: 1), curve: Curves.ease),
+                      ),
+                      const Spacer(),
+                      if (index != 2)CustomTextButton(
+                        title: 'التالي',
+                        onPressed: ()=> controller.nextPage(duration: const Duration(milliseconds: 1), curve: Curves.ease),
                       ),
                     ],
                   ),
