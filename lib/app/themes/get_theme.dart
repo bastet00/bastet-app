@@ -10,13 +10,17 @@ import '../utils/app_colors.dart';
       onPrimary: AppColors.white,
     ),
     primaryColor: AppColors.primaryColor,
-    dividerColor: AppColors.grey24,
+    dividerColor: AppColors.dividerColor,
     dividerTheme: const DividerThemeData(
-      color: AppColors.grey24,
+      color: AppColors.dividerColor,
     ),
     indicatorColor: Colors.black,
-    highlightColor: Colors.white,
-    drawerTheme: const DrawerThemeData(backgroundColor: AppColors.primaryColor),
+    highlightColor: AppColors.dividerColor,
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: AppColors.drawerColor,
+      scrimColor: AppColors.scrimColor,
+      shape: Border(),
+    ),
     buttonTheme: const ButtonThemeData(buttonColor: AppColors.primaryColor),
     textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(

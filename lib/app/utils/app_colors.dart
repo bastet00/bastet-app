@@ -7,6 +7,9 @@ class AppColors{
   static const scaffoldBackGround = Color(0xFF1C1C1C);
   static const buttonGradient1 = Color(0xFFD5844A);
   static const buttonGradient2 = Color(0xFF6F4426);
+  static const drawerColor = Color(0xFF735F30);
+  static const scrimColor = Color(0x69000000);
+  static const dividerColor = Color(0xFFF2CD77);
 
   static const red = Color(0xffEB5757);
   static const hint = Color(0xFF828282);
