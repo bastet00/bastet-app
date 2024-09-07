@@ -5,6 +5,13 @@
 class AppAssets{
   static const String logo = "${iconBase}logo.svg";
   static const String cat = "${iconBase}cat.svg";
+  static const String drawer = "${iconBase}drawer.svg";
+  static const String share = "${iconBase}share.svg";
+  static const String rate = "${iconBase}rate.svg";
+  static const String privacy = "${iconBase}privacy.svg";
+  static const String idea = "${iconBase}idea.svg";
+  static const String contact = "${iconBase}contact.svg";
+  static const String exit = "${iconBase}exit.svg";
 }
 
 class AppImages{
@@ -13,4 +20,5 @@ class AppImages{
   static const String onBoarding3 = "${imagesBase}on_boarding3.png";
   static const String egypt = "${imagesBase}egypt.png";
   static const String ab = "${imagesBase}ab.png";
+  static const String share = "${imagesBase}share.png";
 }
