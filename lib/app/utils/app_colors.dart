@@ -3,26 +3,22 @@ class AppColors{
   static const black = Color(0xFF000000);
   static const white = Color(0xFFFFFFFF);
   static const primaryColor = Color(0xFFE7B133);
-  static const secondaryColor = Color(0xFF62A54B);
+  static const secondaryColor = Color(0xFF275EA5);
   static const scaffoldBackGround = Color(0xFF1C1C1C);
   static const buttonGradient1 = Color(0xFFD5844A);
   static const buttonGradient2 = Color(0xFF6F4426);
   static const drawerColor = Color(0xFF735F30);
   static const scrimColor = Color(0x69000000);
   static const dividerColor = Color(0xFFF2CD77);
+  static const containerColor = Color(0xFF38301C);
+  static const colorC7B384 = Color(0xFFC7B384);
+  static const color84744F = Color(0xFF84744F);
+  static const colorA69670 = Color(0xFFA69670);
 
   static const red = Color(0xffEB5757);
-  static const hint = Color(0xFF828282);
+  static const hint = Color(0xFFD1D1D1);
   static const grey24 = Color(0x24000000);
   static const descriptionColor = Color(0xFF82808D);
-
-  // static const green = Color(0xFF3AB947);
-  // static const favourite = Color(0xFFE81A65);
-  // static const warning = Color(0xFFFFC107);
-  // static const textColor = Color(0xFF423A47);
-  // static const gery455 = Color(0xFF455A64);
-  // static const greyD1D1D1 = Color(0xFFD1D1D1);
-  // static const grey9A9A9A = Color(0xff9A9A9A);
 }
 
 
