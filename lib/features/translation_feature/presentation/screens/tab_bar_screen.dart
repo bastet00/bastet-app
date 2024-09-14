@@ -1,4 +1,3 @@
-import 'package:bastet_app/features/translation_feature/presentation/presentation_logic_holder/translation_cubit/translate_cubit.dart';
 import 'package:bastet_app/features/translation_feature/presentation/screens/fav_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,9 +18,11 @@ class TabBarScreen extends StatefulWidget {
 
 class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderStateMixin {
 
+  late TabController tabController;
+
   @override
   void initState() {
-    TranslateCubit.get().tabController = TabController(length: 2, vsync: this, initialIndex: 1);
+    tabController = TabController(length: 2, vsync: this, initialIndex: 1);
     super.initState();
   }
 
@@ -50,7 +51,7 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
           },
         ),
         bottom: TabBar(
-          controller: TranslateCubit.get().tabController,
+          controller: tabController,
           indicatorColor: AppColors.secondaryColor,
           indicatorSize: TabBarIndicatorSize.tab,
           dividerColor: Colors.transparent,
@@ -74,7 +75,7 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
       ),
       drawer: const DrawerWidget(),
       body: TabBarView(
-        controller: TranslateCubit.get().tabController,
+        controller: tabController,
         children: const [
           FavBody(),
           TranslationBody(),
