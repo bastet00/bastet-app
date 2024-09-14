@@ -150,8 +150,8 @@ class CustomFormField extends StatelessWidget {
               onChanged: onChange,
               obscureText: obscure ?? false,
               obscuringCharacter: '*',
-              autovalidateMode: autovalidateMode??AutovalidateMode.onUserInteraction,
-              textAlign: align ?? TextAlign.start,
+              autovalidateMode: autovalidateMode??AutovalidateMode.disabled,
+              textAlign: align ?? TextAlign.end,
               style: TextStyle(
                 height: 1.2.h,
                 fontFamily: fontFamily,
@@ -160,46 +160,46 @@ class CustomFormField extends StatelessWidget {
               ),
               cursorHeight: 16.h,
               decoration: InputDecoration(
-                fillColor: fillColor ?? Colors.white,
+                fillColor: fillColor ?? AppColors.containerColor,
                 filled: filled ?? false,
                 isDense: true,
                 contentPadding: contentPadding ??
-                    const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                    EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
                 errorStyle: TextStyle(
                   fontSize: 14.sp,
                   height: 2.h,
                 ),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadiusValue ?? 15),
+                  borderRadius: BorderRadius.circular(borderRadiusValue ?? 6.r),
                   borderSide: BorderSide(
-                    color: borderColor?? AppColors.primaryColor,
+                    color: borderColor?? Colors.transparent,
                   ),
                 ),
                 enabledBorder: enabledBorder ??
                     OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(borderRadiusValue ?? 15),
+                          BorderRadius.circular(borderRadiusValue ?? 6.r),
                       borderSide: BorderSide(
-                        color: borderColor?? AppColors.primaryColor,
+                        color: borderColor?? Colors.transparent,
                       ),
                     ),
                 disabledBorder: disableBorder ??
                     OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(borderRadiusValue ?? 15),
+                          BorderRadius.circular(borderRadiusValue ?? 6.r),
                       borderSide: BorderSide(
-                          color: borderColor?? AppColors.primaryColor
+                          color: borderColor?? Colors.transparent,
                       ),
                     ),
                 errorBorder: errorBorder ??
                     OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(borderRadiusValue ?? 15),
+                          BorderRadius.circular(borderRadiusValue ?? 6.r),
                       borderSide: const BorderSide(color: AppColors.red),
                     ),
                 focusedErrorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: AppColors.primaryColor,
+                  borderSide: BorderSide(
+                    color: borderColor?? Colors.transparent,
                     width: 1,
                   ),
                   borderRadius: BorderRadius.circular(15),
@@ -207,9 +207,9 @@ class CustomFormField extends StatelessWidget {
                 focusedBorder: focusedBorder ??
                     OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(borderRadiusValue ?? 15),
-                      borderSide: const BorderSide(
-                        color: AppColors.primaryColor,
+                          BorderRadius.circular(borderRadiusValue ?? 6.r),
+                      borderSide: BorderSide(
+                        color: borderColor?? Colors.transparent,
                       ),
                     ),
                 hintText: hint ?? "",
