@@ -9,15 +9,22 @@ import 'app/utils/get_it_injection.dart';
 import 'app/utils/language_manager.dart';
 import 'app/utils/navigation_helper.dart';
 import 'features/intro_feature/presentation/screens/splash_screen.dart';
+import 'features/translation_feature/presentation/presentation_logic_holder/translation_cubit/translation_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   await init();
-
   runApp(
-    const MyApp(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<TranslationCubit>(
+          create: (BuildContext context) => TranslationCubit(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
 
