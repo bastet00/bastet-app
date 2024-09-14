@@ -35,8 +35,9 @@ class TextWidget extends StatelessWidget {
     return Text(
       title,
       style: TextStyle(
-        decorationColor: color ?? AppColors.white,
+        decorationColor: AppColors.secondaryColor,
         decoration: underLine==true?TextDecoration.underline:decoration ?? TextDecoration.none,
+        decorationThickness: 8.sp,
         color: color ?? AppColors.white,
         fontFamily: fontFamily,
         fontSize: fontSize ?? 16.sp,
