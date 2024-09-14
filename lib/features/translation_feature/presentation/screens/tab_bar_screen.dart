@@ -1,6 +1,5 @@
 import 'package:bastet_app/features/translation_feature/presentation/presentation_logic_holder/translation_cubit/translate_cubit.dart';
 import 'package:bastet_app/features/translation_feature/presentation/screens/fav_body.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
