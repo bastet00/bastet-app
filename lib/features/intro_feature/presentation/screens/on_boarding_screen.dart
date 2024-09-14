@@ -10,7 +10,7 @@ import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_fonts.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
-import '../../../translate_feature/presentation/screens/translate_screen.dart';
+import '../../../translation_feature/presentation/screens/tab_bar_screen.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({super.key});
@@ -54,7 +54,7 @@ class OnBoardingScreen extends StatelessWidget {
                 children: [
                   if (index != 2) CustomTextButton(
                     title: 'تخطي',
-                    onPressed: ()=> navigateTo(const TranslateScreen(), removeAll: true),
+                    onPressed: ()=> navigateTo(const TabBarScreen(), removeAll: true),
                   ),
                   const Spacer(),
                   if (index == 0) ...[
@@ -127,7 +127,7 @@ class OnBoardingScreen extends StatelessWidget {
                       child: ButtonWidget(
                         width: 160.w,
                         text: 'ابدأ',
-                        onPressed: ()=> navigateTo(const TranslateScreen(), removeAll: true),
+                        onPressed: ()=> navigateTo(const TabBarScreen(), removeAll: true),
                       ),
                     )
                   ],
