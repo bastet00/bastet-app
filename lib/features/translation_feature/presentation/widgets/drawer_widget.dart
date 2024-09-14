@@ -28,7 +28,7 @@ class DrawerWidget extends StatelessWidget {
               child: Column(
                 children: [
                   ListTileWidget(
-                    trailingUrl: AppImages.share,
+                    trailingUrl: AppAssets.share,
                     title: 'شارك التطبيق',
                     onTap: () {},
                   ),
@@ -50,11 +50,6 @@ class DrawerWidget extends StatelessWidget {
                   ListTileWidget(
                     trailingUrl: AppAssets.contact,
                     title: 'اتصل بنا',
-                    onTap: () {},
-                  ),
-                  ListTileWidget(
-                    trailingUrl: AppAssets.exit,
-                    title: 'الخروج',
                     onTap: () {},
                   ),
                 ],
