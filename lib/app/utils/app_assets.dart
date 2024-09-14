@@ -12,6 +12,12 @@ class AppAssets{
   static const String idea = "${iconBase}idea.svg";
   static const String contact = "${iconBase}contact.svg";
   static const String exit = "${iconBase}exit.svg";
+  static const String fav = "${iconBase}fav.svg";
+  static const String translate = "${iconBase}translate.svg";
+  static const String arrow = "${iconBase}arrow.svg";
+  static const String audio = "${iconBase}audio.svg";
+  static const String microphone = "${iconBase}microphone.svg";
+  static const String copy = "${iconBase}copy.svg";
 }
 
 class AppImages{
@@ -20,5 +26,4 @@ class AppImages{
   static const String onBoarding3 = "${imagesBase}on_boarding3.png";
   static const String egypt = "${imagesBase}egypt.png";
   static const String ab = "${imagesBase}ab.png";
-  static const String share = "${imagesBase}share.png";
 }
