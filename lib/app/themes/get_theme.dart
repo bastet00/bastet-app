@@ -24,7 +24,7 @@ import '../utils/app_colors.dart';
     buttonTheme: const ButtonThemeData(buttonColor: AppColors.primaryColor),
     textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: AppColors.secondaryColor,
+          foregroundColor: AppColors.primaryColor,
         )
     ),
     datePickerTheme: DatePickerThemeData(

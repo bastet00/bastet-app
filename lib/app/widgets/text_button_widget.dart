@@ -66,10 +66,10 @@ class CustomTextButton extends StatelessWidget {
                             color: color ?? AppColors.primaryColor,
                             size: 18.sp,
                           ),
-                      8.horizontalSpace,
+                      if (title != null) 8.horizontalSpace,
                     ],
                     TextWidget(
-                      title: title ?? "Skip",
+                      title: title ?? "",
                       decoration: textDecoration,
                       color: color ?? AppColors.primaryColor,
                       fontSize: fontSize ?? 16.sp,
