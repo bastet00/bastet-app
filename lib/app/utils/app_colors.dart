@@ -15,6 +15,8 @@ class AppColors{
   static const color84744F = Color(0xFF84744F);
   static const colorA69670 = Color(0xFFA69670);
   static const iconsColor = Color(0xFFD4A02E);
+  static const suggestionsBorderColor = Color(0x6BE7B133);
+  static const suggestionsTextColor = Color(0xFF7C7668);
 
   static const red = Color(0xffEB5757);
   static const hint = Color(0xFFD1D1D1);

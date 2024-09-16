@@ -59,7 +59,7 @@ class TranslationBody extends StatelessWidget {
           ),
           12.verticalSpace,
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             height: 200.h,
             decoration: BoxDecoration(
               color: AppColors.containerColor,
@@ -69,40 +69,57 @@ class TranslationBody extends StatelessWidget {
               children: [
                 const CustomFormField(
                   hint: 'اكتب  هنا',
-                  minLines: 2,
+                  minLines: 5,
                   maxLines: 5,
                 ),
                 const Spacer(),
-                SizedBox(
-                  height: 48.h,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CustomTextButton(
-                        onPressed: () {},
-                        icon: ImageWidget(
-                          imageUrl: AppAssets.audio,
-                          width: 24.w,
-                          height: 20.h,
-                        ),
-                      ),
-                      VerticalDivider(
-                        width: 8.w,
-                        color: AppColors.colorC7B384,
-                        indent: 10.h,
-                        endIndent: 10.h,
-                      ),
-                      CustomTextButton(
-                        onPressed: () {},
-                        icon: ImageWidget(
-                          imageUrl: AppAssets.microphone,
-                          width: 14.w,
-                          height: 22.h,
-                        ),
-                      ),
-                    ],
-                  ),
+                Row(
+                  children: List.generate(3, (index) {
+                    return
+                      Row(
+                        children: [
+                          CustomTextButton(
+                            color: AppColors.suggestionsBorderColor,
+                            titleColor: AppColors.suggestionsTextColor,
+                            title: index == 0 ? 'فلسفة' : index == 1 ?'رجل' : 'عادات وتقاليد',
+                            outlined: true,
+                            onPressed: () {},
+                          ),
+                          6.horizontalSpace,
+                        ],
+                      );
+                  }),
                 ),
+                // SizedBox(
+                //   height: 48.h,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: [
+                //       CustomTextButton(
+                //         onPressed: () {},
+                //         icon: ImageWidget(
+                //           imageUrl: AppAssets.audio,
+                //           width: 24.w,
+                //           height: 20.h,
+                //         ),
+                //       ),
+                //       VerticalDivider(
+                //         width: 8.w,
+                //         color: AppColors.colorC7B384,
+                //         indent: 10.h,
+                //         endIndent: 10.h,
+                //       ),
+                //       CustomTextButton(
+                //         onPressed: () {},
+                //         icon: ImageWidget(
+                //           imageUrl: AppAssets.microphone,
+                //           width: 14.w,
+                //           height: 22.h,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -120,20 +137,24 @@ class TranslationBody extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    CustomTextButton(
-                      onPressed: () {},
-                      icon: ImageWidget(
-                        imageUrl: AppAssets.audio,
-                        width: 24.w,
-                        height: 20.h,
-                      ),
-                    ),
-                    4.horizontalSpace,
-                    TextWidget(
-                      title: 'هيروغليفي',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16.sp,
-                      color: AppColors.hint,
+                    // CustomTextButton(
+                    //   onPressed: () {},
+                    //   icon: ImageWidget(
+                    //     imageUrl: AppAssets.audio,
+                    //     width: 24.w,
+                    //     height: 20.h,
+                    //   ),
+                    // ),
+                    10.horizontalSpace,
+                    BlocBuilder<TranslationCubit, TranslationState>(
+                      builder: (context, state) {
+                        return TextWidget(
+                          title: TranslationCubit.get().fromArabic ? 'هيروغليفي' : 'عربي',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16.sp,
+                          color: AppColors.hint,
+                        );
+                      },
                     ),
                   ],
                 ),
