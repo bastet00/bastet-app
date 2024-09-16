@@ -10,4 +10,11 @@ class TranslationCubit extends Cubit<TranslationState> {
   TranslationCubit() : super(TranslationInitial());
   static TranslationCubit get() => BlocProvider.of(getIt<NavHelper>().navigatorKey.currentState!.context);
 
+  bool fromArabic = true;
+
+  void convertLanguage() {
+    fromArabic = !fromArabic;
+    emit(ConvertLanguageState(fromArabic));
+  }
+
 }
