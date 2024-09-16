@@ -49,12 +49,16 @@ class OnBoardingScreen extends StatelessWidget {
                 ),
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  if (index != 2) CustomTextButton(
-                    title: 'تخطي',
-                    onPressed: ()=> navigateTo(const TabBarScreen(), removeAll: true),
+                  if (index != 2) Row(
+                    children: [
+                      CustomTextButton(
+                        title: 'تخطي',
+                        onPressed: ()=> navigateTo(const TabBarScreen(), removeAll: true),
+                      ),
+                    ],
                   ),
                   const Spacer(),
                   if (index == 0) ...[

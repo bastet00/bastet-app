@@ -13,7 +13,7 @@ class TranslationBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         children: [
@@ -22,7 +22,7 @@ class TranslationBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               const TextWidget(
-                title: 'هيروغليفي',
+                title: 'عربي',
                 fontWeight: FontWeight.w400,
               ),
               ImageWidget(
@@ -31,7 +31,7 @@ class TranslationBody extends StatelessWidget {
                 height: 15.h,
               ),
               const TextWidget(
-                title: 'عربي',
+                title: 'هيروغليفي',
                 fontWeight: FontWeight.w400,
               ),
             ],
@@ -55,6 +55,7 @@ class TranslationBody extends StatelessWidget {
                 SizedBox(
                   height: 48.h,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CustomTextButton(
                         onPressed: () {},
@@ -94,18 +95,10 @@ class TranslationBody extends StatelessWidget {
               border: Border.all(color: AppColors.colorA69670),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    TextWidget(
-                      title: 'هيروغليفي',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16.sp,
-                      color: AppColors.hint,
-                    ),
-                    4.horizontalSpace,
                     CustomTextButton(
                       onPressed: () {},
                       icon: ImageWidget(
@@ -114,45 +107,50 @@ class TranslationBody extends StatelessWidget {
                         height: 20.h,
                       ),
                     ),
+                    4.horizontalSpace,
+                    TextWidget(
+                      title: 'هيروغليفي',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16.sp,
+                      color: AppColors.hint,
+                    ),
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    TextWidget(
-                      title: '𓊖',
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 22.sp,
-                    ),
-                    5.horizontalSpace,
+                    10.horizontalSpace,
                     const TextWidget(
                       title: 'كيميت',
                       color: AppColors.primaryColor,
                       fontWeight: FontWeight.w700,
                     ),
-                    10.horizontalSpace,
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
+                    5.horizontalSpace,
                     TextWidget(
                       title: '𓊖',
-                      color: Colors.transparent,
+                      color: AppColors.primaryColor,
                       fontWeight: FontWeight.w600,
                       fontSize: 22.sp,
                     ),
-                    5.horizontalSpace,
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    10.horizontalSpace,
                     const TextWidget(
                       title: 'كيميت',
                       color: Colors.transparent,
                       fontWeight: FontWeight.w700,
                       decoration: TextDecoration.overline,
                     ),
-                    10.horizontalSpace,
+                    5.horizontalSpace,
+                    TextWidget(
+                      title: '𓊖',
+                      color: Colors.transparent,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 22.sp,
+                    ),
                   ],
                 ),
                 Padding(
@@ -171,11 +169,12 @@ class TranslationBody extends StatelessWidget {
                 SizedBox(
                   height: 48.h,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CustomTextButton(
                         onPressed: () {},
                         icon: ImageWidget(
-                          imageUrl: AppAssets.share,
+                          imageUrl: AppAssets.copy,
                           width: 20.w,
                           height: 20.h,
                         ),
@@ -203,7 +202,7 @@ class TranslationBody extends StatelessWidget {
                       CustomTextButton(
                         onPressed: () {},
                         icon: ImageWidget(
-                          imageUrl: AppAssets.copy,
+                          imageUrl: AppAssets.share,
                           width: 20.w,
                           height: 20.h,
                         ),

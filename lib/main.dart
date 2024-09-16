@@ -40,9 +40,9 @@ class MyApp extends StatelessWidget {
         arabicLocal,
       ],
       saveLocale: true,
-      startLocale: englishLocal,
+      startLocale: arabicLocal,
       path: assetsPathLocalisations,
-      fallbackLocale: englishLocal,
+      fallbackLocale: arabicLocal,
       //
       //* ScreenUtilInit
       //

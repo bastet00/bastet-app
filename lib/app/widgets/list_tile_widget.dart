@@ -9,20 +9,20 @@ class ListTileWidget extends StatelessWidget {
   final void Function() onTap;
   final String title;
   final String? subtitle;
-  final String? trailingUrl;
+  final String? leadingUrl;
   final Color? textButtonColor;
   final bool arrowIcon;
-  final Widget? trailing;
+  final Widget? leading;
 
   const ListTileWidget({
     super.key,
     required this.onTap,
     required this.title,
-    this.trailingUrl,
+    this.leadingUrl,
     this.textButtonColor,
     this.arrowIcon = false,
     this.subtitle,
-    this.trailing,
+    this.leading,
   });
 
   @override
@@ -30,8 +30,8 @@ class ListTileWidget extends StatelessWidget {
     return ListTile(
         splashColor: Colors.transparent,
         onTap: onTap,
-        trailing: trailing??ImageWidget(
-          imageUrl: trailingUrl??'',
+        leading: leading??ImageWidget(
+          imageUrl: leadingUrl??'',
           width: 24.w,
           height: 24.h,
           color: textButtonColor??AppColors.white,
@@ -45,7 +45,7 @@ class ListTileWidget extends StatelessWidget {
           fontSize: 16.sp,
           fontWeight: FontWeight.w400,
           color: textButtonColor,
-          titleAlign: TextAlign.end,
+          titleAlign: TextAlign.start,
           maxLines: 2,
         ),
         subtitle: subtitle == null
@@ -57,7 +57,7 @@ class ListTileWidget extends StatelessWidget {
           color: textButtonColor,
           titleAlign: TextAlign.start,
         ),
-        leading: arrowIcon
+        trailing: arrowIcon
             ? Icon(
           Icons.arrow_forward_ios,
           color: AppColors.white,

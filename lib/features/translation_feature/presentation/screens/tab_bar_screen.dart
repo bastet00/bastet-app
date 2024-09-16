@@ -21,7 +21,7 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
 
   @override
   void initState() {
-    tabController = TabController(length: 2, vsync: this, initialIndex: 1);
+    tabController = TabController(length: 2, vsync: this,);
     super.initState();
   }
 
@@ -30,21 +30,24 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF2C2924),
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              padding: EdgeInsets.all(15.r),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-              icon: const Icon(
-                Icons.menu,
-              ),
-              isSelected: true,
-              selectedIcon: const ImageWidget(
-                imageUrl: AppAssets.drawer,
-              ),
-            );
-          },
-        ),
+        actions: [
+          Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                onPressed: () => Scaffold.of(context).openEndDrawer(),
+                icon: const Icon(
+                  Icons.menu,
+                ),
+                isSelected: true,
+                selectedIcon: ImageWidget(
+                  imageUrl: AppAssets.drawer,
+                  width: 32.w,
+                  height: 32.h,
+                ),
+              );
+            },
+          ),
+        ],
         bottom: TabBar(
           controller: tabController,
           indicatorColor: AppColors.secondaryColor,
@@ -53,14 +56,14 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
           tabs: [
             Tab(
               child: ImageWidget(
-                imageUrl: AppAssets.fav,
+                imageUrl: AppAssets.translate,
                 width: 32.w,
                 height: 32.h,
               ),
             ),
             Tab(
               child: ImageWidget(
-                imageUrl: AppAssets.translate,
+                imageUrl: AppAssets.fav,
                 width: 32.w,
                 height: 32.h,
               ),
@@ -68,12 +71,12 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
           ],
         ),
       ),
-      drawer: const DrawerWidget(),
+      endDrawer: const DrawerWidget(),
       body: TabBarView(
         controller: tabController,
         children: const [
-          FavBody(),
           TranslationBody(),
+          FavBody(),
         ],
       ),
     );
