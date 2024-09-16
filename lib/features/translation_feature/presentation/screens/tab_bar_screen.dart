@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
 import '../../../../app/widgets/image_widget.dart';
-import '../../../../app/widgets/text_widget.dart';
 import '../widgets/drawer_widget.dart';
 import 'translation_body.dart';
 
@@ -31,10 +30,6 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF2C2924),
-        title: const TextWidget(
-          title: 'Bastet',
-          fontWeight: FontWeight.w400,
-        ),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
