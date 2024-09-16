@@ -9,6 +9,7 @@ class CustomTextButton extends StatelessWidget {
     super.key,
     this.title,
     this.color,
+    this.titleColor,
     this.fontSize,
     this.fontWeight,
     this.onPressed,
@@ -22,6 +23,7 @@ class CustomTextButton extends StatelessWidget {
 
   final String? title;
   final Color? color;
+  final Color? titleColor;
   final TextDecoration? textDecoration;
   final double? fontSize;
   final FontWeight? fontWeight;
@@ -71,7 +73,7 @@ class CustomTextButton extends StatelessWidget {
                     TextWidget(
                       title: title ?? "",
                       decoration: textDecoration,
-                      color: color ?? AppColors.primaryColor,
+                      color: titleColor ?? AppColors.primaryColor,
                       fontSize: fontSize ?? 16.sp,
                       fontWeight: fontWeight ?? FontWeight.w400,
                     ),
