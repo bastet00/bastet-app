@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/app_assets.dart';
@@ -7,6 +8,7 @@ import '../../../../app/widgets/custom_form_field.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
+import '../presentation_logic_holder/translation_cubit/translation_cubit.dart';
 
 class TranslationBody extends StatelessWidget {
   const TranslationBody({super.key});
@@ -18,23 +20,42 @@ class TranslationBody extends StatelessWidget {
       child: Column(
         children: [
           20.verticalSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const TextWidget(
-                title: 'عربي',
-                fontWeight: FontWeight.w400,
-              ),
-              ImageWidget(
-                imageUrl: AppAssets.arrow,
-                width: 31.w,
-                height: 15.h,
-              ),
-              const TextWidget(
-                title: 'هيروغليفي',
-                fontWeight: FontWeight.w400,
-              ),
-            ],
+          BlocBuilder<TranslationCubit, TranslationState>(
+            builder: (context, state) {
+              final cubit = TranslationCubit.get();
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 80.w,
+                      child: TextWidget(
+                        title: cubit.fromArabic ? 'عربي' : 'هيروغليفي',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const Spacer(),
+                    CustomTextButton(
+                      onPressed: cubit.convertLanguage,
+                      icon: ImageWidget(
+                        imageUrl: AppAssets.convert,
+                        width: 28.w,
+                        height: 28.h,
+                        color: AppColors.iconsColor,
+                      ),
+                    ),
+                    const Spacer(),
+                    SizedBox(
+                      width: 80.w,
+                      child: TextWidget(
+                        title: cubit.fromArabic ? 'هيروغليفي' : 'عربي',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
           12.verticalSpace,
           Container(
