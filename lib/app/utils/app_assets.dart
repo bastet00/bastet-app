@@ -18,6 +18,7 @@ class AppAssets{
   static const String audio = "${iconBase}audio.svg";
   static const String microphone = "${iconBase}microphone.svg";
   static const String copy = "${iconBase}copy.svg";
+  static const String convert = "${iconBase}convert.svg";
 }
 
 class AppImages{

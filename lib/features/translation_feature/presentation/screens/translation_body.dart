@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/app_assets.dart';
@@ -7,38 +8,58 @@ import '../../../../app/widgets/custom_form_field.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
+import '../presentation_logic_holder/translation_cubit/translation_cubit.dart';
 
 class TranslationBody extends StatelessWidget {
   const TranslationBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         children: [
           20.verticalSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const TextWidget(
-                title: 'هيروغليفي',
-                fontWeight: FontWeight.w400,
-              ),
-              ImageWidget(
-                imageUrl: AppAssets.arrow,
-                width: 31.w,
-                height: 15.h,
-              ),
-              const TextWidget(
-                title: 'عربي',
-                fontWeight: FontWeight.w400,
-              ),
-            ],
+          BlocBuilder<TranslationCubit, TranslationState>(
+            builder: (context, state) {
+              final cubit = TranslationCubit.get();
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 80.w,
+                      child: TextWidget(
+                        title: cubit.fromArabic ? 'عربي' : 'هيروغليفي',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const Spacer(),
+                    CustomTextButton(
+                      onPressed: cubit.convertLanguage,
+                      icon: ImageWidget(
+                        imageUrl: AppAssets.convert,
+                        width: 28.w,
+                        height: 28.h,
+                        color: AppColors.iconsColor,
+                      ),
+                    ),
+                    const Spacer(),
+                    SizedBox(
+                      width: 80.w,
+                      child: TextWidget(
+                        title: cubit.fromArabic ? 'هيروغليفي' : 'عربي',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
           12.verticalSpace,
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             height: 200.h,
             decoration: BoxDecoration(
               color: AppColors.containerColor,
@@ -48,39 +69,57 @@ class TranslationBody extends StatelessWidget {
               children: [
                 const CustomFormField(
                   hint: 'اكتب  هنا',
-                  minLines: 2,
+                  minLines: 5,
                   maxLines: 5,
                 ),
                 const Spacer(),
-                SizedBox(
-                  height: 48.h,
-                  child: Row(
-                    children: [
-                      CustomTextButton(
-                        onPressed: () {},
-                        icon: ImageWidget(
-                          imageUrl: AppAssets.audio,
-                          width: 24.w,
-                          height: 20.h,
-                        ),
-                      ),
-                      VerticalDivider(
-                        width: 8.w,
-                        color: AppColors.colorC7B384,
-                        indent: 10.h,
-                        endIndent: 10.h,
-                      ),
-                      CustomTextButton(
-                        onPressed: () {},
-                        icon: ImageWidget(
-                          imageUrl: AppAssets.microphone,
-                          width: 14.w,
-                          height: 22.h,
-                        ),
-                      ),
-                    ],
-                  ),
+                Row(
+                  children: List.generate(3, (index) {
+                    return
+                      Row(
+                        children: [
+                          CustomTextButton(
+                            color: AppColors.suggestionsBorderColor,
+                            titleColor: AppColors.suggestionsTextColor,
+                            title: index == 0 ? 'فلسفة' : index == 1 ?'رجل' : 'عادات وتقاليد',
+                            outlined: true,
+                            onPressed: () {},
+                          ),
+                          6.horizontalSpace,
+                        ],
+                      );
+                  }),
                 ),
+                // SizedBox(
+                //   height: 48.h,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: [
+                //       CustomTextButton(
+                //         onPressed: () {},
+                //         icon: ImageWidget(
+                //           imageUrl: AppAssets.audio,
+                //           width: 24.w,
+                //           height: 20.h,
+                //         ),
+                //       ),
+                //       VerticalDivider(
+                //         width: 8.w,
+                //         color: AppColors.colorC7B384,
+                //         indent: 10.h,
+                //         endIndent: 10.h,
+                //       ),
+                //       CustomTextButton(
+                //         onPressed: () {},
+                //         icon: ImageWidget(
+                //           imageUrl: AppAssets.microphone,
+                //           width: 14.w,
+                //           height: 22.h,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -94,65 +133,66 @@ class TranslationBody extends StatelessWidget {
               border: Border.all(color: AppColors.colorA69670),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    TextWidget(
-                      title: 'هيروغليفي',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16.sp,
-                      color: AppColors.hint,
-                    ),
-                    4.horizontalSpace,
-                    CustomTextButton(
-                      onPressed: () {},
-                      icon: ImageWidget(
-                        imageUrl: AppAssets.audio,
-                        width: 24.w,
-                        height: 20.h,
-                      ),
+                    // CustomTextButton(
+                    //   onPressed: () {},
+                    //   icon: ImageWidget(
+                    //     imageUrl: AppAssets.audio,
+                    //     width: 24.w,
+                    //     height: 20.h,
+                    //   ),
+                    // ),
+                    10.horizontalSpace,
+                    BlocBuilder<TranslationCubit, TranslationState>(
+                      builder: (context, state) {
+                        return TextWidget(
+                          title: TranslationCubit.get().fromArabic ? 'هيروغليفي' : 'عربي',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16.sp,
+                          color: AppColors.hint,
+                        );
+                      },
                     ),
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    TextWidget(
-                      title: '𓊖',
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 22.sp,
-                    ),
-                    5.horizontalSpace,
+                    10.horizontalSpace,
                     const TextWidget(
                       title: 'كيميت',
                       color: AppColors.primaryColor,
                       fontWeight: FontWeight.w700,
                     ),
-                    10.horizontalSpace,
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
+                    5.horizontalSpace,
                     TextWidget(
                       title: '𓊖',
-                      color: Colors.transparent,
+                      color: AppColors.primaryColor,
                       fontWeight: FontWeight.w600,
                       fontSize: 22.sp,
                     ),
-                    5.horizontalSpace,
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    10.horizontalSpace,
                     const TextWidget(
                       title: 'كيميت',
                       color: Colors.transparent,
                       fontWeight: FontWeight.w700,
                       decoration: TextDecoration.overline,
                     ),
-                    10.horizontalSpace,
+                    5.horizontalSpace,
+                    TextWidget(
+                      title: '𓊖',
+                      color: Colors.transparent,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 22.sp,
+                    ),
                   ],
                 ),
                 Padding(
@@ -171,11 +211,12 @@ class TranslationBody extends StatelessWidget {
                 SizedBox(
                   height: 48.h,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CustomTextButton(
                         onPressed: () {},
                         icon: ImageWidget(
-                          imageUrl: AppAssets.share,
+                          imageUrl: AppAssets.copy,
                           width: 20.w,
                           height: 20.h,
                         ),
@@ -203,7 +244,7 @@ class TranslationBody extends StatelessWidget {
                       CustomTextButton(
                         onPressed: () {},
                         icon: ImageWidget(
-                          imageUrl: AppAssets.copy,
+                          imageUrl: AppAssets.share,
                           width: 20.w,
                           height: 20.h,
                         ),

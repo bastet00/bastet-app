@@ -28,27 +28,27 @@ class DrawerWidget extends StatelessWidget {
               child: Column(
                 children: [
                   ListTileWidget(
-                    trailingUrl: AppAssets.share,
+                    leadingUrl: AppAssets.share,
                     title: 'شارك التطبيق',
                     onTap: () {},
                   ),
                   ListTileWidget(
-                    trailingUrl: AppAssets.rate,
+                    leadingUrl: AppAssets.rate,
                     title: 'قيم التطبيق',
                     onTap: () {},
                   ),
                   ListTileWidget(
-                    trailingUrl: AppAssets.privacy,
+                    leadingUrl: AppAssets.privacy,
                     title: 'سياسة الخصوصية',
                     onTap: () {},
                   ),
                   ListTileWidget(
-                    trailingUrl: AppAssets.idea,
+                    leadingUrl: AppAssets.idea,
                     title: 'اقترح فكرتك',
                     onTap: () {},
                   ),
                   ListTileWidget(
-                    trailingUrl: AppAssets.contact,
+                    leadingUrl: AppAssets.contact,
                     title: 'اتصل بنا',
                     onTap: () {},
                   ),

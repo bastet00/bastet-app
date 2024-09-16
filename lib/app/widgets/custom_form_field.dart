@@ -151,7 +151,7 @@ class CustomFormField extends StatelessWidget {
               obscureText: obscure ?? false,
               obscuringCharacter: '*',
               autovalidateMode: autovalidateMode??AutovalidateMode.disabled,
-              textAlign: align ?? TextAlign.end,
+              textAlign: align ?? TextAlign.start,
               style: TextStyle(
                 height: 1.2.h,
                 fontFamily: fontFamily,
