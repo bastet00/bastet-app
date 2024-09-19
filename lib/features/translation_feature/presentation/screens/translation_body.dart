@@ -60,34 +60,51 @@ class TranslationBody extends StatelessWidget {
           12.verticalSpace,
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-            height: 200.h,
             decoration: BoxDecoration(
               color: AppColors.containerColor,
               borderRadius: BorderRadius.circular(6.r),
             ),
             child: Column(
               children: [
-                const CustomFormField(
+                CustomFormField(
+                  controller: TranslationCubit.get().translationController,
                   hint: 'اكتب  هنا',
                   minLines: 5,
                   maxLines: 5,
                 ),
-                const Spacer(),
                 Row(
                   children: List.generate(3, (index) {
-                    return
-                      Row(
-                        children: [
-                          CustomTextButton(
-                            color: AppColors.suggestionsBorderColor,
-                            titleColor: AppColors.suggestionsTextColor,
-                            title: index == 0 ? 'فلسفة' : index == 1 ?'رجل' : 'عادات وتقاليد',
-                            outlined: true,
-                            onPressed: () {},
-                          ),
-                          6.horizontalSpace,
-                        ],
-                      );
+                    final title = index == 0 ? 'شمس' : index == 1 ?'عدالة' : 'قلب';
+                    return Row(
+                      children: [
+                        CustomTextButton(
+                          color: AppColors.suggestionsBorderColor,
+                          titleColor: AppColors.suggestionsTextColor,
+                          title: title,
+                          outlined: true,
+                          onPressed: ()=> TranslationCubit.get().translationController.text = title,
+                        ),
+                        6.horizontalSpace,
+                      ],
+                    );
+                  }),
+                ),
+                6.verticalSpace,
+                Row(
+                  children: List.generate(2, (index) {
+                    final title = index == 0 ? 'صباح الخير' : 'جميل';
+                    return Row(
+                      children: [
+                        CustomTextButton(
+                          color: AppColors.suggestionsBorderColor,
+                          titleColor: AppColors.suggestionsTextColor,
+                          title: title,
+                          outlined: true,
+                          onPressed: ()=> TranslationCubit.get().translationController.text = title,
+                        ),
+                        6.horizontalSpace,
+                      ],
+                    );
                   }),
                 ),
                 // SizedBox(

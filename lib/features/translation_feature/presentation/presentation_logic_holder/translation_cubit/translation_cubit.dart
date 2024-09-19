@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../app/utils/get_it_injection.dart';
@@ -11,6 +12,7 @@ class TranslationCubit extends Cubit<TranslationState> {
   static TranslationCubit get() => BlocProvider.of(getIt<NavHelper>().navigatorKey.currentState!.context);
 
   bool fromArabic = true;
+  final translationController = TextEditingController();
 
   void convertLanguage() {
     fromArabic = !fromArabic;
