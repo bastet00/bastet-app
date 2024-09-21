@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
 import '../../../../app/widgets/custom_form_field.dart';
+import '../../../../app/widgets/flutter_toast.dart';
 import '../../../../app/widgets/image_widget.dart';
+import '../../../../app/widgets/loading.dart';
 import '../../../../app/widgets/text_button_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
 import '../presentation_logic_holder/translation_cubit/translation_cubit.dart';
@@ -71,6 +74,9 @@ class TranslationBody extends StatelessWidget {
                   hint: 'اكتب  هنا',
                   minLines: 5,
                   maxLines: 5,
+                  onChange: (value) {
+                    TranslationCubit.get().getTranslation();
+                  },
                 ),
                 Row(
                   children: List.generate(3, (index) {
@@ -82,7 +88,10 @@ class TranslationBody extends StatelessWidget {
                           titleColor: AppColors.suggestionsTextColor,
                           title: title,
                           outlined: true,
-                          onPressed: ()=> TranslationCubit.get().translationController.text = title,
+                          onPressed: () {
+                            TranslationCubit.get().translationController.text = title;
+                            TranslationCubit.get().getTranslation();
+                          },
                         ),
                         6.horizontalSpace,
                       ],
@@ -100,7 +109,10 @@ class TranslationBody extends StatelessWidget {
                           titleColor: AppColors.suggestionsTextColor,
                           title: title,
                           outlined: true,
-                          onPressed: ()=> TranslationCubit.get().translationController.text = title,
+                          onPressed: () {
+                            TranslationCubit.get().translationController.text = title;
+                            TranslationCubit.get().getTranslation();
+                          },
                         ),
                         6.horizontalSpace,
                       ],
@@ -140,138 +152,142 @@ class TranslationBody extends StatelessWidget {
               ],
             ),
           ),
-          16.verticalSpace,
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
-            height: 270.h,
-            decoration: BoxDecoration(
-              color: AppColors.containerColor,
-              borderRadius: BorderRadius.circular(6.r),
-              border: Border.all(color: AppColors.colorA69670),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    // CustomTextButton(
-                    //   onPressed: () {},
-                    //   icon: ImageWidget(
-                    //     imageUrl: AppAssets.audio,
-                    //     width: 24.w,
-                    //     height: 20.h,
-                    //   ),
-                    // ),
-                    10.horizontalSpace,
-                    BlocBuilder<TranslationCubit, TranslationState>(
-                      builder: (context, state) {
-                        return TextWidget(
-                          title: TranslationCubit.get().fromArabic ? 'هيروغليفي' : 'عربي',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16.sp,
-                          color: AppColors.hint,
-                        );
-                      },
+          20.verticalSpace,
+          BlocBuilder<TranslationCubit, TranslationState>(
+            builder: (context, state) {
+              return state is TranslationLoading
+              ? const Loading()
+              : ListView.separated(
+                itemBuilder: (context, index) {
+                  final translation = TranslationCubit.get().translationModel?.translation?[index];
+                  final egyptianSymbolUnicode  = int.parse(translation?.egyptian?[0].symbol?? '', radix: 16);
+                  final egyptianWord = translation?.egyptian?[0].word;
+                  final egyptian = '${translation?.egyptian?[0].word?? ''} ${String.fromCharCode(egyptianSymbolUnicode)}';
+                  final arabic = translation?.arabic?.map((e) => e.word).join('، ');
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+                    decoration: BoxDecoration(
+                      color: AppColors.containerColor,
+                      borderRadius: BorderRadius.circular(6.r),
+                      border: Border.all(color: AppColors.colorA69670),
                     ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    10.horizontalSpace,
-                    const TextWidget(
-                      title: 'كيميت',
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    5.horizontalSpace,
-                    TextWidget(
-                      title: '𓊖',
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 22.sp,
-                    ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    10.horizontalSpace,
-                    const TextWidget(
-                      title: 'كيميت',
-                      color: Colors.transparent,
-                      fontWeight: FontWeight.w700,
-                      decoration: TextDecoration.overline,
-                    ),
-                    5.horizontalSpace,
-                    TextWidget(
-                      title: '𓊖',
-                      color: Colors.transparent,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 22.sp,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(right: 10.w),
-                  child: const TextWidget(
-                    title: 'مصر',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                const Spacer(),
-                Divider(
-                  color: AppColors.color84744F,
-                  indent: 10.w,
-                  endIndent: 10.w,
-                ),
-                SizedBox(
-                  height: 48.h,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CustomTextButton(
-                        onPressed: () {},
-                        icon: ImageWidget(
-                          imageUrl: AppAssets.copy,
-                          width: 20.w,
-                          height: 20.h,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Row(
+                              //   children: [
+                              //     // CustomTextButton(
+                              //     //   onPressed: () {},
+                              //     //   icon: ImageWidget(
+                              //     //     imageUrl: AppAssets.audio,
+                              //     //     width: 24.w,
+                              //     //     height: 20.h,
+                              //     //   ),
+                              //     // ),
+                              //     TextWidget(
+                              //       title: TranslationCubit.get().fromArabic ? 'هيروغليفي' : 'عربي',
+                              //       fontWeight: FontWeight.w400,
+                              //       fontSize: 16.sp,
+                              //       color: AppColors.hint,
+                              //     ),
+                              //   ],
+                              // ),
+                              20.horizontalSpace,
+                              Stack(
+                                alignment: Alignment.bottomRight,
+                                children: [
+                                  TextWidget(
+                                    title: egyptianWord?? '',
+                                    color: Colors.transparent,
+                                    fontWeight: FontWeight.w700,
+                                    underLine: true,
+                                    fontSize: 18.sp,
+                                  ),
+                                  TextWidget(
+                                    title: egyptian,
+                                    color: AppColors.primaryColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18.sp,
+                                  ),
+                                ],
+                              ),
+                              12.verticalSpace,
+                              TextWidget(
+                                title: arabic?? '',
+                                fontWeight: FontWeight.w400,
+                                titleAlign: TextAlign.start,
+                                maxLines: 4,
+                              ),
+                              const Divider(
+                                color: AppColors.color84744F,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      VerticalDivider(
-                        width: 8.w,
-                        color: AppColors.colorC7B384,
-                        indent: 10.h,
-                        endIndent: 10.h,
-                      ),
-                      CustomTextButton(
-                        onPressed: () {},
-                        icon: ImageWidget(
-                          imageUrl: AppAssets.fav,
-                          width: 20.w,
-                          height: 20.h,
+                        SizedBox(
+                          height: 48.h,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              CustomTextButton(
+                                onPressed: () {
+                                  // Copy to clipboard
+                                  Clipboard.setData(ClipboardData(text: egyptian));
+                                  showToast(msg: 'تم النسخ');
+                                },
+                                icon: ImageWidget(
+                                  imageUrl: AppAssets.copy,
+                                  width: 20.w,
+                                  height: 20.h,
+                                ),
+                              ),
+                              VerticalDivider(
+                                width: 8.w,
+                                color: AppColors.colorC7B384,
+                                indent: 10.h,
+                                endIndent: 10.h,
+                              ),
+                              CustomTextButton(
+                                onPressed: () {},
+                                icon: ImageWidget(
+                                  imageUrl: AppAssets.fav,
+                                  width: 20.w,
+                                  height: 20.h,
+                                ),
+                              ),
+                              VerticalDivider(
+                                width: 8.w,
+                                color: AppColors.colorC7B384,
+                                indent: 10.h,
+                                endIndent: 10.h,
+                              ),
+                              CustomTextButton(
+                                onPressed: () {},
+                                icon: ImageWidget(
+                                  imageUrl: AppAssets.share,
+                                  width: 20.w,
+                                  height: 20.h,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      VerticalDivider(
-                        width: 8.w,
-                        color: AppColors.colorC7B384,
-                        indent: 10.h,
-                        endIndent: 10.h,
-                      ),
-                      CustomTextButton(
-                        onPressed: () {},
-                        icon: ImageWidget(
-                          imageUrl: AppAssets.share,
-                          width: 20.w,
-                          height: 20.h,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+                      ],
+                    ),
+                  );
+                },
+                itemCount: TranslationCubit.get().translationModel?.translation?.length?? 0,
+                separatorBuilder: (context, index) => 10.verticalSpace,
+                shrinkWrap: true,
+                primary: false,
+              );
+            },
           ),
+          20.verticalSpace,
         ],
       ),
     );
