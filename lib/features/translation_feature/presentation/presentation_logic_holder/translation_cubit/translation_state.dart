@@ -15,3 +15,8 @@ class ConvertLanguageState extends TranslationState {
   @override
   List<Object?> get props => [fromArabic];
 }
+
+final class TranslationLoading extends TranslationState {
+  @override
+  List<Object> get props => [];
+}
