@@ -1,11 +1,28 @@
 class TranslationModel {
   TranslationModel({
+    this.translation,
+  });
+
+  TranslationModel.fromJson(dynamic json) {
+    if (json != null) {
+      translation = [];
+      json.forEach((v) {
+        translation?.add(Translation.fromJson(v));
+      });
+    }
+  }
+
+  List<Translation>? translation;
+}
+
+class Translation {
+  Translation({
       this.id, 
       this.arabic, 
       this.egyptian, 
       this.english,});
 
-  TranslationModel.fromJson(dynamic json) {
+  Translation.fromJson(dynamic json) {
     id = json['id'];
     if (json['Arabic'] != null) {
       arabic = [];
