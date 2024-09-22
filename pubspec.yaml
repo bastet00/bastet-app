@@ -48,6 +48,7 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   equatable: ^2.0.5
   fluttertoast: ^8.2.8
+  async: ^2.11.0
 
 dev_dependencies:
   flutter_test:

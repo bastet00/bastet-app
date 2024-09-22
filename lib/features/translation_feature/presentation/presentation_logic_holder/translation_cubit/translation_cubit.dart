@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:async/async.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +20,8 @@ class TranslationCubit extends Cubit<TranslationState> {
   bool fromArabic = true;
   final translationController = TextEditingController();
   TranslationModel? translationModel;
+  Timer? _debounce;
+  CancelableOperation? _cancelableRequest;
 
   void convertLanguage() {
     fromArabic = !fromArabic;
@@ -24,7 +29,7 @@ class TranslationCubit extends Cubit<TranslationState> {
     if (translationController.text.isNotEmpty) getTranslation();
   }
 
-  void getTranslation() async {
+  Future<void> getTranslation() async {
     emit(TranslationLoading());
     final response = await getIt<GetTranslationUseCase>()(GetTranslationUseCaseParams(
       word: translationController.text,
@@ -37,6 +42,31 @@ class TranslationCubit extends Cubit<TranslationState> {
       },
     );
     emit(TranslationInitial());
+  }
+
+  void onTextChanged(String text) {
+    // Cancel the previous debounce timer if it's still active
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+
+    // Debounce - wait for 500ms after typing stops
+    _debounce = Timer(const Duration(milliseconds: 300), () {
+      // Cancel the previous HTTP request if it's still ongoing
+      _cancelableRequest?.cancel();
+
+      _cancelableRequest = CancelableOperation.fromFuture(
+        getTranslation(), // Trigger the translation request
+        onCancel: () {
+          debugPrint("***** Previous request canceled. *****");
+        },
+      );
+    });
+  }
+
+  @override
+  Future<void> close() {
+    _debounce?.cancel();
+    _cancelableRequest?.cancel();
+    return super.close();
   }
 
 }
