@@ -49,6 +49,8 @@ dependencies:
   equatable: ^2.0.5
   fluttertoast: ^8.2.8
   async: ^2.11.0
+  url_launcher: ^6.3.0
+  share_plus: ^10.0.2
 
 dev_dependencies:
   flutter_test:
