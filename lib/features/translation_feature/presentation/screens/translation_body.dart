@@ -74,8 +74,10 @@ class TranslationBody extends StatelessWidget {
                   hint: 'اكتب  هنا',
                   minLines: 5,
                   maxLines: 5,
-                  onChange: (value) {
-                    TranslationCubit.get().getTranslation();
+                  onChange: (text) {
+                    if (text.isNotEmpty) {
+                      TranslationCubit.get().onTextChanged(text);
+                    }
                   },
                 ),
                 Row(
@@ -155,7 +157,9 @@ class TranslationBody extends StatelessWidget {
           20.verticalSpace,
           BlocBuilder<TranslationCubit, TranslationState>(
             builder: (context, state) {
-              return state is TranslationLoading
+              return TranslationCubit.get().translationController.text.isEmpty
+              ? const SizedBox()
+              : state is TranslationLoading
               ? const Loading()
               : ListView.separated(
                 itemBuilder: (context, index) {
