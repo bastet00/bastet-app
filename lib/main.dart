@@ -9,6 +9,7 @@ import 'app/utils/get_it_injection.dart';
 import 'app/utils/language_manager.dart';
 import 'app/utils/navigation_helper.dart';
 import 'features/intro_feature/presentation/screens/splash_screen.dart';
+import 'features/translation_feature/presentation/presentation_logic_holder/settings_cubit/settings_cubit.dart';
 import 'features/translation_feature/presentation/presentation_logic_holder/translation_cubit/translation_cubit.dart';
 
 Future<void> main() async {
@@ -21,6 +22,9 @@ Future<void> main() async {
       providers: [
         BlocProvider<TranslationCubit>(
           create: (BuildContext context) => TranslationCubit(),
+        ),
+        BlocProvider<SettingsCubit>(
+          create: (BuildContext context) => SettingsCubit()..getPrivacyPolicy(),
         ),
       ],
       child: const MyApp(),
