@@ -62,7 +62,9 @@ class DrawerWidget extends StatelessWidget {
                     onTap: () async {
                       // email
                       if (!await launchUrl(Uri.parse(
-                      "mailto:contact@bastet-app.com"))) {
+                        "mailto:contact@bastet-app.com?subject=اقتراح فكرة"
+                        "&body=للتواصل مع  باستت 𓃠\nالموضوع:\n\nرقم الهاتف:\n\nالاسم:"
+                      ))) {
                       throw Exception('Could not launch url');
                       }
                     },
@@ -73,7 +75,9 @@ class DrawerWidget extends StatelessWidget {
                     onTap: () async {
                       // email
                       if (!await launchUrl(Uri.parse(
-                      "mailto:contact@bastet-app.com"))) {
+                        "mailto:contact@bastet-app.com?subject=تواصل مع الفريق"
+                        "&body=للتواصل مع  باستت 𓃠\nالموضوع:\n\nرقم الهاتف:\n\nالاسم:"
+                      ))) {
                       throw Exception('Could not launch url');
                       }
                     },
