@@ -5,4 +5,5 @@ import '../../data/model/translation_model.dart';
 
 abstract class TranslationRepo {
   Future<Either<Failure, TranslationModel>> getTranslation(Map<String, String> map);
+  Future<Either<Failure, String>> getPrivacyPolicy();
 }
