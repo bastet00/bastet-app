@@ -22,4 +22,11 @@ class TranslationRepoImpl extends TranslationRepo {
     });
   }
 
+  @override
+  Future<Either<Failure, String>> getPrivacyPolicy() async {
+    return await RepoImplCallHandler<String>(networkInfo)(() async {
+      return await translationRemoteDataSource.getPrivacyPolicy();
+    });
+  }
+
 }
