@@ -3,9 +3,12 @@ import 'package:bastet_app/app/widgets/image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../app/services/cache_service.dart';
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
+import '../../../../app/utils/get_it_injection.dart';
 import '../../../../app/utils/helper.dart';
+import '../../../translation_feature/presentation/screens/tab_bar_screen.dart';
 import 'on_boarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -24,7 +27,11 @@ class _SplashScreenState extends State<SplashScreen> {
       DeviceOrientation.portraitUp,
     ]);
     Future.delayed(const Duration(seconds: 2), () {
-      navigateTo(OnBoardingScreen(), removeAll: true);
+      if (getIt<CacheService>().getOnBoarding() != null) {
+        navigateTo(const TabBarScreen(), removeAll: true);
+      } else {
+        navigateTo(OnBoardingScreen(), removeAll: true);
+      }
     });
   }
 

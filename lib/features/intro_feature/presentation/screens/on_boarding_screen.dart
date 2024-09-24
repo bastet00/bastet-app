@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../../app/services/cache_service.dart';
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_fonts.dart';
+import '../../../../app/utils/get_it_injection.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
 import '../../../translation_feature/presentation/screens/tab_bar_screen.dart';
@@ -29,9 +31,9 @@ class OnBoardingScreen extends StatelessWidget {
     'إحياء اللغة هو إعلان بداية عصر جديد، عصر النهضة والحضارة الحديثة لكيميت.\n شارك معانا في إحياء اللغة والثقافة',
   ];
 
-  // Timer? _timer;
   @override
   Widget build(BuildContext context) {
+    getIt<CacheService>().setOnBoarding();
     return Scaffold(
       body: SafeArea(
         child: PageView.builder(
