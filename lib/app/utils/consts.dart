@@ -3,6 +3,7 @@ const String kBaseVersion = '';
 
 /// end points
 const String kSearch = 'search';
+const String kPrivacyPolicy = 'privacy-policy';
 
 //Static Headers
 Map<String, String> apiHeaders = {

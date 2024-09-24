@@ -51,6 +51,7 @@ dependencies:
   async: ^2.11.0
   url_launcher: ^6.3.0
   share_plus: ^10.0.2
+  flutter_widget_from_html: ^0.15.2
   shared_preferences: ^2.3.2
 
 dev_dependencies:
@@ -63,17 +64,6 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
-
-  flutter_launcher_icons: ^0.14.0
-
-flutter_launcher_icons:
-  android: true
-  ios: true
-  remove_alpha_ios: true
-  image_path: "assets/images/cat.png"
-  adaptive_icon_background: "#837453"
-  adaptive_icon_foreground: "assets/images/cat.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

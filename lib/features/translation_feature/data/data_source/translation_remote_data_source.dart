@@ -8,6 +8,11 @@ abstract class TranslationRemoteDataSource {
   ///
   /// Throws a [ServerException] for all error codes.
   Future<TranslationModel> search(Map<String, String> map);
+
+  /// Calls the [Get] {privacy-policy} endpoint.
+  ///
+  /// Throws a [ServerException] for all error codes.
+  Future<String> getPrivacyPolicy();
 }
 
 class TranslationRemoteDataSourceImpl implements TranslationRemoteDataSource {
@@ -24,6 +29,16 @@ class TranslationRemoteDataSourceImpl implements TranslationRemoteDataSource {
     );
     final data = await RemoteDataSourceCallHandler()(response);
     return TranslationModel.fromJson(data);
+  }
+
+  @override
+  Future<String> getPrivacyPolicy() async {
+    final response = await networkManager.request(
+      endPoint: kPrivacyPolicy,
+      method: RequestMethod.get,
+    );
+    final data = await RemoteDataSourceCallHandler()(response);
+    return data["privacyPolicyTextDiv"]?? "";
   }
 
 }

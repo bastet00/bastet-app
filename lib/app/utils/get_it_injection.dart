@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../features/translation_feature/data/data_source/translation_remote_data_source.dart';
 import '../../features/translation_feature/data/repo_impl/translation_repo_impl.dart';
 import '../../features/translation_feature/domain/repo/translation_repo.dart';
+import '../../features/translation_feature/domain/usecases/privacy_policy_use_case.dart';
 import '../../features/translation_feature/domain/usecases/translation_use_case.dart';
 import '../network/network_info.dart';
 import '../network/network_manager.dart';
@@ -37,4 +38,5 @@ Future<void> init() async {
 
 void _translationUseCases() {
   getIt.registerLazySingleton<GetTranslationUseCase>(() => GetTranslationUseCase(repository: getIt()));
+  getIt.registerLazySingleton<GetPrivacyPolicyUseCase>(() => GetPrivacyPolicyUseCase(repository: getIt()));
 }

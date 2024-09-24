@@ -1,3 +1,4 @@
+import 'package:bastet_app/app/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/list_tile_widget.dart';
+import '../screens/privacy_policy_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -54,7 +56,7 @@ class DrawerWidget extends StatelessWidget {
                   ListTileWidget(
                     leadingUrl: AppAssets.privacy,
                     title: 'سياسة الخصوصية',
-                    onTap: () {},
+                    onTap: () => navigateTo(const PrivacyPolicyScreen()),
                   ),
                   ListTileWidget(
                     leadingUrl: AppAssets.idea,
@@ -62,7 +64,9 @@ class DrawerWidget extends StatelessWidget {
                     onTap: () async {
                       // email
                       if (!await launchUrl(Uri.parse(
-                      "mailto:contact@bastet-app.com"))) {
+                        "mailto:contact@bastet-app.com?subject=اقتراح فكرة"
+                        "&body=للتواصل مع  باستيت 𓃠\nالموضوع:\n\nرقم الهاتف:\n\nالاسم:"
+                      ))) {
                       throw Exception('Could not launch url');
                       }
                     },
@@ -73,7 +77,9 @@ class DrawerWidget extends StatelessWidget {
                     onTap: () async {
                       // email
                       if (!await launchUrl(Uri.parse(
-                      "mailto:contact@bastet-app.com"))) {
+                        "mailto:contact@bastet-app.com?subject=تواصل مع الفريق"
+                        "&body=للتواصل مع  باستيت 𓃠\nالموضوع:\n\nرقم الهاتف:\n\nالاسم:"
+                      ))) {
                       throw Exception('Could not launch url');
                       }
                     },
