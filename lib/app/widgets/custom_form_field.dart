@@ -29,7 +29,7 @@ class CustomFormField extends StatelessWidget {
   final FocusNode? focusNode;
   final int? maxLines;
   final int? minLines;
-  final Color? color;
+  final Color? textColor;
   final Color? fillColor;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
@@ -71,7 +71,7 @@ class CustomFormField extends StatelessWidget {
     this.maxLines,
     this.minLines,
     this.iconPressed,
-    this.color,
+    this.textColor,
     this.onChange,
     this.keyboardType,
     this.textInputAction,
@@ -155,7 +155,7 @@ class CustomFormField extends StatelessWidget {
               style: TextStyle(
                 height: 1.2.h,
                 fontFamily: fontFamily,
-                color: AppColors.white,
+                color: textColor?? AppColors.white,
                 fontSize: 16.sp,
               ),
               cursorHeight: 16.h,
