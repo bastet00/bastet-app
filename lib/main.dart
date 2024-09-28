@@ -10,13 +10,13 @@ import 'app/utils/consts.dart';
 import 'app/utils/get_it_injection.dart';
 import 'app/utils/language_manager.dart';
 import 'app/utils/navigation_helper.dart';
-import 'features/fav_feature/presentation/presentation_logic_holder/fav_cubit.dart';
+import 'features/fav_feature/presentation/presentation_logic_holder/fav_cubit/fav_cubit.dart';
 import 'features/intro_feature/presentation/screens/splash_screen.dart';
 import 'features/translation_feature/data/model/arabic.dart';
 import 'features/translation_feature/data/model/egyptian.dart';
 import 'features/translation_feature/data/model/english.dart';
 import 'features/translation_feature/data/model/translation.dart';
-import 'features/translation_feature/presentation/presentation_logic_holder/settings_cubit/settings_cubit.dart';
+import 'features/settings_feature/presentation/presentation_logic_holder/settings_cubit/settings_cubit.dart';
 import 'features/translation_feature/presentation/presentation_logic_holder/translation_cubit/translation_cubit.dart';
 
 Future<void> main() async {

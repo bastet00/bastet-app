@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
-import '../../../../app/utils/consts.dart';
-import '../../../../app/utils/get_it_injection.dart';
-import '../../../../app/utils/navigation_helper.dart';
-import '../../../../app/widgets/flutter_toast.dart';
-import '../../../translation_feature/data/model/translation.dart';
+import '../../../../../app/utils/consts.dart';
+import '../../../../../app/utils/get_it_injection.dart';
+import '../../../../../app/utils/navigation_helper.dart';
+import '../../../../../app/widgets/flutter_toast.dart';
+import '../../../../translation_feature/data/model/translation.dart';
 
 part 'fav_state.dart';
 

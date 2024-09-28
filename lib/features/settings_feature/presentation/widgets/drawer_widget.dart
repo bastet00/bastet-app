@@ -36,8 +36,7 @@ class DrawerWidget extends StatelessWidget {
                     leadingUrl: AppAssets.share,
                     title: 'شارك التطبيق',
                     onTap: () {
-                      // TODO: Add App Link
-                      const String appLink = 'App Link here';
+                      const String appLink = 'https://play.google.com/store/apps/details?id=com.bastet.bastet_app';
                       Clipboard.setData(const ClipboardData(text: appLink));
                       Share.share(appLink);
                     },
@@ -46,9 +45,8 @@ class DrawerWidget extends StatelessWidget {
                     leadingUrl: AppAssets.rate,
                     title: 'قيم التطبيق',
                     onTap: () async {
-                      // TODO: Add App Link
                       if (!await launchUrl(Uri.parse(
-                          "https://play.google.com/store/apps/details?id=com.google.android.apps.translate"))) {
+                          "https://play.google.com/store/apps/details?id=com.bastet.bastet_app"))) {
                         throw Exception('Could not launch url');
                       }
                     },
