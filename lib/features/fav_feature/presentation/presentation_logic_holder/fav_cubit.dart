@@ -17,6 +17,19 @@ class FavCubit extends Cubit<FavState> {
   var box = Hive.box<Translation>(kFavoritesBox);
   Set<String> favoriteIds = {};
   List<Translation> favoriteTranslations = [];
+  List<Translation> filteredTranslations = [];
+
+  // Load favorites from Hive box into the Set
+  void getFavorites() {
+    // Add all IDs of favorite translations to the Set
+    favoriteIds = box.values.map((translation) => translation.id!).toSet();
+    favoriteTranslations = box.values.toList();
+    filteredTranslations = favoriteTranslations;
+  }
+
+  bool isFavorite(Translation translation) {
+    return favoriteIds.contains(translation.id);
+  }
 
   void toggleFav({required Translation translation, bool isFav = false}) async {
     emit(FavLoading());
