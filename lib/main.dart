@@ -11,6 +11,9 @@ import 'app/utils/get_it_injection.dart';
 import 'app/utils/language_manager.dart';
 import 'app/utils/navigation_helper.dart';
 import 'features/intro_feature/presentation/screens/splash_screen.dart';
+import 'features/translation_feature/data/model/arabic.dart';
+import 'features/translation_feature/data/model/egyptian.dart';
+import 'features/translation_feature/data/model/english.dart';
 import 'features/translation_feature/data/model/translation.dart';
 import 'features/translation_feature/presentation/presentation_logic_holder/settings_cubit/settings_cubit.dart';
 import 'features/translation_feature/presentation/presentation_logic_holder/translation_cubit/translation_cubit.dart';
@@ -21,6 +24,11 @@ Future<void> main() async {
   Bloc.observer = MyBlocObserver();
   await init();
   await Hive.initFlutter();
+
+  Hive.registerAdapter(TranslationAdapter());
+  Hive.registerAdapter(ArabicAdapter());
+  Hive.registerAdapter(EgyptianAdapter());
+  Hive.registerAdapter(EnglishAdapter());
 
   await Hive.openBox<Translation>(kFavoritesBox);
 
