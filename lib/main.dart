@@ -10,6 +10,7 @@ import 'app/utils/consts.dart';
 import 'app/utils/get_it_injection.dart';
 import 'app/utils/language_manager.dart';
 import 'app/utils/navigation_helper.dart';
+import 'features/fav_feature/presentation/presentation_logic_holder/fav_cubit.dart';
 import 'features/intro_feature/presentation/screens/splash_screen.dart';
 import 'features/translation_feature/data/model/arabic.dart';
 import 'features/translation_feature/data/model/egyptian.dart';
@@ -40,6 +41,9 @@ Future<void> main() async {
         ),
         BlocProvider<SettingsCubit>(
           create: (BuildContext context) => SettingsCubit()..getPrivacyPolicy(),
+        ),
+        BlocProvider<FavCubit>(
+          create: (BuildContext context) => FavCubit(),
         ),
       ],
       child: const MyApp(),
