@@ -5,6 +5,9 @@ const String kBaseVersion = '';
 const String kSearch = 'search';
 const String kPrivacyPolicy = 'privacy-policy';
 
+/// Hive Boxes
+const String kFavoritesBox = 'favoritesBox';
+
 //Static Headers
 Map<String, String> apiHeaders = {
   "Content-Type": "application/json",
