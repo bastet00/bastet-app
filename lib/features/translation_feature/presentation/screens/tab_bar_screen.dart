@@ -6,7 +6,7 @@ import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../widgets/drawer_widget.dart';
-import 'translation_body.dart';
+import 'translation_screen.dart';
 
 class TabBarScreen extends StatefulWidget {
   const TabBarScreen({super.key});
@@ -77,6 +77,7 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
         children: const [
           TranslationBody(),
           FavBody(),
+          TranslationScreen(),
         ],
       ),
     );
