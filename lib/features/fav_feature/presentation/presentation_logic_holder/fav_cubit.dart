@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
@@ -18,6 +19,7 @@ class FavCubit extends Cubit<FavState> {
   Set<String> favoriteIds = {};
   List<Translation> favoriteTranslations = [];
   List<Translation> filteredTranslations = [];
+  final searchController  = TextEditingController();
 
   // Load favorites from Hive box into the Set
   void getFavorites() {
@@ -46,6 +48,16 @@ class FavCubit extends Cubit<FavState> {
       favoriteTranslations.add(translation);
       showToast(msg: 'تم الإضافة إلى المفضلة');
     }
+    emit(FavInitial());
+  }
+
+  void filterFavorites() {
+    filteredTranslations = favoriteTranslations.where((translation) {
+      final egyptianSymbolUnicode  = int.parse(translation.egyptian?[0].symbol?? '', radix: 16);
+      final egyptian = '${translation.egyptian?[0].word?? ''} ${String.fromCharCode(egyptianSymbolUnicode)}';
+      return egyptian.contains(searchController.text.toLowerCase());
+    }).toList();
+    emit(FavLoading());
     emit(FavInitial());
   }
 
