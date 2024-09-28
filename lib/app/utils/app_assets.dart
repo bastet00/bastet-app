@@ -13,12 +13,15 @@ class AppAssets{
   static const String contact = "${iconBase}contact.svg";
   static const String exit = "${iconBase}exit.svg";
   static const String fav = "${iconBase}fav.svg";
+  static const String favSolid = "${iconBase}fav_solid.svg";
   static const String translate = "${iconBase}translate.svg";
   static const String arrow = "${iconBase}arrow.svg";
   static const String audio = "${iconBase}audio.svg";
   static const String microphone = "${iconBase}microphone.svg";
   static const String copy = "${iconBase}copy.svg";
   static const String convert = "${iconBase}convert.svg";
+  static const String emptyFav = "${iconBase}empty_fav.svg";
+  static const String search = "${iconBase}search.svg";
 }
 
 class AppImages{
