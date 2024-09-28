@@ -1,4 +1,4 @@
-import 'package:bastet_app/features/translation_feature/presentation/screens/fav_body.dart';
+import 'package:bastet_app/features/fav_feature/presentation/presentation_logic_holder/fav_cubit.dart';
 import 'package:bastet_app/features/fav_feature/presentation/screens/fav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +23,7 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
   @override
   void initState() {
     tabController = TabController(length: 2, vsync: this,);
+    FavCubit.get().getFavorites();
     super.initState();
   }
 
