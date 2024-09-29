@@ -1,4 +1,3 @@
-import 'package:bastet_app/features/fav_feature/presentation/presentation_logic_holder/fav_cubit.dart';
 import 'package:bastet_app/features/fav_feature/presentation/screens/fav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
 import '../../../../app/widgets/image_widget.dart';
-import '../widgets/drawer_widget.dart';
+import '../../../settings_feature/presentation/widgets/drawer_widget.dart';
 import 'translation_screen.dart';
 
 class TabBarScreen extends StatefulWidget {
@@ -23,7 +22,6 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
   @override
   void initState() {
     tabController = TabController(length: 2, vsync: this,);
-    FavCubit.get().getFavorites();
     super.initState();
   }
 

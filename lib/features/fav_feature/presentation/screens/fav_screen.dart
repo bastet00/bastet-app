@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../translation_feature/presentation/widgets/translation_widget.dart';
-import '../presentation_logic_holder/fav_cubit.dart';
+import '../presentation_logic_holder/fav_cubit/fav_cubit.dart';
 import '../widgets/empty_fav_widget.dart';
 
 class FavScreen extends StatelessWidget {

@@ -21,12 +21,4 @@ class TranslationRepoImpl extends TranslationRepo {
       return await translationRemoteDataSource.search(map);
     });
   }
-
-  @override
-  Future<Either<Failure, String>> getPrivacyPolicy() async {
-    return await RepoImplCallHandler<String>(networkInfo)(() async {
-      return await translationRemoteDataSource.getPrivacyPolicy();
-    });
-  }
-
 }
