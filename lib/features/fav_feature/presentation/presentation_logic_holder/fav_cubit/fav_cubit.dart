@@ -55,7 +55,7 @@ class FavCubit extends Cubit<FavState> {
     filteredTranslations = favoriteTranslations.where((translation) {
       final egyptianSymbolUnicode  = int.parse(translation.egyptian?[0].symbol?? '', radix: 16);
       final egyptian = '${translation.egyptian?[0].word?? ''} ${String.fromCharCode(egyptianSymbolUnicode)}';
-      return egyptian.contains(searchController.text.toLowerCase());
+      return egyptian.contains(searchController.text.trim());
     }).toList();
     emit(FavLoading());
     emit(FavInitial());

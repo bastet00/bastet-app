@@ -26,13 +26,13 @@ class TranslationCubit extends Cubit<TranslationState> {
   void convertLanguage() {
     fromArabic = !fromArabic;
     emit(ConvertLanguageState(fromArabic));
-    if (translationController.text.isNotEmpty) getTranslation();
+    if (translationController.text.trim().isNotEmpty) getTranslation();
   }
 
   Future<void> getTranslation() async {
     emit(TranslationLoading());
     final response = await getIt<GetTranslationUseCase>()(GetTranslationUseCaseParams(
-      word: translationController.text,
+      word: translationController.text.trim(),
       lang: fromArabic ? 'Arabic' : 'Egyptian',
     ));
     response.fold(
