@@ -18,6 +18,8 @@ class AppColors{
   static const suggestionsBorderColor = Color(0x6BE7B133);
   static const suggestionsTextColor = Color(0xFF7C7668);
   static const toastColor = Color(0xFF18130D);
+  static const searchFormColor = Color(0xFF2C2924);
+  static const searchHintColor = Color(0xFF9E8855);
 
   static const red = Color(0xffEB5757);
   static const hint = Color(0xFFD1D1D1);
