@@ -23,7 +23,6 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
   @override
   void initState() {
     tabController = TabController(length: 2, vsync: this,);
-    FavCubit.get().getFavorites();
     super.initState();
   }
 
@@ -77,8 +76,8 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
       body: TabBarView(
         controller: tabController,
         children: const [
-          TranslationScreen(),
-          FavScreen(),
+          TranslationBody(),
+          FavBody(),
         ],
       ),
     );
