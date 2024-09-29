@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
@@ -123,7 +124,12 @@ class TranslationWidget extends StatelessWidget {
                   endIndent: 10.h,
                 ),
                 CustomTextButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final id = translation?.id;
+                    final String appLink = 'bastet-app.com/word/$id';
+                    Clipboard.setData(ClipboardData(text: appLink));
+                    Share.share(appLink);
+                  },
                   icon: ImageWidget(
                     imageUrl: AppAssets.share,
                     width: 20.w,
