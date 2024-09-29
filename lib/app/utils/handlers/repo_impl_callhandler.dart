@@ -22,7 +22,7 @@ class RepoImplCallHandler<T> {
         return Left(AmbiguousFailure(e.toString()));
       }
     } else {
-      return Left(ConnectionFailure("phone not connected"));
+      return Left(ConnectionFailure("أنت غير متصل بالإنترنت!"));
     }
   }
 }
