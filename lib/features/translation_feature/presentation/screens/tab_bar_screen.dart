@@ -1,4 +1,3 @@
-import 'package:bastet_app/features/fav_feature/presentation/presentation_logic_holder/fav_cubit/fav_cubit.dart';
 import 'package:bastet_app/features/fav_feature/presentation/screens/fav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -76,8 +75,8 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
       body: TabBarView(
         controller: tabController,
         children: const [
-          TranslationBody(),
-          FavBody(),
+          TranslationScreen(),
+          FavScreen(),
         ],
       ),
     );
