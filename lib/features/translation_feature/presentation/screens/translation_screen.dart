@@ -74,7 +74,7 @@ class TranslationScreen extends StatelessWidget {
                   minLines: 5,
                   maxLines: 5,
                   onChange: (text) {
-                    if (text.isNotEmpty) {
+                    if (text.trim().isNotEmpty) {
                       TranslationCubit.get().onTextChanged(text);
                     }
                   },
