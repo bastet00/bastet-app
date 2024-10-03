@@ -20,7 +20,7 @@ class GetTranslationUseCase implements UseCase <TranslationModel, GetTranslation
 
 class GetTranslationUseCaseParams {
   final String word;
-  final String lang; // 'Arabic' or 'Egyptian'
+  final String lang; // 'arabic' or 'egyptian'
 
   GetTranslationUseCaseParams({required this.word,required this.lang});
 
