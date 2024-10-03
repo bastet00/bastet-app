@@ -24,9 +24,9 @@ class Egyptian extends HiveObject {
     this.hieroglyphics,});
 
   Egyptian.fromJson(dynamic json) {
-    word = json['Word'];
-    symbol = json['Symbol'];
-    transliteration = json['Transliteration'];
-    hieroglyphics = json['Hieroglyphics'] != null ? json['Hieroglyphics'].cast<String>() : [];
+    word = json['word'];
+    symbol = json['symbol'];
+    transliteration = json['transliteration'];
+    hieroglyphics = json['hieroglyphics'] != null ? json['hieroglyphics'].cast<String>() : [];
   }
 }

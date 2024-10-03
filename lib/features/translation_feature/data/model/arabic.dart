@@ -12,6 +12,6 @@ class Arabic extends HiveObject {
     this.word,});
 
   Arabic.fromJson(dynamic json) {
-    word = json['Word'];
+    word = json['word'];
   }
 }

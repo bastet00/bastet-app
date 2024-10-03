@@ -33,7 +33,7 @@ class TranslationCubit extends Cubit<TranslationState> {
     emit(TranslationLoading());
     final response = await getIt<GetTranslationUseCase>()(GetTranslationUseCaseParams(
       word: translationController.text.trim(),
-      lang: fromArabic ? 'Arabic' : 'Egyptian',
+      lang: fromArabic ? 'arabic' : 'egyptian',
     ));
     response.fold(
       errorStateHandler,

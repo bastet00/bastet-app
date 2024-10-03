@@ -29,21 +29,21 @@ class Translation extends HiveObject {
 
   Translation.fromJson(dynamic json) {
     id = json['id'];
-    if (json['Arabic'] != null) {
+    if (json['arabic'] != null) {
       arabic = [];
-      json['Arabic'].forEach((v) {
+      json['arabic'].forEach((v) {
         arabic?.add(Arabic.fromJson(v));
       });
     }
-    if (json['Egyptian'] != null) {
+    if (json['egyptian'] != null) {
       egyptian = [];
-      json['Egyptian'].forEach((v) {
+      json['egyptian'].forEach((v) {
         egyptian?.add(Egyptian.fromJson(v));
       });
     }
-    if (json['English'] != null) {
+    if (json['english'] != null) {
       english = [];
-      json['English'].forEach((v) {
+      json['english'].forEach((v) {
         english?.add(English.fromJson(v));
       });
     }

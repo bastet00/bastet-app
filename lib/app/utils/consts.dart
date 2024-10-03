@@ -2,7 +2,7 @@ const String kBaseUrl = "bastet-server-ef94bb4e91eb.herokuapp.com";
 const String kBaseVersion = '';
 
 /// end points
-const String kSearch = 'search';
+const String kSearch = 'word/search';
 const String kPrivacyPolicy = 'privacy-policy';
 
 /// Hive Boxes
