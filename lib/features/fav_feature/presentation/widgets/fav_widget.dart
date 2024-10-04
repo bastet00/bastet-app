@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/app_assets.dart';
@@ -7,7 +8,7 @@ import '../../../../app/widgets/text_button_widget.dart';
 import '../../../translation_feature/data/model/translation.dart';
 import '../presentation_logic_holder/fav_cubit/fav_cubit.dart';
 
-class FavWidget extends StatefulWidget {
+class FavWidget extends StatelessWidget {
   final Translation translation;
 
   const FavWidget({
@@ -16,35 +17,24 @@ class FavWidget extends StatefulWidget {
   });
 
   @override
-  State<FavWidget> createState() => _FavWidgetState();
-}
-
-class _FavWidgetState extends State<FavWidget> {
-  bool _isFav = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isFav = FavCubit.get().isFavorite(widget.translation);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return CustomTextButton(
-      onPressed: () {
-        FavCubit.get().toggleFav(
-          isFav: _isFav,
-          translation: widget.translation,
+    return BlocBuilder<FavCubit, FavState>(
+      builder: (context, state) {
+        final isFav = FavCubit.get().isFavorite(translation);
+        return CustomTextButton(
+          onPressed: () {
+            FavCubit.get().toggleFav(
+              isFav: isFav,
+              translation: translation,
+            );
+          },
+          icon: ImageWidget(
+            imageUrl: isFav ? AppAssets.favSolid : AppAssets.fav,
+            width: 20.w,
+            height: 20.h,
+          ),
         );
-        setState(() {
-          _isFav = !_isFav;
-        });
       },
-      icon: ImageWidget(
-        imageUrl: _isFav? AppAssets.favSolid : AppAssets.fav,
-        width: 20.w,
-        height: 20.h,
-      ),
     );
   }
 }
