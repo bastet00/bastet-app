@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 
 import '../../error/exceptions.dart';
@@ -13,13 +16,19 @@ class RepoImplCallHandler<T> {
       try {
         return Right(await datasourceCall());
       } on DataParsingException catch(e) {
+        log(e.toString(), name: 'Data Parsing Exception Error');
         return Left(DataParsingFailure(e.toString()));
       } on ServerException catch (e) {
+        log(e.toString(), name: 'Server Exception Error');
         return Left(ServerFailure(e.toString()));
-      } on AuthException catch (e) {
-        return Left(AuthFailure(e.cause));
+      } on SocketException catch (e) {
+        log(e.toString(), name: 'Socket Exception Error');
+        return Left(
+          ConnectionFailure('تعذر الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت أو المحاولة مرة أخرى لاحقًا.'),
+        );
       } catch (e) {
-        return Left(AmbiguousFailure(e.toString()));
+        log(e.toString(), name: 'Unknown Error');
+        return Left(AmbiguousFailure('خطأ غير متوقع، رجاء محاولة مرة أخرى'));
       }
     } else {
       return Left(ConnectionFailure("أنت غير متصل بالإنترنت!"));
