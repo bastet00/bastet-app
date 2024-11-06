@@ -20,3 +20,8 @@ final class TranslationLoading extends TranslationState {
   @override
   List<Object> get props => [];
 }
+
+final class TranslationDetailsLoading extends TranslationState {
+  @override
+  List<Object> get props => [];
+}

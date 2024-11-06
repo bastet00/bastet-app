@@ -8,8 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../app/utils/get_it_injection.dart';
 import '../../../../../app/utils/handlers/error_state_handler.dart';
 import '../../../../../app/utils/navigation_helper.dart';
+import '../../../data/model/translation_details_model.dart';
 import '../../../data/model/translation_model.dart';
-import '../../../domain/usecases/translation_use_case.dart';
+import '../../../domain/usecases/get_translation_details_usecase.dart';
+import '../../../domain/usecases/get_translation_usecase.dart';
 
 part 'translation_state.dart';
 
@@ -23,6 +25,8 @@ class TranslationCubit extends Cubit<TranslationState> {
   Timer? _debounce;
   CancelableOperation? _cancelableRequest;
 
+  TranslationDetailsModel? translationDetails;
+
   void convertLanguage() {
     fromArabic = !fromArabic;
     emit(ConvertLanguageState(fromArabic));
@@ -34,7 +38,7 @@ class TranslationCubit extends Cubit<TranslationState> {
     if (translationController.text.trim().isEmpty) {
       return;
     }
-    final response = await getIt<GetTranslationUseCase>()(GetTranslationUseCaseParams(
+    final response = await getIt<GetTranslationUsecase>()(GetTranslationUseCaseParams(
       word: translationController.text.trim(),
       lang: fromArabic ? 'arabic' : 'egyptian',
     ));
@@ -63,6 +67,20 @@ class TranslationCubit extends Cubit<TranslationState> {
         },
       );
     });
+  }
+
+  void getTranslationDetails(String id) async {
+    emit(TranslationDetailsLoading());
+    final response = await getIt<GetTranslationDetailsUseCase>()(GetTranslationDetailsUseCaseParams(
+      id: id,
+    ));
+    response.fold(
+      errorStateHandler,
+      (r) {
+        translationDetails = r;
+      },
+    );
+    emit(TranslationInitial());
   }
 
   @override
