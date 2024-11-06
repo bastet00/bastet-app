@@ -9,7 +9,8 @@ import '../../features/translation_feature/data/data_source/translation_remote_d
 import '../../features/translation_feature/data/repo_impl/translation_repo_impl.dart';
 import '../../features/translation_feature/domain/repo/translation_repo.dart';
 import '../../features/settings_feature/domain/usecases/privacy_policy_use_case.dart';
-import '../../features/translation_feature/domain/usecases/translation_use_case.dart';
+import '../../features/translation_feature/domain/usecases/get_translation_details_usecase.dart';
+import '../../features/translation_feature/domain/usecases/get_translation_usecase.dart';
 import '../network/network_info.dart';
 import '../network/network_manager.dart';
 import '../services/cache_service.dart';
@@ -43,7 +44,8 @@ Future<void> init() async {
 }
 
 void _translationUseCases() {
-  getIt.registerLazySingleton<GetTranslationUseCase>(() => GetTranslationUseCase(repository: getIt()));
+  getIt.registerLazySingleton<GetTranslationUsecase>(() => GetTranslationUsecase(repository: getIt()));
+  getIt.registerLazySingleton<GetTranslationDetailsUseCase>(() => GetTranslationDetailsUseCase(repository: getIt()));
 }
 
 void _settingsUseCases() {

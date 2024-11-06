@@ -6,10 +6,10 @@ import '../../../../app/usecase/usecase.dart';
 import '../../data/model/translation_model.dart';
 import '../repo/translation_repo.dart';
 
-class GetTranslationUseCase implements UseCase <TranslationModel, GetTranslationUseCaseParams> {
+class GetTranslationUsecase implements UseCase <TranslationModel, GetTranslationUseCaseParams> {
   final TranslationRepo repository;
 
-  GetTranslationUseCase({required this.repository});
+  GetTranslationUsecase({required this.repository});
 
   @override
   Future<Either<Failure, TranslationModel>> call(params) async {
