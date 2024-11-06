@@ -3,6 +3,7 @@ const String kBaseVersion = '';
 
 /// end points
 const String kSearch = 'word/search';
+const String kWord = 'word';
 const String kPrivacyPolicy = 'privacy-policy';
 
 /// Hive Boxes
