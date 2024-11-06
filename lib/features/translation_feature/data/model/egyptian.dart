@@ -17,16 +17,21 @@ class Egyptian extends HiveObject {
   @HiveField(3)
   List<String>? hieroglyphics;
 
+  List<String>? hieroglyphicSigns;
+
   Egyptian({
     this.word,
     this.symbol,
     this.transliteration,
-    this.hieroglyphics,});
+    this.hieroglyphics,
+    this.hieroglyphicSigns,
+  });
 
   Egyptian.fromJson(dynamic json) {
     word = json['word'];
     symbol = json['symbol'];
     transliteration = json['transliteration'];
     hieroglyphics = json['hieroglyphics'] != null ? json['hieroglyphics'].cast<String>() : [];
+    hieroglyphicSigns = json['hieroglyphicSigns'] != null ? json['hieroglyphicSigns'].cast<String>() : [];
   }
 }
