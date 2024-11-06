@@ -1,4 +1,5 @@
 import 'package:bastet_app/app/error/failures.dart';
+import 'package:bastet_app/features/translation_feature/data/model/translation_details_model.dart';
 
 import 'package:bastet_app/features/translation_feature/data/model/translation_model.dart';
 
@@ -16,9 +17,16 @@ class TranslationRepoImpl extends TranslationRepo {
   TranslationRepoImpl({required this.networkInfo, required this.translationRemoteDataSource});
 
   @override
-  Future<Either<Failure, TranslationModel>> getTranslation(map) async {
+  Future<Either<Failure, TranslationModel>> getTranslation(params) async {
     return await RepoImplCallHandler<TranslationModel>(networkInfo)(() async {
-      return await translationRemoteDataSource.search(map);
+      return await translationRemoteDataSource.search(params);
+    });
+  }
+
+  @override
+  Future<Either<Failure, TranslationDetailsModel>> getTranslationDetails(params) async {
+    return await RepoImplCallHandler<TranslationDetailsModel>(networkInfo)(() async {
+      return await translationRemoteDataSource.getWordDetails(params);
     });
   }
 }
