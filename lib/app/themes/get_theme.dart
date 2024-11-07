@@ -68,6 +68,9 @@ import '../utils/app_colors.dart';
         fontFamily: "Noto Sans Arabic",
         color: AppColors.white,
       ),
+      iconTheme: const IconThemeData(
+        color: AppColors.primaryColor,
+      ),
     ),
   );
 }

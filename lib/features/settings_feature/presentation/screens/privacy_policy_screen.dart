@@ -16,8 +16,6 @@ class PrivacyPolicyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: AppColors.primaryColor),
-        backgroundColor: const Color(0xFF2C2924),
         title: const TextWidget(
           title: 'سياسة الخصوصية', color: AppColors.primaryColor,),
       ),
