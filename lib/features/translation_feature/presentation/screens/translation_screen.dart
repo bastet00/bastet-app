@@ -167,7 +167,7 @@ class TranslationScreen extends StatelessWidget {
                   );
                 },
                 itemCount: TranslationCubit.get().translationModel?.translation?.length?? 0,
-                separatorBuilder: (context, index) => 10.verticalSpace,
+                separatorBuilder: (context, index) => 20.verticalSpace,
                 shrinkWrap: true,
                 primary: false,
               );
