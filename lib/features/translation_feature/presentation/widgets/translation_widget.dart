@@ -41,7 +41,7 @@ class TranslationWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        if (translation?.id != null) navigateTo(TranslationDetailsScreen(translation: translation!));
+        if (!isDetailsScreen && translation?.id != null) navigateTo(TranslationDetailsScreen(translation: translation!));
       },
       borderRadius: BorderRadius.circular(6.r),
       child: Container(
