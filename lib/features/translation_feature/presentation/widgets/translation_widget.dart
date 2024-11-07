@@ -1,3 +1,6 @@
+import 'package:bastet_app/app/utils/helper.dart';
+import 'package:bastet_app/features/translation_feature/data/model/translation_details_model.dart';
+import 'package:bastet_app/features/translation_feature/presentation/screens/translation_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,13 +14,18 @@ import '../../../../app/widgets/text_button_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
 import '../../../fav_feature/presentation/widgets/fav_widget.dart';
 import '../../data/model/translation.dart';
+import 'details_column_widget.dart';
 
 class TranslationWidget extends StatelessWidget {
   final Translation? translation;
+  final TranslationDetailsModel? translationDetails;
+  final bool isDetailsScreen;
 
   const TranslationWidget({
     super.key,
     this.translation,
+    this.translationDetails,
+    this.isDetailsScreen = false,
   });
 
   @override
@@ -26,6 +34,10 @@ class TranslationWidget extends StatelessWidget {
     final egyptianWord = translation?.egyptian?[0].word;
     final egyptian = '${translation?.egyptian?[0].word?? ''} ${String.fromCharCode(egyptianSymbolUnicode)}';
     final arabic = translation?.arabic?.map((e) => e.word).join('، ');
+    final english = translation?.english?.map((e) => e.word).join(', ');
+    final hieroglyphicSigns = translationDetails?.egyptian?[0].hieroglyphicSigns?.map((e) => e).join(' ');
+    final hieroglyphics = translationDetails?.egyptian?[0].hieroglyphics?.map((e) => e).join(', ');
+    final resources = translationDetails?.resources?.map((e) => '• $e').join('\n');
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
@@ -68,23 +80,52 @@ class TranslationWidget extends StatelessWidget {
                       color: Colors.transparent,
                       fontWeight: FontWeight.w700,
                       underLine: true,
-                      fontSize: 18.sp,
+                      fontSize: isDetailsScreen ? 22.sp : 18.sp,
                     ),
                     TextWidget(
                       title: egyptian,
                       color: AppColors.primaryColor,
                       fontWeight: FontWeight.w700,
-                      fontSize: 18.sp,
+                      fontSize: isDetailsScreen ? 22.sp : 18.sp,
                     ),
                   ],
                 ),
                 12.verticalSpace,
-                TextWidget(
+                if (!isDetailsScreen) TextWidget(
                   title: arabic?? '',
                   fontWeight: FontWeight.w400,
                   titleAlign: TextAlign.start,
-                  maxLines: 4,
+                  maxLines: 6,
                 ),
+                if (isDetailsScreen) ...[
+                  DetailsColumnWidget(
+                    title: 'إنجليزي:',
+                    description: english,
+                  ),
+                  DetailsColumnWidget(
+                    title: 'عربي:',
+                    description: arabic,
+                  ),
+                  DetailsColumnWidget(
+                    title: 'القيمة الصوتية الإنجليزية:',
+                    description: translationDetails?.egyptian?[0].transliteration,
+                  ),
+                  DetailsColumnWidget(
+                    title: 'الهيروغليفية:',
+                    description: hieroglyphicSigns,
+                    descriptionFontSize: 16.sp,
+                  ),
+                  DetailsColumnWidget(
+                    title: 'علامات جاردنير:',
+                    description: hieroglyphics,
+                  ),
+                  DetailsColumnWidget(
+                    title: 'المصادر:',
+                    description: resources,
+                    descriptionFontSize: 12.sp,
+                  ),
+                ],
+                20.verticalSpace,
                 const Divider(
                   color: AppColors.color84744F,
                 ),
@@ -94,8 +135,20 @@ class TranslationWidget extends StatelessWidget {
           SizedBox(
             height: 48.h,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                if (!isDetailsScreen) CustomTextButton(
+                  onPressed: () {
+                    if (translation?.id != null) navigateTo(TranslationDetailsScreen(translation: translation!));
+                  },
+                  title: 'القاموس',
+                  titleColor: AppColors.white,
+                  icon: ImageWidget(
+                    imageUrl: AppAssets.dictionary,
+                    width: 16.w,
+                    height: 20.h,
+                  ),
+                ),
+                const Spacer(),
                 CustomTextButton(
                   onPressed: () {
                     // Copy to clipboard
