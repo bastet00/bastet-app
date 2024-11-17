@@ -114,15 +114,18 @@ class TranslationWidget extends StatelessWidget {
                     DetailsColumnWidget(
                       title: 'القيمة الصوتية الإنجليزية:',
                       description: translationDetails?.egyptian?[0].transliteration,
+                      isCopy: true,
                     ),
                     DetailsColumnWidget(
                       title: 'الهيروغليفية:',
                       description: hieroglyphicSigns,
                       descriptionFontSize: 16.sp,
+                      isCopy: true,
                     ),
                     DetailsColumnWidget(
                       title: 'علامات جاردنير:',
                       description: hieroglyphics,
+                      isCopy: true,
                     ),
                     DetailsColumnWidget(
                       title: 'المصادر:',
