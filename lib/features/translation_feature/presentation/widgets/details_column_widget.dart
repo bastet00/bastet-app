@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
@@ -46,6 +47,7 @@ class DetailsColumnWidget extends StatelessWidget {
             if (isCopy) CustomTextButton(
               onPressed: () {
                 // Copy to clipboard
+                Fluttertoast.cancel();
                 Clipboard.setData(ClipboardData(text: description ?? ''));
                 showToast(msg: 'تم النسخ');
               },
