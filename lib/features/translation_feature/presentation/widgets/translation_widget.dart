@@ -4,6 +4,7 @@ import 'package:bastet_app/features/translation_feature/presentation/screens/tra
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../app/utils/app_assets.dart';
@@ -114,15 +115,18 @@ class TranslationWidget extends StatelessWidget {
                     DetailsColumnWidget(
                       title: 'القيمة الصوتية الإنجليزية:',
                       description: translationDetails?.egyptian?[0].transliteration,
+                      isCopy: true,
                     ),
                     DetailsColumnWidget(
                       title: 'الهيروغليفية:',
                       description: hieroglyphicSigns,
                       descriptionFontSize: 16.sp,
+                      isCopy: true,
                     ),
                     DetailsColumnWidget(
                       title: 'علامات جاردنير:',
                       description: hieroglyphics,
+                      isCopy: true,
                     ),
                     DetailsColumnWidget(
                       title: 'المصادر:',
@@ -156,6 +160,7 @@ class TranslationWidget extends StatelessWidget {
                   const Spacer(),
                   CustomTextButton(
                     onPressed: () {
+                      Fluttertoast.cancel();
                       // Copy to clipboard
                       Clipboard.setData(ClipboardData(text: egyptian));
                       showToast(msg: 'تم النسخ');
