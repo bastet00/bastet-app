@@ -16,13 +16,12 @@ class DetailsColumnWidget extends StatelessWidget {
   final double? descriptionFontSize;
   final bool isCopy;
 
-  const DetailsColumnWidget({
-    super.key,
-    required this.title,
-    this.description,
-    this.descriptionFontSize,
-    this.isCopy = false
-  });
+  const DetailsColumnWidget(
+      {super.key,
+      required this.title,
+      this.description,
+      this.descriptionFontSize,
+      this.isCopy = false});
 
   @override
   Widget build(BuildContext context) {
@@ -35,30 +34,42 @@ class DetailsColumnWidget extends StatelessWidget {
           color: AppColors.primaryColor,
           fontSize: 14.sp,
         ),
-        Row(
-          children: [
-            TextWidget(
-              title: description ?? '',
-              fontWeight: FontWeight.w400,
-              titleAlign: TextAlign.start,
-              maxLines: 10,
-              fontSize: descriptionFontSize?? 14.sp,
-            ),
-            if (isCopy) CustomTextButton(
-              onPressed: () {
-                // Copy to clipboard
-                Fluttertoast.cancel();
-                Clipboard.setData(ClipboardData(text: description ?? ''));
-                showToast(msg: 'تم النسخ');
-              },
-              icon: ImageWidget(
-                imageUrl: AppAssets.copy,
-                width: 15.w,
-                height: 15.h,
+        isCopy
+            ? Row(
+                children: [
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 235.w),
+                    child: TextWidget(
+                      title: description?? '',
+                      fontWeight: FontWeight.w400,
+                      titleAlign: TextAlign.start,
+                      maxLines: 10,
+                      fontSize: descriptionFontSize ?? 14.sp,
+                    ),
+                  ),
+                  4.horizontalSpace,
+                  CustomTextButton(
+                    onPressed: () {
+                      // Copy to clipboard
+                      Fluttertoast.cancel();
+                      Clipboard.setData(ClipboardData(text: description ?? ''));
+                      showToast(msg: 'تم النسخ');
+                    },
+                    icon: ImageWidget(
+                      imageUrl: AppAssets.copy,
+                      width: 15.w,
+                      height: 15.h,
+                    ),
+                  ),
+                ],
+              )
+            : TextWidget(
+                title: description ?? '',
+                fontWeight: FontWeight.w400,
+                titleAlign: TextAlign.start,
+                maxLines: 10,
+                fontSize: descriptionFontSize ?? 14.sp,
               ),
-            ),
-          ],
-        ),
         10.verticalSpace,
       ],
     );
