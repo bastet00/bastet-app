@@ -1,11 +1,12 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' as easy_loc;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../app/utils/app_colors.dart';
 import '../utils/app_strings.dart';
 
-class CustomFormField extends StatelessWidget {
+class CustomFormField extends StatefulWidget {
+
   final TextEditingController? controller;
   final String? hint;
   final String? header;
@@ -98,14 +99,55 @@ class CustomFormField extends StatelessWidget {
   });
 
   @override
+  State<CustomFormField> createState() => _CustomFormFieldState();
+}
+
+class _CustomFormFieldState extends State<CustomFormField> {
+  TextDirection _textDirection = TextDirection.rtl;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller?.addListener(_updateTextDirection);
+  }
+
+  void _updateTextDirection() {
+    if (widget.controller?.text.isNotEmpty?? false) {
+      final firstChar = widget.controller?.text.characters.first;
+
+      // Check if the first character is an Arabic letter
+      if (RegExp(r'^[\u0600-\u06FF]').hasMatch(firstChar!)) {
+        setState(() {
+          _textDirection = TextDirection.rtl;
+        });
+      } else {
+        setState(() {
+          _textDirection = TextDirection.ltr;
+        });
+      }
+    } else {
+      // Default to LTR if the text is empty
+      setState(() {
+        _textDirection = TextDirection.rtl;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.controller?.removeListener(_updateTextDirection);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        header == null
+        widget.header == null
             ? const SizedBox()
             : Text(
-                header ?? "",
+                widget.header ?? "",
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   color: AppColors.white,
@@ -113,148 +155,149 @@ class CustomFormField extends StatelessWidget {
                 ),
               ),
         SizedBox(
-          height: header == null ? 0 : 10.h,
+          height: widget.header == null ? 0 : 10.h,
         ),
         SizedBox(
-          height: height,
-          width: width,
+          height: widget.height,
+          width: widget.width,
           child: InkWell(
-            onTap: onPressed,
+            onTap: widget.onPressed,
             child: TextFormField(
+              textDirection: _textDirection,
               cursorColor: AppColors.primaryColor,
-              inputFormatters: inputFormatters,
-              onFieldSubmitted: onFieldSubmitted ?? (st) {},
-              validator: validator ?? (value) {
+              inputFormatters: widget.inputFormatters,
+              onFieldSubmitted: widget.onFieldSubmitted ?? (st) {},
+              validator: widget.validator ?? (value) {
                 if (value!.isEmpty) {
                   return AppStrings.requiredField.tr();
                 }
-                if (value.length > maxValueLength) {
-                  return keyboardType == TextInputType.phone || keyboardType == TextInputType.number
-                      ? '${AppStrings.mustLessThan.tr()} $maxValueLength ${AppStrings.digits.tr()}'
-                      : '${AppStrings.mustLessThan.tr()} $maxValueLength ${AppStrings.characters.tr()}';
+                if (value.length > widget.maxValueLength) {
+                  return widget.keyboardType == TextInputType.phone || widget.keyboardType == TextInputType.number
+                      ? '${AppStrings.mustLessThan.tr()} ${widget.maxValueLength} ${AppStrings.digits.tr()}'
+                      : '${AppStrings.mustLessThan.tr()} ${widget.maxValueLength} ${AppStrings.characters.tr()}';
                 }
-                if (value.length < minValueLength) {
-                  return keyboardType == TextInputType.phone || keyboardType == TextInputType.number
-                      ? '${AppStrings.mustMoreThan.tr()} $minValueLength ${AppStrings.digits.tr()}'
-                      : '${AppStrings.mustMoreThan.tr()} $minValueLength ${AppStrings.characters.tr()}';
+                if (value.length < widget.minValueLength) {
+                  return widget.keyboardType == TextInputType.phone || widget.keyboardType == TextInputType.number
+                      ? '${AppStrings.mustMoreThan.tr()} ${widget.minValueLength} ${AppStrings.digits.tr()}'
+                      : '${AppStrings.mustMoreThan.tr()} ${widget.minValueLength} ${AppStrings.characters.tr()}';
                 }
                 return null;
               },
-              textInputAction: textInputAction,
-              controller: controller,
-              minLines: minLines ?? 1,
-              maxLines: maxLines ?? 1,
-              enabled: enabled,
-              keyboardType: keyboardType,
-              focusNode: focusNode,
-              onChanged: onChange,
-              obscureText: obscure ?? false,
+              textInputAction: widget.textInputAction,
+              controller: widget.controller,
+              minLines: widget.minLines ?? 1,
+              maxLines: widget.maxLines ?? 1,
+              enabled: widget.enabled,
+              keyboardType: widget.keyboardType,
+              focusNode: widget.focusNode,
+              onChanged: widget.onChange,
+              obscureText: widget.obscure ?? false,
               obscuringCharacter: '*',
-              autovalidateMode: autovalidateMode??AutovalidateMode.disabled,
-              textAlign: align ?? TextAlign.start,
+              autovalidateMode: widget.autovalidateMode??AutovalidateMode.disabled,
+              textAlign: widget.align ?? TextAlign.start,
               style: TextStyle(
                 height: 1.2.h,
-                fontFamily: fontFamily,
-                color: textColor?? AppColors.white,
+                fontFamily: widget.fontFamily,
+                color: widget.textColor?? AppColors.white,
                 fontSize: 16.sp,
               ),
               cursorHeight: 16.h,
               decoration: InputDecoration(
-                fillColor: fillColor ?? AppColors.containerColor,
-                filled: filled ?? false,
+                fillColor: widget.fillColor ?? AppColors.containerColor,
+                filled: widget.filled ?? false,
                 isDense: true,
-                contentPadding: contentPadding ??
+                contentPadding: widget.contentPadding ??
                     EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
                 errorStyle: TextStyle(
                   fontSize: 14.sp,
                   height: 2.h,
                 ),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(borderRadiusValue ?? 6.r),
+                  borderRadius: BorderRadius.circular(widget.borderRadiusValue ?? 6.r),
                   borderSide: BorderSide(
-                    color: borderColor?? Colors.transparent,
+                    color: widget.borderColor?? Colors.transparent,
                   ),
                 ),
-                enabledBorder: enabledBorder ??
+                enabledBorder: widget.enabledBorder ??
                     OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(borderRadiusValue ?? 6.r),
+                          BorderRadius.circular(widget.borderRadiusValue ?? 6.r),
                       borderSide: BorderSide(
-                        color: borderColor?? Colors.transparent,
+                        color: widget.borderColor?? Colors.transparent,
                       ),
                     ),
-                disabledBorder: disableBorder ??
+                disabledBorder: widget.disableBorder ??
                     OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(borderRadiusValue ?? 6.r),
+                          BorderRadius.circular(widget.borderRadiusValue ?? 6.r),
                       borderSide: BorderSide(
-                          color: borderColor?? Colors.transparent,
+                          color: widget.borderColor?? Colors.transparent,
                       ),
                     ),
-                errorBorder: errorBorder ??
+                errorBorder: widget.errorBorder ??
                     OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(borderRadiusValue ?? 6.r),
+                          BorderRadius.circular(widget.borderRadiusValue ?? 6.r),
                       borderSide: const BorderSide(color: AppColors.red),
                     ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: borderColor?? Colors.transparent,
+                    color: widget.borderColor?? Colors.transparent,
                     width: 1,
                   ),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                focusedBorder: focusedBorder ??
+                focusedBorder: widget.focusedBorder ??
                     OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(borderRadiusValue ?? 6.r),
+                          BorderRadius.circular(widget.borderRadiusValue ?? 6.r),
                       borderSide: BorderSide(
-                        color: borderColor?? Colors.transparent,
+                        color: widget.borderColor?? Colors.transparent,
                       ),
                     ),
-                hintText: hint ?? "",
+                hintText: widget.hint ?? "",
                 hintStyle: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
-                  color: hintColor ?? AppColors.hint,
+                  color: widget.hintColor ?? AppColors.hint,
                 ),
-                labelText: labelText,
+                labelText: widget.labelText,
                 labelStyle: TextStyle(
                   fontSize: 16.sp,
                   color: AppColors.primaryColor,
-                  fontFamily: fontFamily,
+                  fontFamily: widget.fontFamily,
                 ),
-                suffixIcon: suffixIconWidget == null
-                    ? (suffixIcon == null
+                suffixIcon: widget.suffixIconWidget == null
+                    ? (widget.suffixIcon == null
                         ? null
                         : InkWell(
-                            onTap: iconPressed ?? () {},
+                            onTap: widget.iconPressed ?? () {},
                             child: Icon(
-                              suffixIcon,
+                              widget.suffixIcon,
                               size: 23,
-                              color: suffixIconColor ?? AppColors.primaryColor,
+                              color: widget.suffixIconColor ?? AppColors.primaryColor,
                             )))
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          suffixIconWidget!,
+                          widget.suffixIconWidget!,
                         ],
                       ),
-                prefixIcon: prefixIconWidget == null
-                    ? (prefixIcon == null
+                prefixIcon: widget.prefixIconWidget == null
+                    ? (widget.prefixIcon == null
                         ? null
                         : Icon(
-                            prefixIcon,
+                            widget.prefixIcon,
                             size: 23.sp,
-                            color: prefixIconColor ?? AppColors.primaryColor,
+                            color: widget.prefixIconColor ?? AppColors.primaryColor,
                           ))
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          prefixIconWidget!,
+                          widget.prefixIconWidget!,
                           SizedBox(
                             width: 16.h,
                           ),
