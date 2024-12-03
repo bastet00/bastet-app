@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
+import '../../../../app/utils/ui_helpers.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../settings_feature/presentation/widgets/drawer_widget.dart';
 import 'translation_screen.dart';
@@ -22,9 +23,22 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
 
   @override
   void initState() {
-    tabController = TabController(length: 2, vsync: this,);
-    FavCubit.get().getFavorites();
     super.initState();
+    tabController = TabController(length: 2, vsync: this,);
+    tabController.addListener(_removeKeyboard);
+    FavCubit.get().getFavorites();
+  }
+
+  void _removeKeyboard() {
+    if (tabController.indexIsChanging) {
+      UIHelpers.removeKeyboard();
+    }
+  }
+
+  @override
+  void dispose() {
+    tabController.removeListener(_removeKeyboard);
+    super.dispose();
   }
 
   @override
