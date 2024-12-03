@@ -29,4 +29,11 @@ class TranslationRepoImpl extends TranslationRepo {
       return await translationRemoteDataSource.getWordDetails(params);
     });
   }
+
+  @override
+  Future<Either<Failure, void>> suggestWord(params) async {
+    return await RepoImplCallHandler<void>(networkInfo)(() async {
+      return await translationRemoteDataSource.suggestWord(params);
+    });
+  }
 }

@@ -9,9 +9,11 @@ class RemoteDataSourceCallHandler {
     log(res.statusCode.toString(),name: "status code");
 
     // Decode the response body to handle Arabic text issue
-    final decodedBody = jsonDecode(res.body);
-    log(jsonEncode(decodedBody), name: "response"); // Encode back to JSON string
+    if (res.body.isNotEmpty) {
+      final decodedBody = jsonDecode(res.body);
+      log(jsonEncode(decodedBody), name: "response"); // Encode back to JSON string
+      return decodedBody;
+    }
 
-    return decodedBody;
     }
   }
