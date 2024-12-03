@@ -37,48 +37,52 @@ class CustomTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return loading
-        ? Center(
-            child: CircularProgressIndicator(
-              color: color ?? AppColors.primaryColor,
-            ),
-          )
+        ? SizedBox(
+      width: width,
+      height: 48.h,
+      child: Center(
+        child: CircularProgressIndicator(
+          color: color ?? AppColors.primaryColor,
+        ),
+      ),
+    )
         : SizedBox(
-            width: width,
-            height: 48.h,
-            child: TextButton(
-                style: TextButton.styleFrom(
-                  padding: padding ??
-                      EdgeInsetsDirectional.symmetric(horizontal: 8.w),
-                  foregroundColor: color ?? AppColors.primaryColor,
-                  side: outlined
-                      ? BorderSide(color: color ?? AppColors.primaryColor)
-                      : null,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40.r),
-                  ),
-                ),
-                onPressed: onPressed ?? () {},
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (icon != null) ...[
-                      icon ??
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: color ?? AppColors.primaryColor,
-                            size: 18.sp,
-                          ),
-                      if (title != null) 8.horizontalSpace,
-                    ],
-                    TextWidget(
-                      title: title ?? "",
-                      decoration: textDecoration,
-                      color: titleColor ?? AppColors.primaryColor,
-                      fontSize: fontSize ?? 16.sp,
-                      fontWeight: fontWeight ?? FontWeight.w400,
+      width: width,
+      height: 48.h,
+      child: TextButton(
+          style: TextButton.styleFrom(
+            padding: padding ??
+                EdgeInsetsDirectional.symmetric(horizontal: 8.w),
+            foregroundColor: color ?? AppColors.primaryColor,
+            side: outlined
+                ? BorderSide(color: color ?? AppColors.primaryColor)
+                : null,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40.r),
+            ),
+          ),
+          onPressed: onPressed ?? () {},
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (icon != null) ...[
+                icon ??
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: color ?? AppColors.primaryColor,
+                      size: 18.sp,
                     ),
-                  ],
-                )),
-          );
+                if (title != null) 8.horizontalSpace,
+              ],
+              TextWidget(
+                title: title ?? "",
+                decoration: textDecoration,
+                color: titleColor ?? AppColors.primaryColor,
+                fontSize: fontSize ?? 16.sp,
+                fontWeight: fontWeight ?? FontWeight.w400,
+              ),
+            ],
+          )),
+    );
   }
 }
