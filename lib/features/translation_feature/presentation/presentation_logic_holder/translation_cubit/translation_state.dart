@@ -25,3 +25,8 @@ final class TranslationDetailsLoading extends TranslationState {
   @override
   List<Object> get props => [];
 }
+
+final class SuggestWordLoading extends TranslationState {
+  @override
+  List<Object> get props => [];
+}

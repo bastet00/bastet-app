@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:async/async.dart';
+import 'package:bastet_app/app/widgets/flutter_toast.dart';
+import 'package:bastet_app/features/translation_feature/domain/usecases/suggest_word_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,6 +80,22 @@ class TranslationCubit extends Cubit<TranslationState> {
       errorStateHandler,
       (r) {
         translationDetails = r;
+      },
+    );
+    emit(TranslationInitial());
+  }
+
+  void suggestWord() async {
+    emit(SuggestWordLoading());
+    final response = await getIt<SuggestWordUsecase>()(SuggestWordUsecaseParams(
+      word: translationController.text,
+      fromArabic: fromArabic,
+    ));
+    response.fold(
+      errorStateHandler,
+      (r) {
+        showToast(msg: 'لقد تم تقديم هذه الكلمة للمراجعة، شكرا لك');
+        translationController.clear();
       },
     );
     emit(TranslationInitial());

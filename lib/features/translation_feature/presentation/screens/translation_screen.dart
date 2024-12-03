@@ -11,6 +11,7 @@ import '../../../../app/widgets/loading.dart';
 import '../../../../app/widgets/text_button_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
 import '../presentation_logic_holder/translation_cubit/translation_cubit.dart';
+import '../widgets/suggest_word_widget.dart';
 
 class TranslationScreen extends StatelessWidget {
   const TranslationScreen({super.key});
@@ -160,6 +161,8 @@ class TranslationScreen extends StatelessWidget {
               ? const SizedBox()
               : state is TranslationLoading
               ? const Loading()
+              : TranslationCubit.get().translationModel?.translation?.isEmpty?? false
+              ? const SuggestWordWidget()
               : ListView.separated(
                 itemBuilder: (context, index) {
                   return TranslationWidget(
