@@ -24,10 +24,10 @@ class SuggestWordWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          TextWidget(
+          const TextWidget(
             title: 'لسوء الحظ، قاموسنا لا يحتوي على هذه الكلمة. يرجى التحقق من الإملاء الخاص بك. إذا كان كل شيء صحيحًا وتريد منا أن نضيف هذه الكلمة',
             maxLines: 5,
-            fontSize: 14.sp,
+            fontWeight: FontWeight.w400,
           ),
           10.verticalSpace,
           BlocBuilder<TranslationCubit, TranslationState>(

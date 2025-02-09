@@ -1,3 +1,5 @@
+import 'package:bastet_app/features/translation_feature/data/model/literal_translation.dart';
+
 import '../../../../app/network/network_manager.dart';
 import '../../../../app/utils/consts.dart';
 import '../../../../app/utils/handlers/remote_data_source_handler.dart';
@@ -19,6 +21,10 @@ abstract class TranslationRemoteDataSource {
   ///
   /// Throws a [ServerException] for all error codes.
   Future<void> suggestWord(Map<String, dynamic> params);
+
+  /// Calls the [GET] {word} endpoint.
+  /// Throws a [ServerException] for all error codes.
+  Future<LiteralTranslationModel> literalTranslation(Map<String, dynamic> params);
 }
 
 class TranslationRemoteDataSourceImpl implements TranslationRemoteDataSource {
@@ -54,5 +60,16 @@ class TranslationRemoteDataSourceImpl implements TranslationRemoteDataSource {
       method: RequestMethod.post,
       body: params,
     );
+  }
+
+  @override
+  Future<LiteralTranslationModel> literalTranslation(params) async {
+    final response = await networkManager.request(
+      endPoint: kLiteralTranslation,
+      method: RequestMethod.get,
+      queryParameters: params,
+    );
+    final data = await RemoteDataSourceCallHandler()(response);
+    return LiteralTranslationModel.fromJson(data);
   }
 }
