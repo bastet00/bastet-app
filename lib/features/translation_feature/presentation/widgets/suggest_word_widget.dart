@@ -25,7 +25,7 @@ class SuggestWordWidget extends StatelessWidget {
       child: Column(
         children: [
           const TextWidget(
-            title: 'لسوء الحظ، قاموسنا لا يحتوي على هذه الكلمة. يرجى التحقق من الإملاء الخاص بك. إذا كان كل شيء صحيحًا وتريد منا أن نضيف هذه الكلمة',
+            title: 'لسوء الحظ، قاموسنا لا يحتوي على هذه الكلمة. يوجد حاليا فقط ترجمة حرفية في حالة الاسماء. إذا كنت تريد منا أن نضيف هذه الكلمة',
             maxLines: 5,
             fontWeight: FontWeight.w400,
           ),
