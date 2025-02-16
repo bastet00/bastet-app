@@ -29,6 +29,7 @@ class LiteralTranslationWidget extends StatefulWidget {
 
 class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
   bool isFolded = true;
+  bool useMultiLetterSymbols = false;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,6 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                     height: 25.h,
                   ),
                 ),
-
                 Expanded(
                   child: Align(
                     alignment: Alignment.centerLeft,
@@ -100,10 +100,9 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                         color: AppColors.color84744F,
                       ),
                       SingleChildScrollView(
-                        reverse: true,
+                          reverse: true,
                           scrollDirection: Axis.horizontal,
-                          child: Row(
-                              children: [
+                          child: Row(children: [
                             if (widget.literalTranslation?.lettersMapper !=
                                 null)
                               ...?widget.literalTranslation!.lettersMapper?.map(
@@ -127,6 +126,38 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                                         ],
                                       )))
                           ])),
+                      const Divider(
+                        color: AppColors.color84744F,
+                      ),
+                      Row(
+                        children: [
+                          const TextWidget(
+                            title: 'علامات صوتية مركبة: ',
+                            color: AppColors.suggestionsTextColor,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          const Spacer(),
+                          Transform.scale(
+                            scale: 0.75,
+                            child: Switch(
+                              trackOutlineWidth: const WidgetStatePropertyAll(0),
+                              trackOutlineColor: WidgetStateProperty.all(
+                                  AppColors.suggestionsTextColor),
+                              inactiveThumbColor: AppColors.inactiveSwitchThumbColor,
+                              inactiveTrackColor: AppColors.suggestionsTextColor,
+                              activeColor: AppColors.primaryColor,
+                              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              value: useMultiLetterSymbols,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  useMultiLetterSymbols =
+                                      !useMultiLetterSymbols;
+                                });
+                              },
+                            ),
+                          )
+                        ],
+                      )
                     ],
                   ))
             ]
