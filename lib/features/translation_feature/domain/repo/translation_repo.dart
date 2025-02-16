@@ -8,6 +8,6 @@ import '../../data/model/literal_translation.dart';
 abstract class TranslationRepo {
   Future<Either<Failure, TranslationModel>> getTranslation(Map<String, String> params);
   Future<Either<Failure, TranslationDetailsModel>> getTranslationDetails(Map<String, String> params);
-  Future<Either<Failure, LiteralTranslationModel>> getLiteralTranslation(Map<String, String> params);
+  Future<Either<Failure, LiteralTranslationModel>> getLiteralTranslation(Map<String, dynamic> params);
   Future<Either<Failure, void>> suggestWord(Map<String, dynamic> params);
 }

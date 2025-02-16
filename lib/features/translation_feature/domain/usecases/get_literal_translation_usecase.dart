@@ -19,9 +19,10 @@ class GetLiteralTranslationUseCase implements UseCase <LiteralTranslationModel, 
 }
 
 class GetLiteralTranslationUseCaseParams {
-  final String text; // 'arabic' or 'egyptian'
+  final String text;
+  final String useMultiLetterSymbols;
 
-  GetLiteralTranslationUseCaseParams({required this.text});
+  GetLiteralTranslationUseCaseParams({required this.text, required this.useMultiLetterSymbols});
 
-  Map<String, String> toMap() => {'text': text};
+  Map<String, String> toMap() => {'text': text, 'useMultiLetterSymbols': useMultiLetterSymbols};
 }

@@ -27,8 +27,9 @@ class TranslationCubit extends Cubit<TranslationState> {
   final translationController = TextEditingController();
   TranslationModel? translationModel;
   LiteralTranslationModel? literalTranslationModel;
+  bool useMultiLetterSymbols = false;
   Timer? _debounce;
-  CancelableOperation? _cancelableRequest;
+  CancelableOperation? _cancelableRequest; // نفرتيتي
 
   TranslationDetailsModel? translationDetails;
 
@@ -36,6 +37,13 @@ class TranslationCubit extends Cubit<TranslationState> {
     fromArabic = !fromArabic;
     emit(ConvertLanguageState(fromArabic));
     if (translationController.text.trim().isNotEmpty) getTranslation();
+  }
+
+  void toggleMultiLetterSymbols() async {
+    emit(ToggleMultiLetterSymbolsLoading());
+    useMultiLetterSymbols = !useMultiLetterSymbols;
+    if (translationController.text.trim().isNotEmpty) await getLiteralTranslation();
+    emit(TranslationInitial());
   }
 
   Future<void> getTranslation() async {
@@ -62,6 +70,7 @@ class TranslationCubit extends Cubit<TranslationState> {
     }
     final response = await getIt<GetLiteralTranslationUseCase>()(GetLiteralTranslationUseCaseParams(
       text: translationController.text.trim(),
+      useMultiLetterSymbols: useMultiLetterSymbols ? "true": "false"
     ));
     response.fold(
       errorStateHandler,
