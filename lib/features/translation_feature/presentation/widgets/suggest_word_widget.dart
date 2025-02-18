@@ -25,7 +25,7 @@ class SuggestWordWidget extends StatelessWidget {
       child: Column(
         children: [
           const TextWidget(
-            title: 'لسوء الحظ، قاموسنا لا يحتوي على هذه الكلمة. يوجد حاليا فقط ترجمة حرفية في حالة الاسماء. إذا كنت تريد منا أن نضيف هذه الكلمة',
+            title: 'تم توفير ترجمة حرفية في حالة ترجمة الأسماء. لو بتدور على كلمة أخرى في القاموس وعاوزنا نضيفها!',
             maxLines: 5,
             fontWeight: FontWeight.w400,
           ),
@@ -35,7 +35,7 @@ class SuggestWordWidget extends StatelessWidget {
               return CustomTextButton(
                 loading: state is SuggestWordLoading,
                 color: AppColors.white,
-                title: 'انقر هنا',
+                title: 'اضغط هنا',
                 outlined: true,
                 onPressed: () {
                   TranslationCubit.get().suggestWord();
