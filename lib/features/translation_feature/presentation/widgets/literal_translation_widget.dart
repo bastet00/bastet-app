@@ -78,17 +78,18 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                     onPressed: () {
                       Fluttertoast.cancel();
                       // Copy to clipboard
+
                       Clipboard.setData(ClipboardData(
                           text: TranslationCubit.get()
-                              .literalTranslationModel
-                              ?.literalTranslation ??
+                                  .literalTranslationModel
+                                  ?.literalTranslation ??
                               ''));
                       showToast(msg: 'تم النسخ');
                     },
                     icon: ImageWidget(
                       imageUrl: AppAssets.copy,
-                      width: 15.w,
-                      height: 15.h,
+                      width: 20.w,
+                      height: 20.h,
                     ),
                   ),
                 ],
@@ -107,8 +108,8 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                             scrollDirection: Axis.horizontal,
                             child: Row(children: [
                               if (TranslationCubit.get()
-                                  .literalTranslationModel
-                                  ?.lettersMapper !=
+                                      .literalTranslationModel
+                                      ?.lettersMapper !=
                                   null)
                                 ...?TranslationCubit.get()
                                     .literalTranslationModel
@@ -156,7 +157,7 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                                     AppColors.inactiveSwitchThumbColor,
                                 inactiveTrackColor:
                                     AppColors.suggestionsTextColor,
-                                activeColor: AppColors.primaryColor,
+                                activeColor: AppColors.activeSwitchColor,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
                                 value: TranslationCubit.get()
@@ -168,7 +169,48 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                               ),
                             )
                           ],
+                        ),
+                    IntrinsicHeight(
+
+                       child:  Row(
+                          children: [
+                            const TextWidget(
+                              title: 'الجنس',
+                              color: AppColors.suggestionsTextColor,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            const Spacer(),
+                            CustomTextButton(
+                                padding: EdgeInsetsDirectional.symmetric(
+                                    horizontal: 1.w),
+                                onPressed: () {
+                                  TranslationCubit.get()
+                                      .applyGender("MALE");
+                                },
+                                title: '𓀀',
+                                width: 40.w,
+                                titleColor: TranslationCubit.get().gender == "MALE"
+                                    ? AppColors.primaryColor
+                                    : AppColors.white,
+                                fontSize: 21.sp,
+                                ),
+                            const VerticalDivider(color: AppColors.colorC6B283,thickness: 1, width: 6, indent: 10, endIndent: 12),
+                            CustomTextButton(
+                              onPressed: () {
+                                TranslationCubit.get()
+                                    .applyGender("FEMALE");
+                              },
+                              title: '𓁐',
+                              width: 40.w,
+                              fontSize: 21.sp,
+                              titleColor:  TranslationCubit.get().gender == "FEMALE" ? AppColors.primaryColor: AppColors.white,
+                              padding: EdgeInsetsDirectional.symmetric(
+                                  horizontal: 1.w),
+
+                            ),
+                          ],
                         )
+                    )
                       ],
                     ))
               ]

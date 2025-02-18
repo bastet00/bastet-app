@@ -28,8 +28,10 @@ class TranslationCubit extends Cubit<TranslationState> {
   TranslationModel? translationModel;
   LiteralTranslationModel? literalTranslationModel;
   bool useMultiLetterSymbols = false;
+  String? gender; // MALE FEMALE
+
   Timer? _debounce;
-  CancelableOperation? _cancelableRequest; // نفرتيتي
+  CancelableOperation? _cancelableRequest;
 
   TranslationDetailsModel? translationDetails;
 
@@ -40,14 +42,26 @@ class TranslationCubit extends Cubit<TranslationState> {
   }
 
   void toggleMultiLetterSymbols() async {
-    emit(ToggleMultiLetterSymbolsLoading());
+    emit(LiteralTranslationForumLoading());
     useMultiLetterSymbols = !useMultiLetterSymbols;
+    if (translationController.text.trim().isNotEmpty) await getLiteralTranslation();
+    emit(TranslationInitial());
+  }
+
+  void applyGender(String clickedGender) async {
+    emit(LiteralTranslationForumLoading());
+    if (gender == clickedGender) {
+      gender = null;
+    } else {
+      gender = clickedGender;
+    }
     if (translationController.text.trim().isNotEmpty) await getLiteralTranslation();
     emit(TranslationInitial());
   }
 
   Future<void> getTranslation() async {
     emit(TranslationLoading());
+    gender = null;
     if (translationController.text.trim().isEmpty) {
       return;
     }
@@ -70,7 +84,8 @@ class TranslationCubit extends Cubit<TranslationState> {
     }
     final response = await getIt<GetLiteralTranslationUseCase>()(GetLiteralTranslationUseCaseParams(
       text: translationController.text.trim(),
-      useMultiLetterSymbols: useMultiLetterSymbols ? "true": "false"
+      useMultiLetterSymbols: useMultiLetterSymbols ? "true": "false",
+      gender: gender == "" ? null: gender
     ));
     response.fold(
       errorStateHandler,

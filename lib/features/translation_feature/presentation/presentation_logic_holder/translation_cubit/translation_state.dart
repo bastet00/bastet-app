@@ -26,7 +26,7 @@ final class LiteralTranslationLoading extends TranslationState {
   List<Object> get props => [];
 }
 
-final class ToggleMultiLetterSymbolsLoading extends TranslationState {
+final class LiteralTranslationForumLoading extends TranslationState {
   @override
   List<Object> get props => [];
 }

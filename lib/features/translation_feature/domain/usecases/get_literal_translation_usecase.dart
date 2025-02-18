@@ -6,7 +6,9 @@ import '../../../../app/usecase/usecase.dart';
 import '../../data/model/literal_translation.dart';
 import '../repo/translation_repo.dart';
 
-class GetLiteralTranslationUseCase implements UseCase <LiteralTranslationModel, GetLiteralTranslationUseCaseParams> {
+class GetLiteralTranslationUseCase
+    implements
+        UseCase<LiteralTranslationModel, GetLiteralTranslationUseCaseParams> {
   final TranslationRepo repository;
 
   GetLiteralTranslationUseCase({required this.repository});
@@ -15,14 +17,21 @@ class GetLiteralTranslationUseCase implements UseCase <LiteralTranslationModel, 
   Future<Either<Failure, LiteralTranslationModel>> call(params) async {
     return await repository.getLiteralTranslation(params.toMap());
   }
-
 }
 
 class GetLiteralTranslationUseCaseParams {
   final String text;
   final String useMultiLetterSymbols;
+  final String? gender;
 
-  GetLiteralTranslationUseCaseParams({required this.text, required this.useMultiLetterSymbols});
+  GetLiteralTranslationUseCaseParams(
+      {required this.text, required this.useMultiLetterSymbols, this.gender});
 
-  Map<String, String> toMap() => {'text': text, 'useMultiLetterSymbols': useMultiLetterSymbols};
+  Map<String, String> toMap() {
+    final map = {'text': text, 'useMultiLetterSymbols': useMultiLetterSymbols};
+    if (gender != null) {
+      map['gender'] = gender!;
+    }
+    return map;
+  }
 }
