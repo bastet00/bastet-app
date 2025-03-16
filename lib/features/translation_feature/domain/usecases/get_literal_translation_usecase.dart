@@ -21,7 +21,7 @@ class GetLiteralTranslationUseCase
 
 class GetLiteralTranslationUseCaseParams {
   final String text;
-  final String useMultiLetterSymbols;
+  final bool useMultiLetterSymbols;
   final String lang;
   final String? gender;
 
@@ -29,7 +29,7 @@ class GetLiteralTranslationUseCaseParams {
       {required this.text, required this.useMultiLetterSymbols, required this.lang, this.gender});
 
   Map<String, String> toMap() {
-    final map = {'text': text, 'useMultiLetterSymbols': useMultiLetterSymbols, 'lang': lang};
+    final map = {'text': text, 'useMultiLetterSymbols': useMultiLetterSymbols.toString(), 'lang': lang};
     if (gender != null) {
       map['gender'] = gender!;
     }
