@@ -38,7 +38,10 @@ class TranslationCubit extends Cubit<TranslationState> {
   void convertLanguage() {
     fromArabic = !fromArabic;
     emit(ConvertLanguageState(fromArabic));
-    if (translationController.text.trim().isNotEmpty) getTranslation();
+    if (translationController.text.trim().isNotEmpty) {
+      getTranslation();
+      getLiteralTranslation();
+    }
   }
 
   void toggleMultiLetterSymbols() async {
@@ -85,7 +88,8 @@ class TranslationCubit extends Cubit<TranslationState> {
     final response = await getIt<GetLiteralTranslationUseCase>()(GetLiteralTranslationUseCaseParams(
       text: translationController.text.trim(),
       useMultiLetterSymbols: useMultiLetterSymbols ? "true": "false",
-      gender: gender == "" ? null: gender
+      gender: gender == "" ? null: gender,
+      lang: fromArabic ? 'arabic' : 'egyptian',
     ));
     response.fold(
       errorStateHandler,

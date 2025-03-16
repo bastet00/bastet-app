@@ -17,13 +17,8 @@ class FoldArrowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FavCubit, FavState>(
       builder: (context, state) {
-        // final isFav = FavCubit.get().isFavorite(translation);
         return CustomTextButton(
           onPressed: () {
-            // FavCubit.get().toggleFav(
-            //   isFav: isFav,
-            //   translation: translation,
-            // );
           },
           icon: ImageWidget(
             imageUrl: true ? AppAssets.favSolid : AppAssets.fav,
