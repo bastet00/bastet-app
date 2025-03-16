@@ -1,4 +1,3 @@
-import 'package:bastet_app/features/translation_feature/presentation/widgets/translation_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +10,8 @@ import '../../../../app/widgets/loading.dart';
 import '../../../../app/widgets/text_button_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
 import '../presentation_logic_holder/translation_cubit/translation_cubit.dart';
+import '../widgets/translation_widget.dart';
+import '../widgets/literal_translation_widget.dart';
 import '../widgets/suggest_word_widget.dart';
 
 class TranslationScreen extends StatelessWidget {
@@ -82,7 +83,11 @@ class TranslationScreen extends StatelessWidget {
                 ),
                 Row(
                   children: List.generate(3, (index) {
-                    final title = index == 0 ? 'شمس' : index == 1 ?'عدالة' : 'قلب';
+                    final title = index == 0
+                        ? 'شمس'
+                        : index == 1
+                            ? 'عدالة'
+                            : 'قلب';
                     return Row(
                       children: [
                         CustomTextButton(
@@ -91,8 +96,10 @@ class TranslationScreen extends StatelessWidget {
                           title: title,
                           outlined: true,
                           onPressed: () {
-                            TranslationCubit.get().translationController.text = title;
+                            TranslationCubit.get().translationController.text =
+                                title;
                             TranslationCubit.get().getTranslation();
+                            TranslationCubit.get().getLiteralTranslation();
                           },
                         ),
                         6.horizontalSpace,
@@ -112,8 +119,10 @@ class TranslationScreen extends StatelessWidget {
                           title: title,
                           outlined: true,
                           onPressed: () {
-                            TranslationCubit.get().translationController.text = title;
+                            TranslationCubit.get().translationController.text =
+                                title;
                             TranslationCubit.get().getTranslation();
+                            TranslationCubit.get().getLiteralTranslation();
                           },
                         ),
                         6.horizontalSpace,
@@ -121,36 +130,6 @@ class TranslationScreen extends StatelessWidget {
                     );
                   }),
                 ),
-                // SizedBox(
-                //   height: 48.h,
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.end,
-                //     children: [
-                //       CustomTextButton(
-                //         onPressed: () {},
-                //         icon: ImageWidget(
-                //           imageUrl: AppAssets.audio,
-                //           width: 24.w,
-                //           height: 20.h,
-                //         ),
-                //       ),
-                //       VerticalDivider(
-                //         width: 8.w,
-                //         color: AppColors.colorC7B384,
-                //         indent: 10.h,
-                //         endIndent: 10.h,
-                //       ),
-                //       CustomTextButton(
-                //         onPressed: () {},
-                //         icon: ImageWidget(
-                //           imageUrl: AppAssets.microphone,
-                //           width: 14.w,
-                //           height: 22.h,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -158,22 +137,51 @@ class TranslationScreen extends StatelessWidget {
           BlocBuilder<TranslationCubit, TranslationState>(
             builder: (context, state) {
               return TranslationCubit.get().translationController.text.isEmpty
-              ? const SizedBox()
-              : state is TranslationLoading
-              ? const Loading()
-              : TranslationCubit.get().translationModel?.translation?.isEmpty?? false
-              ? const SuggestWordWidget()
-              : ListView.separated(
-                itemBuilder: (context, index) {
-                  return TranslationWidget(
-                    translation: TranslationCubit.get().translationModel?.translation?[index],
-                  );
-                },
-                itemCount: TranslationCubit.get().translationModel?.translation?.length?? 0,
-                separatorBuilder: (context, index) => 20.verticalSpace,
-                shrinkWrap: true,
-                primary: false,
-              );
+                  ? const SizedBox()
+                  : state is TranslationLoading
+                      ? const Loading()
+                      : TranslationCubit.get()
+                                  .translationModel
+                                  ?.translation
+                                  ?.isEmpty ??
+                              false
+                          ? Column(
+                              children: [
+                                LiteralTranslationWidget(
+                                  literalTranslation: TranslationCubit.get()
+                                      .literalTranslationModel,
+                                ),
+                                20.verticalSpace,
+                                const SuggestWordWidget(),
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                LiteralTranslationWidget(
+                                  literalTranslation: TranslationCubit.get()
+                                      .literalTranslationModel,
+                                ),
+                                20.verticalSpace,
+                                ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    return TranslationWidget(
+                                      translation: TranslationCubit.get()
+                                          .translationModel
+                                          ?.translation?[index],
+                                    );
+                                  },
+                                  itemCount: TranslationCubit.get()
+                                          .translationModel
+                                          ?.translation
+                                          ?.length ??
+                                      0,
+                                  separatorBuilder: (context, index) =>
+                                      20.verticalSpace,
+                                  shrinkWrap: true,
+                                  primary: false,
+                                )
+                              ],
+                            );
             },
           ),
           20.verticalSpace,

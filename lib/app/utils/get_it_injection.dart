@@ -12,6 +12,8 @@ import '../../features/settings_feature/domain/usecases/privacy_policy_use_case.
 import '../../features/translation_feature/domain/usecases/get_translation_details_usecase.dart';
 import '../../features/translation_feature/domain/usecases/get_translation_usecase.dart';
 import '../../features/translation_feature/domain/usecases/suggest_word_usecase.dart';
+import '../../features/translation_feature/domain/usecases/get_literal_translation_usecase.dart';
+
 import '../network/network_info.dart';
 import '../network/network_manager.dart';
 import '../services/cache_service.dart';
@@ -47,6 +49,7 @@ Future<void> init() async {
 void _translationUseCases() {
   getIt.registerLazySingleton<GetTranslationUsecase>(() => GetTranslationUsecase(repository: getIt()));
   getIt.registerLazySingleton<GetTranslationDetailsUseCase>(() => GetTranslationDetailsUseCase(repository: getIt()));
+  getIt.registerLazySingleton<GetLiteralTranslationUseCase>(() => GetLiteralTranslationUseCase(repository: getIt()));
   getIt.registerLazySingleton<SuggestWordUsecase>(() => SuggestWordUsecase(repository: getIt()));
 }
 

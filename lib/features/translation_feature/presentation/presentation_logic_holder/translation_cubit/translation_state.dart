@@ -21,6 +21,16 @@ final class TranslationLoading extends TranslationState {
   List<Object> get props => [];
 }
 
+final class LiteralTranslationLoading extends TranslationState {
+  @override
+  List<Object> get props => [];
+}
+
+final class LiteralTranslationForumLoading extends TranslationState {
+  @override
+  List<Object> get props => [];
+}
+
 final class TranslationDetailsLoading extends TranslationState {
   @override
   List<Object> get props => [];

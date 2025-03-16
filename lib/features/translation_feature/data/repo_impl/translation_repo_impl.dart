@@ -1,4 +1,5 @@
 import 'package:bastet_app/app/error/failures.dart';
+import 'package:bastet_app/features/translation_feature/data/model/literal_translation.dart';
 import 'package:bastet_app/features/translation_feature/data/model/translation_details_model.dart';
 
 import 'package:bastet_app/features/translation_feature/data/model/translation_model.dart';
@@ -22,6 +23,14 @@ class TranslationRepoImpl extends TranslationRepo {
       return await translationRemoteDataSource.search(params);
     });
   }
+
+  @override
+  Future<Either<Failure, LiteralTranslationModel>> getLiteralTranslation(params) async {
+    return await RepoImplCallHandler<LiteralTranslationModel>(networkInfo)(() async {
+      return await translationRemoteDataSource.literalTranslation(params);
+    });
+  }
+
 
   @override
   Future<Either<Failure, TranslationDetailsModel>> getTranslationDetails(params) async {

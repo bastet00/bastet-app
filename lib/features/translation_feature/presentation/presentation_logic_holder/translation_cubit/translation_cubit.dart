@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:async/async.dart';
 import 'package:bastet_app/app/widgets/flutter_toast.dart';
+import 'package:bastet_app/features/translation_feature/data/model/literal_translation.dart';
+import 'package:bastet_app/features/translation_feature/domain/usecases/get_literal_translation_usecase.dart';
 import 'package:bastet_app/features/translation_feature/domain/usecases/suggest_word_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,10 @@ class TranslationCubit extends Cubit<TranslationState> {
   bool fromArabic = true;
   final translationController = TextEditingController();
   TranslationModel? translationModel;
+  LiteralTranslationModel? literalTranslationModel;
+  bool useMultiLetterSymbols = false;
+  String? gender; // MALE FEMALE
+
   Timer? _debounce;
   CancelableOperation? _cancelableRequest;
 
@@ -32,11 +38,33 @@ class TranslationCubit extends Cubit<TranslationState> {
   void convertLanguage() {
     fromArabic = !fromArabic;
     emit(ConvertLanguageState(fromArabic));
-    if (translationController.text.trim().isNotEmpty) getTranslation();
+    if (translationController.text.trim().isNotEmpty) {
+      getTranslation();
+      getLiteralTranslation();
+    }
+  }
+
+  void toggleMultiLetterSymbols() async {
+    emit(LiteralTranslationForumLoading());
+    useMultiLetterSymbols = !useMultiLetterSymbols;
+    if (translationController.text.trim().isNotEmpty) await getLiteralTranslation();
+    emit(TranslationInitial());
+  }
+
+  void applyGender(String clickedGender) async {
+    emit(LiteralTranslationForumLoading());
+    if (gender == clickedGender) {
+      gender = null;
+    } else {
+      gender = clickedGender;
+    }
+    if (translationController.text.trim().isNotEmpty) await getLiteralTranslation();
+    emit(TranslationInitial());
   }
 
   Future<void> getTranslation() async {
     emit(TranslationLoading());
+    gender = null;
     if (translationController.text.trim().isEmpty) {
       return;
     }
@@ -53,6 +81,25 @@ class TranslationCubit extends Cubit<TranslationState> {
     emit(TranslationInitial());
   }
 
+  Future<void> getLiteralTranslation() async {
+    if (translationController.text.trim().isEmpty) {
+      return;
+    }
+    final response = await getIt<GetLiteralTranslationUseCase>()(GetLiteralTranslationUseCaseParams(
+      text: translationController.text.trim(),
+      useMultiLetterSymbols: useMultiLetterSymbols,
+      gender: gender == "" ? null: gender,
+      lang: fromArabic ? 'arabic' : 'egyptian',
+    ));
+    response.fold(
+      errorStateHandler,
+          (r) {
+        literalTranslationModel = r;
+      },
+    );
+  }
+
+
   void onTextChanged(String text) {
     // Cancel the previous debounce timer if it's still active
     if (_debounce?.isActive ?? false) _debounce?.cancel();
@@ -63,7 +110,7 @@ class TranslationCubit extends Cubit<TranslationState> {
       _cancelableRequest?.cancel();
 
       _cancelableRequest = CancelableOperation.fromFuture(
-        getTranslation(), // Trigger the translation request
+        Future.wait([getTranslation(), getLiteralTranslation()]), // Trigger the translation request
         onCancel: () {
           debugPrint("***** Previous request canceled. *****");
         },
