@@ -9,6 +9,11 @@ final class TranslationInitial extends TranslationState {
   List<Object> get props => [];
 }
 
+final class LiteralTranslationInitial extends TranslationState {
+  @override
+  List<Object> get props => [];
+}
+
 class ConvertLanguageState extends TranslationState {
   final bool fromArabic;
   const ConvertLanguageState(this.fromArabic);
@@ -17,16 +22,14 @@ class ConvertLanguageState extends TranslationState {
 }
 
 final class TranslationLoading extends TranslationState {
+  final bool? literalTranslationLoaded;
+
+  const TranslationLoading({this.literalTranslationLoaded});
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [literalTranslationLoaded];
 }
 
 final class LiteralTranslationLoading extends TranslationState {
-  @override
-  List<Object> get props => [];
-}
-
-final class LiteralTranslationForumLoading extends TranslationState {
   @override
   List<Object> get props => [];
 }
