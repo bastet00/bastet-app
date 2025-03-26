@@ -49,7 +49,7 @@ class TranslationCubit extends Cubit<TranslationState> {
     emit(LiteralTranslationLoading());
     useMultiLetterSymbols = !useMultiLetterSymbols;
     if (translationController.text.trim().isNotEmpty) await getLiteralTranslation();
-    emit(LiteralTranslationLoading());
+    emit(TranslationInitial());
 
   }
 
@@ -61,7 +61,7 @@ class TranslationCubit extends Cubit<TranslationState> {
       gender = clickedGender;
     }
     if (translationController.text.trim().isNotEmpty) await getLiteralTranslation();
-    emit(LiteralTranslationLoading());
+    emit(TranslationInitial());
   }
 
   Future<void> getTranslation() async {
