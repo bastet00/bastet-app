@@ -84,8 +84,6 @@ class TranslationCubit extends Cubit<TranslationState> {
   }
 
   Future<void> getLiteralTranslation() async {
-    emit(TranslationLoading());
-
     if (translationController.text.trim().isEmpty) {
       return;
     }
