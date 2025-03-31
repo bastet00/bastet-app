@@ -98,8 +98,8 @@ class TranslationScreen extends StatelessWidget {
                           onPressed: () {
                             TranslationCubit.get().translationController.text =
                                 title;
-                            TranslationCubit.get().getTranslation();
                             TranslationCubit.get().getLiteralTranslation();
+                            TranslationCubit.get().getTranslation();
                           },
                         ),
                         6.horizontalSpace,
@@ -121,8 +121,8 @@ class TranslationScreen extends StatelessWidget {
                           onPressed: () {
                             TranslationCubit.get().translationController.text =
                                 title;
-                            TranslationCubit.get().getTranslation();
                             TranslationCubit.get().getLiteralTranslation();
+                            TranslationCubit.get().getTranslation();
                           },
                         ),
                         6.horizontalSpace,
@@ -138,31 +138,23 @@ class TranslationScreen extends StatelessWidget {
             builder: (context, state) {
               return TranslationCubit.get().translationController.text.isEmpty
                   ? const SizedBox()
-                  : state is TranslationLoading
-                      ? const Loading()
-                      : TranslationCubit.get()
-                                  .translationModel
-                                  ?.translation
-                                  ?.isEmpty ??
-                              false
-                          ? Column(
-                              children: [
-                                LiteralTranslationWidget(
-                                  literalTranslation: TranslationCubit.get()
-                                      .literalTranslationModel,
-                                ),
-                                20.verticalSpace,
-                                const SuggestWordWidget(),
-                              ],
-                            )
-                          : Column(
-                              children: [
-                                LiteralTranslationWidget(
-                                  literalTranslation: TranslationCubit.get()
-                                      .literalTranslationModel,
-                                ),
-                                20.verticalSpace,
-                                ListView.separated(
+                  : Column(children: [
+                      TranslationCubit.get().literalTranslationModel == null
+                          ? const SizedBox()
+                          : LiteralTranslationWidget(
+                              literalTranslation: TranslationCubit.get()
+                                  .literalTranslationModel,
+                            ),
+                      20.verticalSpace,
+                      state is TranslationLoading
+                          ? const Loading()
+                          : TranslationCubit.get()
+                                      .translationModel
+                                      ?.translation
+                                      ?.isEmpty ??
+                                  false
+                              ? const SuggestWordWidget()
+                              : ListView.separated(
                                   itemBuilder: (context, index) {
                                     return TranslationWidget(
                                       translation: TranslationCubit.get()
@@ -180,8 +172,7 @@ class TranslationScreen extends StatelessWidget {
                                   shrinkWrap: true,
                                   primary: false,
                                 )
-                              ],
-                            );
+                    ]);
             },
           ),
           20.verticalSpace,

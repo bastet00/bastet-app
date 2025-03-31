@@ -31,7 +31,8 @@ class TranslationCubit extends Cubit<TranslationState> {
   String? gender; // MALE FEMALE
 
   Timer? _debounce;
-  CancelableOperation? _cancelableRequest;
+  CancelableOperation? _translationCancelableRequest;
+  CancelableOperation? _literalTranslationCancelableRequest;
 
   TranslationDetailsModel? translationDetails;
 
@@ -45,14 +46,15 @@ class TranslationCubit extends Cubit<TranslationState> {
   }
 
   void toggleMultiLetterSymbols() async {
-    emit(LiteralTranslationForumLoading());
+    emit(LiteralTranslationLoading());
     useMultiLetterSymbols = !useMultiLetterSymbols;
     if (translationController.text.trim().isNotEmpty) await getLiteralTranslation();
     emit(TranslationInitial());
+
   }
 
   void applyGender(String clickedGender) async {
-    emit(LiteralTranslationForumLoading());
+    emit(LiteralTranslationLoading());
     if (gender == clickedGender) {
       gender = null;
     } else {
@@ -97,6 +99,7 @@ class TranslationCubit extends Cubit<TranslationState> {
         literalTranslationModel = r;
       },
     );
+    emit(TranslationLoading(literalTranslationLoaded: true));
   }
 
 
@@ -107,14 +110,24 @@ class TranslationCubit extends Cubit<TranslationState> {
     // Debounce - wait for 500ms after typing stops
     _debounce = Timer(const Duration(milliseconds: 300), () {
       // Cancel the previous HTTP request if it's still ongoing
-      _cancelableRequest?.cancel();
+      _translationCancelableRequest?.cancel();
+      _literalTranslationCancelableRequest?.cancel();
 
-      _cancelableRequest = CancelableOperation.fromFuture(
-        Future.wait([getTranslation(), getLiteralTranslation()]), // Trigger the translation request
+      _literalTranslationCancelableRequest = CancelableOperation.fromFuture(
+        Future.wait([getLiteralTranslation()]), // Trigger the translation request
         onCancel: () {
-          debugPrint("***** Previous request canceled. *****");
+          debugPrint("***** Previous literal-translation request canceled. *****");
         },
       );
+
+      _translationCancelableRequest = CancelableOperation.fromFuture(
+        Future.wait([getTranslation()]), // Trigger the translation request
+        onCancel: () {
+          debugPrint("***** Previous translation request canceled. *****");
+        },
+      );
+
+
     });
   }
 
@@ -151,7 +164,8 @@ class TranslationCubit extends Cubit<TranslationState> {
   @override
   Future<void> close() {
     _debounce?.cancel();
-    _cancelableRequest?.cancel();
+    _translationCancelableRequest?.cancel();
+    _literalTranslationCancelableRequest?.cancel();
     return super.close();
   }
 
