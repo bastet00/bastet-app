@@ -11,6 +11,7 @@ class AppAssets{
   static const String privacy = "${iconBase}privacy.svg";
   static const String idea = "${iconBase}idea.svg";
   static const String contact = "${iconBase}contact.svg";
+  static const String donation = "${iconBase}donation.svg";
   static const String exit = "${iconBase}exit.svg";
   static const String fav = "${iconBase}fav.svg";
   static const String favSolid = "${iconBase}fav_solid.svg";
