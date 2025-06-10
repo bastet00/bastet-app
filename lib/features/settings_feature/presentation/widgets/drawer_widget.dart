@@ -36,7 +36,8 @@ class DrawerWidget extends StatelessWidget {
                     leadingUrl: AppAssets.share,
                     title: 'شارك التطبيق',
                     onTap: () {
-                      const String appLink = 'https://play.google.com/store/apps/details?id=com.bastet.bastet_app';
+                      const String appLink =
+                          'https://play.google.com/store/apps/details?id=com.bastet.bastet_app';
                       Clipboard.setData(const ClipboardData(text: appLink));
                       Share.share(appLink);
                     },
@@ -62,10 +63,9 @@ class DrawerWidget extends StatelessWidget {
                     onTap: () async {
                       // email
                       if (!await launchUrl(Uri.parse(
-                        "mailto:contact@bastet-app.com?subject=اقتراح فكرة"
-                        "&body=للتواصل مع  باستيت 𓃠\nالموضوع:\n\nرقم الهاتف:\n\nالاسم:"
-                      ))) {
-                      throw Exception('Could not launch url');
+                          "mailto:contact@bastet-app.com?subject=اقتراح فكرة"
+                          "&body=للتواصل مع  باستيت 𓃠\nالموضوع:\n\nرقم الهاتف:\n\nالاسم:"))) {
+                        throw Exception('Could not launch url');
                       }
                     },
                   ),
@@ -75,10 +75,19 @@ class DrawerWidget extends StatelessWidget {
                     onTap: () async {
                       // email
                       if (!await launchUrl(Uri.parse(
-                        "mailto:contact@bastet-app.com?subject=تواصل مع الفريق"
-                        "&body=للتواصل مع  باستيت 𓃠\nالموضوع:\n\nرقم الهاتف:\n\nالاسم:"
-                      ))) {
-                      throw Exception('Could not launch url');
+                          "mailto:contact@bastet-app.com?subject=تواصل مع الفريق"
+                          "&body=للتواصل مع  باستيت 𓃠\nالموضوع:\n\nرقم الهاتف:\n\nالاسم:"))) {
+                        throw Exception('Could not launch url');
+                      }
+                    },
+                  ),
+                  ListTileWidget(
+                    leadingUrl: AppAssets.donation,
+                    title: 'تبرع',
+                    onTap: () async {
+                      if (!await launchUrl(Uri.parse(
+                          "https://www.paypal.com/donate/?hosted_button_id=AV9XQGBF9CQMW"))) {
+                        throw Exception('Could not launch url');
                       }
                     },
                   ),

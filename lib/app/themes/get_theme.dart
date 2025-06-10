@@ -35,7 +35,7 @@ import '../utils/app_colors.dart';
         fontSize: 24.sp,
       ),
     ),
-    dialogTheme: const DialogTheme(
+    dialogTheme: const DialogThemeData(
       backgroundColor: AppColors.white,
       iconColor: AppColors.primaryColor,
     ),
@@ -43,7 +43,7 @@ import '../utils/app_colors.dart';
     iconTheme: const IconThemeData(color: AppColors.primaryColor,),
     scaffoldBackgroundColor: AppColors.scaffoldBackGround,
     cardColor: Colors.white,
-    cardTheme: const CardTheme(color: Colors.white),
+    cardTheme: const CardThemeData(color: Colors.white),
     focusColor: AppColors.descriptionColor,
     hintColor: AppColors.descriptionColor,
     fontFamily: "Noto Sans Arabic",
