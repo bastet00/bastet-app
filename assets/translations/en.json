@@ -1,3 +1,24 @@
 {
-  "welcome": "Welcome"
+  "ok": "OK",
+  "required_field": "This field is required",
+  "must_less_than": "Value must be less than",
+  "must_more_than": "Value must be more than",
+  "digits": "digits",
+  "characters": "characters",
+
+  "on_boarding_1": "The ancient Egyptian language (hieroglyphics) is the language of ancient Egyptian culture and civilization. It remained a living language for thousands of years, but now it is dead. With its neglect and death over thousands of years, the culture has disappeared and has become just words on walls.",
+  "on_boarding_2": "The application is a non-profit project that aims to teach Egyptians their ancient Egyptian language in an easy and simple way by writing it in Arabic letters and combining it with the colloquial language.",
+  "on_boarding_3": "The revival of language heralds the beginning of a new era, the Renaissance and modern civilization of Kemet.\n Join us in reviving language and culture.",
+  "skip": "Skip",
+  "welcome": "Welcome",
+  "start": "Start",
+  "previous": "Previous",
+  "next": "Next",
+
+  "share_app": "Share App",
+  "rate_app": "Rate App",
+  "privacy_policy": "Privacy Policy",
+  "suggest_idea": "Suggest an idea",
+  "contact_us": "Contact us",
+  "donate": "Donate"
 }
