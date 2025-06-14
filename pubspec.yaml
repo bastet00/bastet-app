@@ -47,7 +47,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   smooth_page_indicator: ^1.2.0+3
   equatable: ^2.0.5
-  fluttertoast: ^8.2.8
+  fluttertoast: ^8.2.12
   async: ^2.11.0
   url_launcher: ^6.3.0
   share_plus: ^10.0.2
