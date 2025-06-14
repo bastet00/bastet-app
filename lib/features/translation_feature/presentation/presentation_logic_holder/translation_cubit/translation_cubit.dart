@@ -65,7 +65,7 @@ class TranslationCubit extends Cubit<TranslationState> {
   }
 
   Future<void> getTranslation() async {
-    emit(TranslationLoading());
+    emit(const TranslationLoading());
     gender = null;
     if (translationController.text.trim().isEmpty) {
       return;
@@ -99,7 +99,7 @@ class TranslationCubit extends Cubit<TranslationState> {
         literalTranslationModel = r;
       },
     );
-    emit(TranslationLoading(literalTranslationLoaded: true));
+    emit(const TranslationLoading(literalTranslationLoaded: true));
   }
 
 
