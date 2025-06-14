@@ -45,9 +45,8 @@ class ImageWidget extends StatelessWidget {
                 ),
               );
             case LoadState.failed:
-            default:
               return const SizedBox();
-          }
+            }
         },
       );
     } else if (imageUrl.contains('.svg')) {
