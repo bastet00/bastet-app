@@ -6,26 +6,21 @@ abstract class Failure {
 
 // General failures
 class ServerFailure extends Failure {
-  String? cause;
-  ServerFailure(this.cause) : super(cause);
+  ServerFailure(super.cause);
 }
 
 class AmbiguousFailure extends Failure {
-  String? cause;
-  AmbiguousFailure(this.cause) : super(cause);
+  AmbiguousFailure(super.cause);
 }
 
 class ConnectionFailure extends Failure {
-  String? cause;
-  ConnectionFailure(this.cause) : super(cause);
+  ConnectionFailure(super.cause);
 }
 
 class DataParsingFailure extends Failure {
-  String? cause;
-  DataParsingFailure(this.cause) : super(cause);
+  DataParsingFailure(super.cause);
 }
 
 class AuthFailure extends Failure {
-  String? cause;
-  AuthFailure(this.cause) : super(cause);
+  AuthFailure(super.cause);
 }
