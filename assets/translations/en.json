@@ -20,5 +20,14 @@
   "privacy_policy": "Privacy Policy",
   "suggest_idea": "Suggest an idea",
   "contact_us": "Contact us",
-  "donate": "Donate"
+  "donate": "Donate",
+
+  "arabic": "Arabic",
+  "hieroglyphic": "Hieroglyphic",
+  "write_here": "Write here",
+  "sun": "Sun",
+  "justice": "Justice",
+  "heart": "Heart",
+  "good_morning": "Good morning",
+  "beautiful": "Beautiful"
 }

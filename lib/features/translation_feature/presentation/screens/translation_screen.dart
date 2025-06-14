@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
+import '../../../../app/utils/app_strings.dart';
 import '../../../../app/widgets/custom_form_field.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/loading.dart';
@@ -34,7 +36,7 @@ class TranslationScreen extends StatelessWidget {
                     SizedBox(
                       width: 80.w,
                       child: TextWidget(
-                        title: cubit.fromArabic ? 'عربي' : 'هيروغليفي',
+                        title: cubit.fromArabic ? AppStrings.translationArabic.tr() : AppStrings.hieroglyphic.tr(),
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -52,7 +54,7 @@ class TranslationScreen extends StatelessWidget {
                     SizedBox(
                       width: 80.w,
                       child: TextWidget(
-                        title: cubit.fromArabic ? 'هيروغليفي' : 'عربي',
+                        title: cubit.fromArabic ? AppStrings.hieroglyphic.tr() : AppStrings.translationArabic.tr(),
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -72,7 +74,7 @@ class TranslationScreen extends StatelessWidget {
               children: [
                 CustomFormField(
                   controller: TranslationCubit.get().translationController,
-                  hint: 'اكتب  هنا',
+                  hint: AppStrings.writeHere.tr(),
                   minLines: 5,
                   maxLines: 5,
                   onChange: (text) {
@@ -84,10 +86,10 @@ class TranslationScreen extends StatelessWidget {
                 Row(
                   children: List.generate(3, (index) {
                     final title = index == 0
-                        ? 'شمس'
+                        ? AppStrings.sun.tr()
                         : index == 1
-                            ? 'عدالة'
-                            : 'قلب';
+                            ? AppStrings.justice.tr()
+                            : AppStrings.heart.tr();
                     return Row(
                       children: [
                         CustomTextButton(
@@ -110,7 +112,7 @@ class TranslationScreen extends StatelessWidget {
                 6.verticalSpace,
                 Row(
                   children: List.generate(2, (index) {
-                    final title = index == 0 ? 'صباح الخير' : 'جميل';
+                    final title = index == 0 ? AppStrings.goodMorning.tr() : AppStrings.beautiful.tr();
                     return Row(
                       children: [
                         CustomTextButton(

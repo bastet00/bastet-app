@@ -26,4 +26,14 @@ class AppStrings {
   static const String suggestIdea = 'suggest_idea';
   static const String contactUs = 'contact_us';
   static const String donate = 'donate';
+
+  /// Translation Feature
+  static const String translationArabic = 'arabic';
+  static const String hieroglyphic = 'hieroglyphic';
+  static const String writeHere = 'write_here';
+  static const String sun = 'sun';
+  static const String justice = 'justice';
+  static const String heart = 'heart';
+  static const String goodMorning = 'good_morning';
+  static const String beautiful = 'beautiful';
 }
