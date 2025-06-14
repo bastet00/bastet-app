@@ -109,10 +109,10 @@ class DrawerWidget extends StatelessWidget {
               ),
               child: CustomTextButton(
                 onPressed: () {
-                  goBack();
                   context.locale.languageCode=="en"
                   ? context.setLocale(const Locale('ar'))
                   : context.setLocale(const Locale('en'));
+                  goBack();
                 },
                 title: context.locale.languageCode=="en"
                   ? AppStrings.arabic : AppStrings.english,

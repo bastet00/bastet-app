@@ -1,5 +1,6 @@
 import 'package:bastet_app/features/fav_feature/presentation/presentation_logic_holder/fav_cubit/fav_cubit.dart';
 import 'package:bastet_app/features/fav_feature/presentation/screens/fav_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -47,23 +48,43 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
       appBar: AppBar(
         backgroundColor: const Color(0xFF2C2924),
         actions: [
-          Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                onPressed: () => Scaffold.of(context).openEndDrawer(),
-                icon: const Icon(
-                  Icons.menu,
-                ),
-                isSelected: true,
-                selectedIcon: ImageWidget(
-                  imageUrl: AppAssets.drawer,
-                  width: 32.w,
-                  height: 32.h,
-                ),
-              );
-            },
-          ),
+          if (context.locale.languageCode=="ar")...[
+            Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                  onPressed: () => Scaffold.of(context).openEndDrawer(),
+                  icon: const Icon(
+                    Icons.menu,
+                  ),
+                  isSelected: true,
+                  selectedIcon: ImageWidget(
+                    imageUrl: AppAssets.drawer,
+                    width: 32.w,
+                    height: 32.h,
+                  ),
+                );
+              },
+            ),
+          ],
         ],
+        leading: context.locale.languageCode=="en"
+          ? Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              onPressed: () => Scaffold.of(context).openDrawer(),
+              icon: const Icon(
+                Icons.menu,
+              ),
+              isSelected: true,
+              selectedIcon: ImageWidget(
+                imageUrl: AppAssets.drawer,
+                width: 32.w,
+                height: 32.h,
+              ),
+            );
+          },
+        )
+          : null,
         bottom: TabBar(
           controller: tabController,
           indicatorColor: AppColors.secondaryColor,
@@ -87,7 +108,8 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
           ],
         ),
       ),
-      endDrawer: const DrawerWidget(),
+      endDrawer: context.locale.languageCode=="ar" ? const DrawerWidget() : null,
+      drawer: context.locale.languageCode=="en" ? const DrawerWidget() : null,
       body: TabBarView(
         controller: tabController,
         children: const [
