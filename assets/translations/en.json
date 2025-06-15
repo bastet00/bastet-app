@@ -41,5 +41,11 @@
   "sources": "Sources:",
 
   "added_to_favorites": "Added to favorites",
-  "removed_from_favorites": "Removed from favorites"
+  "removed_from_favorites": "Removed from favorites",
+
+  "literal_translation": "Literal Translation",
+  "compound_phonetic_signs": "Compound Phonetic Signs",
+  "gender": "Gender",
+
+  "search_hieroglyphics": "Search in Hieroglyphics"
 }

@@ -41,5 +41,11 @@
   "sources": "المصادر:",
 
   "added_to_favorites": "تم الإضافة إلى المفضلة",
-  "removed_from_favorites": "تم الحذف من المفضلة"
+  "removed_from_favorites": "تم الحذف من المفضلة",
+
+  "literal_translation": "ترجمة حرفية",
+  "compound_phonetic_signs": "علامات صوتية مركبة",
+  "gender": "الجنس",
+
+  "search_hieroglyphics": "ابحث بالهيروغليفية"
 }
