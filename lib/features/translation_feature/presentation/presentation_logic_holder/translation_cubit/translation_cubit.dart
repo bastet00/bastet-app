@@ -45,6 +45,10 @@ class TranslationCubit extends Cubit<TranslationState> {
     }
   }
 
+  void update() {
+    emit(LiteralTranslationLoading());
+  }
+  
   void toggleMultiLetterSymbols() async {
     emit(LiteralTranslationLoading());
     useMultiLetterSymbols = !useMultiLetterSymbols;

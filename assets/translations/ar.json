@@ -29,5 +29,17 @@
   "justice": "عدالة",
   "heart": "قلب",
   "good_morning": "صباح الخير",
-  "beautiful": "جميل"
+  "beautiful": "جميل",
+
+  "dictionary": "القاموس",
+  "copied": "تم النسخ",
+  "english_label": "إنجليزي:",
+  "arabic_label": "عربي:",
+  "english_phonetic": "القيمة الصوتية الإنجليزية:",
+  "hieroglyphics_label": "الهيروغليفية:",
+  "gardiner_signs": "علامات جاردنير:",
+  "sources": "المصادر:",
+
+  "added_to_favorites": "تم الإضافة إلى المفضلة",
+  "removed_from_favorites": "تم الحذف من المفضلة"
 }

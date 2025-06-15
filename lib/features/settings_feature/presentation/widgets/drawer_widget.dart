@@ -12,6 +12,7 @@ import '../../../../app/utils/app_strings.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/list_tile_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
+import '../../../translation_feature/presentation/presentation_logic_holder/translation_cubit/translation_cubit.dart';
 import '../screens/privacy_policy_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -112,6 +113,7 @@ class DrawerWidget extends StatelessWidget {
                   context.locale.languageCode=="en"
                   ? context.setLocale(const Locale('ar'))
                   : context.setLocale(const Locale('en'));
+                  TranslationCubit.get().update();
                   goBack();
                 },
                 title: context.locale.languageCode=="en"

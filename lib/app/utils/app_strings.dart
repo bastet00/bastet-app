@@ -36,4 +36,18 @@ class AppStrings {
   static const String heart = 'heart';
   static const String goodMorning = 'good_morning';
   static const String beautiful = 'beautiful';
+
+  /// Translation Widget
+  static const String dictionary = 'dictionary';
+  static const String copied = 'copied';
+  static const String englishLabel = 'english_label';
+  static const String arabicLabel = 'arabic_label';
+  static const String englishPhonetic = 'english_phonetic';
+  static const String hieroglyphicsLabel = 'hieroglyphics_label';
+  static const String gardinerSigns = 'gardiner_signs';
+  static const String sources = 'sources';
+
+  /// Favorites Feature
+  static const String addedToFavorites = 'added_to_favorites';
+  static const String removedFromFavorites = 'removed_from_favorites';
 }

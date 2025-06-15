@@ -29,5 +29,17 @@
   "justice": "Justice",
   "heart": "Heart",
   "good_morning": "Good morning",
-  "beautiful": "Beautiful"
+  "beautiful": "Beautiful",
+
+  "dictionary": "Dictionary",
+  "copied": "Copied",
+  "english_label": "English:",
+  "arabic_label": "Arabic:",
+  "english_phonetic": "English Phonetic Value:",
+  "hieroglyphics_label": "Hieroglyphics:",
+  "gardiner_signs": "Gardiner Signs:",
+  "sources": "Sources:",
+
+  "added_to_favorites": "Added to favorites",
+  "removed_from_favorites": "Removed from favorites"
 }
