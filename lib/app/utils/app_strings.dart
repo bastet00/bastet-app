@@ -29,6 +29,7 @@ class AppStrings {
 
   /// Translation Feature
   static const String translationArabic = 'arabic';
+  static const String translationEnglish = 'english';
   static const String hieroglyphic = 'hieroglyphic';
   static const String writeHere = 'write_here';
   static const String sun = 'sun';

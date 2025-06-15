@@ -19,6 +19,14 @@ import '../widgets/suggest_word_widget.dart';
 class TranslationScreen extends StatelessWidget {
   const TranslationScreen({super.key});
 
+  String _getLanguageText(BuildContext context, bool fromArabic) {
+    if (context.locale.languageCode == 'en') {
+      return fromArabic ? AppStrings.translationEnglish.tr() : AppStrings.hieroglyphic.tr();
+    } else {
+      return fromArabic ? AppStrings.translationArabic.tr() : AppStrings.hieroglyphic.tr();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -36,7 +44,7 @@ class TranslationScreen extends StatelessWidget {
                     SizedBox(
                       width: 80.w,
                       child: TextWidget(
-                        title: cubit.fromArabic ? AppStrings.translationArabic.tr() : AppStrings.hieroglyphic.tr(),
+                        title: _getLanguageText(context, cubit.fromArabic),
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -54,7 +62,7 @@ class TranslationScreen extends StatelessWidget {
                     SizedBox(
                       width: 80.w,
                       child: TextWidget(
-                        title: cubit.fromArabic ? AppStrings.hieroglyphic.tr() : AppStrings.translationArabic.tr(),
+                        title: _getLanguageText(context, !cubit.fromArabic),
                         fontWeight: FontWeight.w400,
                       ),
                     ),
