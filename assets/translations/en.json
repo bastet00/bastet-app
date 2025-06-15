@@ -24,7 +24,7 @@
 
   "arabic": "Arabic",
   "english": "English",
-  "hieroglyphic": "Hieroglyphic",
+  "hieroglyphic": "Egyptian",
   "write_here": "Write here",
   "sun": "Sun",
   "justice": "Justice",
@@ -48,5 +48,5 @@
   "compound_phonetic_signs": "Compound Phonetic Signs",
   "gender": "Gender",
 
-  "search_hieroglyphics": "Search in Hieroglyphics"
+  "search_hieroglyphics": "Search in egyptian"
 }
