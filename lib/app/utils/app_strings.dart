@@ -52,6 +52,7 @@ class AppStrings {
   static const String addedToFavorites = 'added_to_favorites';
   static const String removedFromFavorites = 'removed_from_favorites';
   static const String searchHieroglyphics = 'search_hieroglyphics';
+  static const String addToFavorites = 'add_to_favorites';
 
   /// Literal Translation Widget
   static const String literalTranslation = 'literal_translation';
