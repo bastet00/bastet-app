@@ -49,6 +49,7 @@ class TranslationCubit extends Cubit<TranslationState> {
 
   void update() {
     emit(LiteralTranslationLoading());
+    emit(TranslationInitial());
   }
   
   void toggleMultiLetterSymbols() async {
