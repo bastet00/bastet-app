@@ -33,21 +33,31 @@ class TranslationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final egyptianSymbolUnicode = int.parse(translation?.egyptian?[0].symbol ?? '', radix: 16);
+    final egyptianSymbolUnicode =
+        int.parse(translation?.egyptian?[0].symbol ?? '', radix: 16);
     final egyptianArabicWord = translation?.egyptian?[0].word;
-    final egyptianArabic = '${egyptianArabicWord ?? ''} ${String.fromCharCode(egyptianSymbolUnicode)}';
+    final egyptianArabic =
+        '${egyptianArabicWord ?? ''} ${String.fromCharCode(egyptianSymbolUnicode)}';
     final egyptianEnglishWord = translation?.egyptian?[0].transliteration ?? '';
-    final egyptianEnglish = '$egyptianEnglishWord ${String.fromCharCode(egyptianSymbolUnicode)}';
+    final egyptianEnglish =
+        '$egyptianEnglishWord ${String.fromCharCode(egyptianSymbolUnicode)}';
     final arabic = translation?.arabic?.map((e) => e.word).join('، ');
     final english = translation?.english?.map((e) => e.word).join(', ');
-    final hieroglyphicSigns = translationDetails?.egyptian?[0].hieroglyphicSigns?.map((e) => e).join(' ');
-    final hieroglyphics = translationDetails?.egyptian?[0].hieroglyphics?.map((e) => e).join(', ');
-    final resources = translationDetails?.resources?.map((e) => '• $e').join('\n');
-    final englishTransliteration = translationDetails?.egyptian?[0].transliteration ?? '';
+    final hieroglyphicSigns = translationDetails?.egyptian?[0].hieroglyphicSigns
+        ?.map((e) => e)
+        .join(' ');
+    final hieroglyphics = translationDetails?.egyptian?[0].hieroglyphics
+        ?.map((e) => e)
+        .join(', ');
+    final resources =
+        translationDetails?.resources?.map((e) => '• $e').join('\n');
+    final englishTransliteration =
+        translationDetails?.egyptian?[0].transliteration ?? '';
 
     return InkWell(
       onTap: () {
-        if (!isDetailsScreen && translation?.id != null) navigateTo(TranslationDetailsScreen(translation: translation!));
+        if (!isDetailsScreen && translation?.id != null)
+          navigateTo(TranslationDetailsScreen(translation: translation!));
       },
       borderRadius: BorderRadius.circular(6.r),
       child: Container(
@@ -66,17 +76,23 @@ class TranslationWidget extends StatelessWidget {
                 children: [
                   20.horizontalSpace,
                   Stack(
-                    alignment: Alignment.bottomRight,
+                    alignment: context.locale.languageCode == "en"
+                        ? Alignment.bottomLeft
+                        : Alignment.bottomRight,
                     children: [
                       TextWidget(
-                        title: context.locale.languageCode == "en" ? egyptianEnglishWord : egyptianArabicWord ?? '',
+                        title: context.locale.languageCode == "en"
+                            ? egyptianEnglishWord
+                            : egyptianArabicWord ?? '',
                         color: Colors.transparent,
                         fontWeight: FontWeight.w700,
                         underLine: true,
                         fontSize: isDetailsScreen ? 22.sp : 18.sp,
                       ),
                       TextWidget(
-                        title: context.locale.languageCode == "en" ? egyptianEnglish : egyptianArabic,
+                        title: context.locale.languageCode == "en"
+                            ? egyptianEnglish
+                            : egyptianArabic,
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.w700,
                         fontSize: isDetailsScreen ? 22.sp : 18.sp,
@@ -84,12 +100,16 @@ class TranslationWidget extends StatelessWidget {
                     ],
                   ),
                   12.verticalSpace,
-                  if (!isDetailsScreen) TextWidget(
-                    title: (context.locale.languageCode == "en" ? english : arabic) ?? '',
-                    fontWeight: FontWeight.w400,
-                    titleAlign: TextAlign.start,
-                    maxLines: 6,
-                  ),
+                  if (!isDetailsScreen)
+                    TextWidget(
+                      title: (context.locale.languageCode == "en"
+                              ? english
+                              : arabic) ??
+                          '',
+                      fontWeight: FontWeight.w400,
+                      titleAlign: TextAlign.start,
+                      maxLines: 6,
+                    ),
                   if (isDetailsScreen) ...[
                     DetailsColumnWidget(
                       title: AppStrings.englishLabel.tr(),
@@ -132,23 +152,29 @@ class TranslationWidget extends StatelessWidget {
               height: 48.h,
               child: Row(
                 children: [
-                  if (!isDetailsScreen) CustomTextButton(
-                    onPressed: () {
-                      if (translation?.id != null) navigateTo(TranslationDetailsScreen(translation: translation!));
-                    },
-                    title: AppStrings.dictionary.tr(),
-                    titleColor: AppColors.white,
-                    icon: ImageWidget(
-                      imageUrl: AppAssets.dictionary,
-                      width: 16.w,
-                      height: 20.h,
+                  if (!isDetailsScreen)
+                    CustomTextButton(
+                      onPressed: () {
+                        if (translation?.id != null)
+                          navigateTo(TranslationDetailsScreen(
+                              translation: translation!));
+                      },
+                      title: AppStrings.dictionary.tr(),
+                      titleColor: AppColors.white,
+                      icon: ImageWidget(
+                        imageUrl: AppAssets.dictionary,
+                        width: 16.w,
+                        height: 20.h,
+                      ),
                     ),
-                  ),
                   const Spacer(),
                   CustomTextButton(
                     onPressed: () {
                       Fluttertoast.cancel();
-                      Clipboard.setData(ClipboardData(text: context.locale.languageCode == "en" ? egyptianEnglish : egyptianArabic));
+                      Clipboard.setData(ClipboardData(
+                          text: context.locale.languageCode == "en"
+                              ? egyptianEnglish
+                              : egyptianArabic));
                       showToast(msg: AppStrings.copied.tr());
                     },
                     icon: ImageWidget(
