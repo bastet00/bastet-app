@@ -48,6 +48,7 @@ class TranslationCubit extends Cubit<TranslationState> {
   }
 
   void update() {
+    translationController.text = '';
     emit(LiteralTranslationLoading());
     emit(TranslationInitial());
   }
