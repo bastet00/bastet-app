@@ -114,7 +114,6 @@ class _CustomFormFieldState extends State<CustomFormField> {
   void _updateTextDirection() {
     if (widget.controller?.text.isNotEmpty?? false) {
       final firstChar = widget.controller?.text.characters.first;
-
       // Check if the first character is an Arabic letter
       if (RegExp(r'^[\u0600-\u06FF]').hasMatch(firstChar!)) {
         setState(() {
@@ -126,9 +125,11 @@ class _CustomFormFieldState extends State<CustomFormField> {
         });
       }
     } else {
-      // Default to LTR if the text is empty
+      // Default to current locale direction if the text is empty
       setState(() {
-        _textDirection = TextDirection.rtl;
+        _textDirection = context.locale.languageCode == 'ar' 
+        ? TextDirection.rtl 
+        : TextDirection.ltr;
       });
     }
   }

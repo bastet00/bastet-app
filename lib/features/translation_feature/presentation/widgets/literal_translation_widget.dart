@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:bastet_app/features/translation_feature/data/model/literal_translation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
+import '../../../../app/utils/app_strings.dart';
 import '../../../../app/widgets/flutter_toast.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
@@ -49,7 +51,7 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                         isFolded = !isFolded;
                       });
                     },
-                    title: 'ترجمة حرفية',
+                    title: AppStrings.literalTranslation.tr(),
                     titleColor: AppColors.suggestionsTextColor,
                     fontWeight: FontWeight.w400,
                     icon: ImageWidget(
@@ -77,14 +79,12 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                   CustomTextButton(
                     onPressed: () {
                       Fluttertoast.cancel();
-                      // Copy to clipboard
-
                       Clipboard.setData(ClipboardData(
                           text: TranslationCubit.get()
                                   .literalTranslationModel
                                   ?.literalTranslation ??
                               ''));
-                      showToast(msg: 'تم النسخ');
+                      showToast(msg: AppStrings.copied.tr());
                     },
                     icon: ImageWidget(
                       imageUrl: AppAssets.copy,
@@ -140,8 +140,8 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                         ),
                         Row(
                           children: [
-                            const TextWidget(
-                              title: 'علامات صوتية مركبة: ',
+                            TextWidget(
+                              title: AppStrings.compoundPhoneticSigns.tr(),
                               color: AppColors.suggestionsTextColor,
                               fontWeight: FontWeight.w400,
                             ),
@@ -170,17 +170,16 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                             )
                           ],
                         ),
-                    IntrinsicHeight(
-
-                       child:  Row(
-                          children: [
-                            const TextWidget(
-                              title: 'الجنس',
-                              color: AppColors.suggestionsTextColor,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            const Spacer(),
-                            CustomTextButton(
+                        IntrinsicHeight(
+                          child: Row(
+                            children: [
+                              TextWidget(
+                                title: AppStrings.gender.tr(),
+                                color: AppColors.suggestionsTextColor,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              const Spacer(),
+                              CustomTextButton(
                                 padding: EdgeInsetsDirectional.symmetric(
                                     horizontal: 1.w),
                                 onPressed: () {
@@ -193,24 +192,31 @@ class _LiteralTranslationWidget extends State<LiteralTranslationWidget> {
                                     ? AppColors.primaryColor
                                     : AppColors.white,
                                 fontSize: 21.sp,
-                                ),
-                            const VerticalDivider(color: AppColors.colorC6B283,thickness: 1, width: 6, indent: 10, endIndent: 12),
-                            CustomTextButton(
-                              onPressed: () {
-                                TranslationCubit.get()
-                                    .applyGender("FEMALE");
-                              },
-                              title: '𓁐',
-                              width: 40.w,
-                              fontSize: 21.sp,
-                              titleColor:  TranslationCubit.get().gender == "FEMALE" ? AppColors.primaryColor: AppColors.white,
-                              padding: EdgeInsetsDirectional.symmetric(
-                                  horizontal: 1.w),
-
-                            ),
-                          ],
+                              ),
+                              const VerticalDivider(
+                                color: AppColors.colorC6B283,
+                                thickness: 1,
+                                width: 6,
+                                indent: 10,
+                                endIndent: 12
+                              ),
+                              CustomTextButton(
+                                onPressed: () {
+                                  TranslationCubit.get()
+                                      .applyGender("FEMALE");
+                                },
+                                title: '𓁐',
+                                width: 40.w,
+                                fontSize: 21.sp,
+                                titleColor: TranslationCubit.get().gender == "FEMALE"
+                                    ? AppColors.primaryColor
+                                    : AppColors.white,
+                                padding: EdgeInsetsDirectional.symmetric(
+                                    horizontal: 1.w),
+                              ),
+                            ],
+                          )
                         )
-                    )
                       ],
                     ))
               ]

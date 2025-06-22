@@ -21,7 +21,7 @@ class FoldArrowWidget extends StatelessWidget {
           onPressed: () {
           },
           icon: ImageWidget(
-            imageUrl: true ? AppAssets.favSolid : AppAssets.fav,
+            imageUrl: AppAssets.favSolid,
             width: 20.w,
             height: 20.h,
           ),

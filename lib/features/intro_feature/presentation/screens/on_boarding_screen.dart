@@ -2,6 +2,7 @@ import 'package:bastet_app/app/utils/app_colors.dart';
 import 'package:bastet_app/app/utils/helper.dart';
 import 'package:bastet_app/app/widgets/button_widget.dart';
 import 'package:bastet_app/app/widgets/text_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -9,6 +10,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../app/services/cache_service.dart';
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_fonts.dart';
+import '../../../../app/utils/app_strings.dart';
 import '../../../../app/utils/get_it_injection.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_button_widget.dart';
@@ -26,9 +28,9 @@ class OnBoardingScreen extends StatelessWidget {
   ];
 
   final List<String> titles = [
-    'اللغة المصرية القديمة (الهيروغليفية) لغة الثقافة والحضارة المصرية القديمة، فضلت لغة حية لآلاف السنيين، بس دلوقتي بقت ميتة ومع إهمالها وموتها على مدار آلاف السنين اختفت الثقافة وبقت مجرد كلام على الجدران',
-    'التطبيق مشروع غير ربحي هدفه تعليم المصريين لغتهم المصرية  القديمة بطريقة سهلة وبسيطة عن طريق كتابتها بالحروف العربية ودمجها مع العامية',
-    'إحياء اللغة هو إعلان بداية عصر جديد، عصر النهضة والحضارة الحديثة لكيميت.\n شارك معانا في إحياء اللغة والثقافة',
+    AppStrings.onBoarding1.tr(),
+    AppStrings.onBoarding2.tr(),
+    AppStrings.onBoarding3.tr(),
   ];
 
   @override
@@ -57,7 +59,7 @@ class OnBoardingScreen extends StatelessWidget {
                   if (index != 2) Row(
                     children: [
                       CustomTextButton(
-                        title: 'تخطي',
+                        title: AppStrings.skip.tr(),
                         onPressed: ()=> navigateTo(const TabBarScreen(), removeAll: true),
                       ),
                     ],
@@ -86,7 +88,7 @@ class OnBoardingScreen extends StatelessWidget {
                   ],
                   index == 0 ? Center(
                     child: TextWidget(
-                      title: 'أهلا بيك',
+                      title: AppStrings.welcome.tr(),
                       color: AppColors.primaryColor,
                       fontWeight: AppFonts.extraBold,
                       fontSize: AppFonts.size28,
@@ -132,7 +134,7 @@ class OnBoardingScreen extends StatelessWidget {
                     Center(
                       child: ButtonWidget(
                         width: 160.w,
-                        text: 'ابدأ',
+                        text: AppStrings.start.tr(),
                         onPressed: ()=> navigateTo(const TabBarScreen(), removeAll: true),
                       ),
                     )
@@ -141,12 +143,12 @@ class OnBoardingScreen extends StatelessWidget {
                   Row(
                     children: [
                       if (index != 0) CustomTextButton(
-                        title: 'السابق',
+                        title: AppStrings.previous.tr(),
                         onPressed: ()=> controller.previousPage(duration: const Duration(milliseconds: 1), curve: Curves.ease),
                       ),
                       const Spacer(),
                       if (index != 2)CustomTextButton(
-                        title: 'التالي',
+                        title: AppStrings.next.tr(),
                         onPressed: ()=> controller.nextPage(duration: const Duration(milliseconds: 1), curve: Curves.ease),
                       ),
                     ],

@@ -1,4 +1,6 @@
+import 'package:bastet_app/app/utils/app_colors.dart';
 import 'package:bastet_app/app/utils/helper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,8 +8,11 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../app/utils/app_assets.dart';
+import '../../../../app/utils/app_strings.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/list_tile_widget.dart';
+import '../../../../app/widgets/text_button_widget.dart';
+import '../../../translation_feature/presentation/presentation_logic_holder/translation_cubit/translation_cubit.dart';
 import '../screens/privacy_policy_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -18,23 +23,26 @@ class DrawerWidget extends StatelessWidget {
     return Drawer(
       child: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             45.verticalSpace,
-            ImageWidget(
-              imageUrl: AppAssets.logo,
-              width: 60.w,
-              height: 100.h,
+            Center(
+              child: ImageWidget(
+                imageUrl: AppAssets.logo,
+                width: 60.w,
+                height: 100.h,
+              ),
             ),
             45.verticalSpace,
             const Divider(),
             30.verticalSpace,
             Padding(
-              padding: EdgeInsets.only(right: 24.w),
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 children: [
                   ListTileWidget(
                     leadingUrl: AppAssets.share,
-                    title: 'شارك التطبيق',
+                    title: AppStrings.shareApp.tr(),
                     onTap: () {
                       const String appLink =
                           'https://play.google.com/store/apps/details?id=com.bastet.bastet_app';
@@ -44,7 +52,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                   ListTileWidget(
                     leadingUrl: AppAssets.rate,
-                    title: 'قيم التطبيق',
+                    title: AppStrings.rateApp.tr(),
                     onTap: () async {
                       if (!await launchUrl(Uri.parse(
                           "https://play.google.com/store/apps/details?id=com.bastet.bastet_app"))) {
@@ -54,12 +62,12 @@ class DrawerWidget extends StatelessWidget {
                   ),
                   ListTileWidget(
                     leadingUrl: AppAssets.privacy,
-                    title: 'سياسة الخصوصية',
+                    title: AppStrings.privacyPolicy.tr(),
                     onTap: () => navigateTo(const PrivacyPolicyScreen()),
                   ),
                   ListTileWidget(
                     leadingUrl: AppAssets.idea,
-                    title: 'اقترح فكرتك',
+                    title: AppStrings.suggestIdea.tr(),
                     onTap: () async {
                       // email
                       if (!await launchUrl(Uri.parse(
@@ -71,7 +79,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                   ListTileWidget(
                     leadingUrl: AppAssets.contact,
-                    title: 'اتصل بنا',
+                    title: AppStrings.contactUs.tr(),
                     onTap: () async {
                       // email
                       if (!await launchUrl(Uri.parse(
@@ -83,7 +91,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                   ListTileWidget(
                     leadingUrl: AppAssets.donation,
-                    title: 'تبرع',
+                    title: AppStrings.donate.tr(),
                     onTap: () async {
                       if (!await launchUrl(Uri.parse(
                           "https://www.paypal.com/donate/?hosted_button_id=AV9XQGBF9CQMW"))) {
@@ -92,6 +100,28 @@ class DrawerWidget extends StatelessWidget {
                     },
                   ),
                 ],
+              ),
+            ),
+            const Spacer(),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 24.w,
+                vertical: 10.h,
+              ),
+              child: CustomTextButton(
+                onPressed: () {
+                  context.locale.languageCode=="en"
+                  ? context.setLocale(const Locale('ar'))
+                  : context.setLocale(const Locale('en'));
+                  TranslationCubit.get().update();
+                  goBack();
+                },
+                title: context.locale.languageCode=="en"
+                  ? AppStrings.arabic : AppStrings.english,
+                titleColor: AppColors.white,
+                color: AppColors.white,
+                borderRadius: 8.r,
+                outlined: true,
               ),
             ),
           ],

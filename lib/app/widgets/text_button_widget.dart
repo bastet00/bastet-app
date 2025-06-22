@@ -19,6 +19,7 @@ class CustomTextButton extends StatelessWidget {
     this.loading = false,
     this.outlined = false,
     this.width,
+    this.borderRadius,
   });
 
   final String? title;
@@ -33,6 +34,7 @@ class CustomTextButton extends StatelessWidget {
   final bool loading;
   final bool outlined;
   final double? width;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class CustomTextButton extends StatelessWidget {
                 ? BorderSide(color: color ?? AppColors.primaryColor)
                 : null,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40.r),
+              borderRadius: BorderRadius.circular(borderRadius ?? 40.r),
             ),
           ),
           onPressed: onPressed ?? () {},
