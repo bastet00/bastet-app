@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' show Platform;
 
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_strings.dart';
@@ -17,6 +18,13 @@ import '../screens/privacy_policy_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
+
+  static const String _iosAppUrl =
+      'https://apps.apple.com/us/app/bastet-hieroglyph-translator/id6747642027';
+  static const String _androidAppUrl =
+      'https://play.google.com/store/apps/details?id=com.bastet.bastet_app';
+
+  String get _appUrl => Platform.isIOS ? _iosAppUrl : _androidAppUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +52,15 @@ class DrawerWidget extends StatelessWidget {
                     leadingUrl: AppAssets.share,
                     title: AppStrings.shareApp.tr(),
                     onTap: () {
-                      const String appLink =
-                          'https://play.google.com/store/apps/details?id=com.bastet.bastet_app';
-                      Clipboard.setData(const ClipboardData(text: appLink));
-                      Share.share(appLink);
+                      Clipboard.setData(ClipboardData(text: _appUrl));
+                      Share.share(_appUrl);
                     },
                   ),
                   ListTileWidget(
                     leadingUrl: AppAssets.rate,
                     title: AppStrings.rateApp.tr(),
                     onTap: () async {
-                      if (!await launchUrl(Uri.parse(
-                          "https://play.google.com/store/apps/details?id=com.bastet.bastet_app"))) {
+                      if (!await launchUrl(Uri.parse(_appUrl))) {
                         throw Exception('Could not launch url');
                       }
                     },
@@ -89,16 +94,17 @@ class DrawerWidget extends StatelessWidget {
                       }
                     },
                   ),
-                  ListTileWidget(
-                    leadingUrl: AppAssets.donation,
-                    title: AppStrings.donate.tr(),
-                    onTap: () async {
-                      if (!await launchUrl(Uri.parse(
-                          "https://www.paypal.com/donate/?hosted_button_id=AV9XQGBF9CQMW"))) {
-                        throw Exception('Could not launch url');
-                      }
-                    },
-                  ),
+                  if (Platform.isAndroid)
+                    ListTileWidget(
+                      leadingUrl: AppAssets.donation,
+                      title: AppStrings.donate.tr(),
+                      onTap: () async {
+                        if (!await launchUrl(Uri.parse(
+                            "https://www.paypal.com/donate/?hosted_button_id=AV9XQGBF9CQMW"))) {
+                          throw Exception('Could not launch url');
+                        }
+                      },
+                    ),
                 ],
               ),
             ),
@@ -110,14 +116,15 @@ class DrawerWidget extends StatelessWidget {
               ),
               child: CustomTextButton(
                 onPressed: () {
-                  context.locale.languageCode=="en"
-                  ? context.setLocale(const Locale('ar'))
-                  : context.setLocale(const Locale('en'));
+                  context.locale.languageCode == "en"
+                      ? context.setLocale(const Locale('ar'))
+                      : context.setLocale(const Locale('en'));
                   TranslationCubit.get().update();
                   goBack();
                 },
-                title: context.locale.languageCode=="en"
-                  ? AppStrings.arabic : AppStrings.english,
+                title: context.locale.languageCode == "en"
+                    ? AppStrings.arabic
+                    : AppStrings.english,
                 titleColor: AppColors.white,
                 color: AppColors.white,
                 borderRadius: 8.r,
