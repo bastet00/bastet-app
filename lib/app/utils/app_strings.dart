@@ -26,6 +26,7 @@ class AppStrings {
   static const String suggestIdea = 'suggest_idea';
   static const String contactUs = 'contact_us';
   static const String donate = 'donate';
+  static const String hieroglyphsKeyboard = 'hieroglyphs_keyboard';
 
   /// Translation Feature
   static const String translationArabic = 'arabic';
@@ -58,4 +59,6 @@ class AppStrings {
   static const String literalTranslation = 'literal_translation';
   static const String compoundPhoneticSigns = 'compound_phonetic_signs';
   static const String gender = 'gender';
+
+
 }

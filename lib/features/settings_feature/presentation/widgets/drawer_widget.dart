@@ -66,6 +66,16 @@ class DrawerWidget extends StatelessWidget {
                     },
                   ),
                   ListTileWidget(
+                    leadingUrl: AppAssets.hieroglyphsKeyboard,
+                    title: AppStrings.hieroglyphsKeyboard.tr(),
+                    onTap: () async {
+                      if (!await launchUrl(Uri.parse(
+                          "https://play.google.com/store/apps/details?id=rkr.hierokeyboard.inputmethod&hl=en"))) {
+                        throw Exception('Could not launch url');
+                      }
+                    },
+                  ),
+                  ListTileWidget(
                     leadingUrl: AppAssets.privacy,
                     title: AppStrings.privacyPolicy.tr(),
                     onTap: () => navigateTo(const PrivacyPolicyScreen()),
