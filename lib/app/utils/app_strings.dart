@@ -59,6 +59,4 @@ class AppStrings {
   static const String literalTranslation = 'literal_translation';
   static const String compoundPhoneticSigns = 'compound_phonetic_signs';
   static const String gender = 'gender';
-
-
 }

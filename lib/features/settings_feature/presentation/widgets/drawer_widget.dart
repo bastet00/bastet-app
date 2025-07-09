@@ -65,6 +65,7 @@ class DrawerWidget extends StatelessWidget {
                       }
                     },
                   ),
+                  if (Platform.isAndroid)
                   ListTileWidget(
                     leadingUrl: AppAssets.hieroglyphsKeyboard,
                     title: AppStrings.hieroglyphsKeyboard.tr(),
