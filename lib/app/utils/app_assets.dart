@@ -26,7 +26,7 @@ class AppAssets{
   static const String dictionary = "${iconBase}dictionary.svg";
   static const String foldedArrow = "${iconBase}folded_arrow.svg";
   static const String unfoldedArrow = "${iconBase}unfolded_arrow.svg";
-
+  static const String hieroglyphsKeyboard = "${iconBase}hieroglyphs_keyboard.svg";
 }
 
 class AppImages{
