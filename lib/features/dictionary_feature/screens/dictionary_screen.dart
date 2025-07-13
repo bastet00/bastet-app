@@ -18,6 +18,17 @@ class DictionaryScreen extends StatefulWidget {
 class _DictionaryScreenState extends State<DictionaryScreen> {
   String selectedCategory = "gods";
 
+  @override
+  void initState() {
+    super.initState();
+    // Ensure the initial category is loaded
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        DictionaryCubit.get().getCategoryWords(selectedCategory);
+      }
+    });
+  }
+
   final List<Map<String, dynamic>> categories = [
     {"id": "gods", "arabic": "آلهة", "english": "gods"},
     {"id": "numbers", "arabic": "أرقام", "english": "numbers"},
@@ -75,19 +86,13 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
       builder: (context, state) {
         final cubit = DictionaryCubit.get();
 
-        // Load category words when the screen is first built
-        if (cubit.categoryTranslations.isEmpty) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            cubit.getCategoryWords(selectedCategory);
-          });
-        }
-
         return Column(
           children: [
             // Category Selection
             Container(
-              height: 50.h,
-              margin: EdgeInsets.symmetric(vertical: 16.h),
+              height: 40.h,
+              margin: EdgeInsets.only(
+                  top: 10.h, bottom: 25.h, right: 8.w, left: 8.w),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: categories.length,
@@ -107,11 +112,11 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF3D3525),
-                        borderRadius: BorderRadius.circular(25.r),
+                        color: AppColors.dictionaryCategoryBackground,
+                        borderRadius: BorderRadius.circular(10.r),
                         border: Border.all(
                           color: isSelected
-                              ? const Color(0xFFE0B85B)
+                              ? AppColors.dictionaryCategoryBorder
                               : Colors.transparent,
                           width: 1,
                         ),
@@ -124,7 +129,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
-                            color: const Color(0xFFB1975C),
+                            color: AppColors.dictionaryCategoryText,
                           ),
                         ),
                       ),

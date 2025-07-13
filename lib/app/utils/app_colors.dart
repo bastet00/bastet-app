@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-class AppColors{
+
+class AppColors {
   static const black = Color(0xFF000000);
   static const white = Color(0xFFFFFFFF);
   static const primaryColor = Color(0xFFE7B133);
@@ -24,15 +25,13 @@ class AppColors{
   static const inactiveSwitchThumbColor = Color(0xFFE6E0E9);
   static const activeSwitchColor = Color(0xFFD39F26);
 
+  // Dictionary category colors
+  static const dictionaryCategoryBackground = Color(0xFF3D3525);
+  static const dictionaryCategoryBorder = Color(0xFFE0B85B);
+  static const dictionaryCategoryText = Color(0xFFB1975C);
+
   static const red = Color(0xffEB5757);
   static const hint = Color(0xFFD1D1D1);
   static const grey24 = Color(0x24000000);
   static const descriptionColor = Color(0xFF82808D);
 }
-
-
-
-
-
-
-
