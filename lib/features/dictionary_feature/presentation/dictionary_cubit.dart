@@ -11,8 +11,14 @@ part 'dictionary_state.dart';
 
 class DictionaryCubit extends Cubit<DictionaryState> {
   DictionaryCubit() : super(DictionaryInitial());
-  static DictionaryCubit get() =>
-      BlocProvider.of(getIt<NavHelper>().navigatorKey.currentState!.context);
+  static DictionaryCubit get() {
+    final currentState = getIt<NavHelper>().navigatorKey.currentState;
+    if (currentState == null) {
+      throw Exception(
+          "Navigator's currentState is null. Ensure the navigator is properly initialized.");
+    }
+    return BlocProvider.of(currentState.context);
+  }
 
   List<Translation> categoryTranslations = [];
 
