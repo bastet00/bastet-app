@@ -7,6 +7,7 @@ const String kWord = 'word';
 const String kLiteralTranslation = 'literal-translation';
 const String kWordSuggestion = 'word-suggestion';
 const String kPrivacyPolicy = 'privacy-policy';
+const String kCategory = 'category';
 
 /// Hive Boxes
 const String kFavoritesBox = 'favoritesBox';
