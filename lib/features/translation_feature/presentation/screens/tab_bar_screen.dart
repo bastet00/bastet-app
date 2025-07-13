@@ -1,3 +1,4 @@
+import 'package:bastet_app/features/dictionary_feature/screens/dictionary_screen.dart';
 import 'package:bastet_app/features/fav_feature/presentation/presentation_logic_holder/fav_cubit/fav_cubit.dart';
 import 'package:bastet_app/features/fav_feature/presentation/screens/fav_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -18,14 +19,17 @@ class TabBarScreen extends StatefulWidget {
   State<TabBarScreen> createState() => _TabBarScreenState();
 }
 
-class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderStateMixin {
-
+class _TabBarScreenState extends State<TabBarScreen>
+    with SingleTickerProviderStateMixin {
   late TabController tabController;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this,);
+    tabController = TabController(
+      length: 3,
+      vsync: this,
+    );
     tabController.addListener(_removeKeyboard);
     FavCubit.get().getFavorites();
   }
@@ -48,7 +52,7 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
       appBar: AppBar(
         backgroundColor: const Color(0xFF2C2924),
         actions: [
-          if (context.locale.languageCode=="ar")...[
+          if (context.locale.languageCode == "ar") ...[
             Builder(
               builder: (BuildContext context) {
                 return IconButton(
@@ -67,24 +71,24 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
             ),
           ],
         ],
-        leading: context.locale.languageCode=="en"
-          ? Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              onPressed: () => Scaffold.of(context).openDrawer(),
-              icon: const Icon(
-                Icons.menu,
-              ),
-              isSelected: true,
-              selectedIcon: ImageWidget(
-                imageUrl: AppAssets.drawer,
-                width: 32.w,
-                height: 32.h,
-              ),
-            );
-          },
-        )
-          : null,
+        leading: context.locale.languageCode == "en"
+            ? Builder(
+                builder: (BuildContext context) {
+                  return IconButton(
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                    icon: const Icon(
+                      Icons.menu,
+                    ),
+                    isSelected: true,
+                    selectedIcon: ImageWidget(
+                      imageUrl: AppAssets.drawer,
+                      width: 32.w,
+                      height: 32.h,
+                    ),
+                  );
+                },
+              )
+            : null,
         bottom: TabBar(
           controller: tabController,
           indicatorColor: AppColors.secondaryColor,
@@ -100,6 +104,13 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
             ),
             Tab(
               child: ImageWidget(
+                imageUrl: AppAssets.dictionary,
+                width: 30.w,
+                height: 30.h,
+              ),
+            ),
+            Tab(
+              child: ImageWidget(
                 imageUrl: AppAssets.fav,
                 width: 32.w,
                 height: 32.h,
@@ -108,12 +119,14 @@ class _TabBarScreenState extends State<TabBarScreen> with SingleTickerProviderSt
           ],
         ),
       ),
-      endDrawer: context.locale.languageCode=="ar" ? const DrawerWidget() : null,
-      drawer: context.locale.languageCode=="en" ? const DrawerWidget() : null,
+      endDrawer:
+          context.locale.languageCode == "ar" ? const DrawerWidget() : null,
+      drawer: context.locale.languageCode == "en" ? const DrawerWidget() : null,
       body: TabBarView(
         controller: tabController,
         children: const [
           TranslationScreen(),
+          DictionaryScreen(),
           FavScreen(),
         ],
       ),

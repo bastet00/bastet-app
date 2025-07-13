@@ -15,7 +15,8 @@ class TranslationRepoImpl extends TranslationRepo {
   final TranslationRemoteDataSource translationRemoteDataSource;
   final NetworkInfo networkInfo;
 
-  TranslationRepoImpl({required this.networkInfo, required this.translationRemoteDataSource});
+  TranslationRepoImpl(
+      {required this.networkInfo, required this.translationRemoteDataSource});
 
   @override
   Future<Either<Failure, TranslationModel>> getTranslation(params) async {
@@ -25,16 +26,19 @@ class TranslationRepoImpl extends TranslationRepo {
   }
 
   @override
-  Future<Either<Failure, LiteralTranslationModel>> getLiteralTranslation(params) async {
-    return await RepoImplCallHandler<LiteralTranslationModel>(networkInfo)(() async {
+  Future<Either<Failure, LiteralTranslationModel>> getLiteralTranslation(
+      params) async {
+    return await RepoImplCallHandler<LiteralTranslationModel>(networkInfo)(
+        () async {
       return await translationRemoteDataSource.literalTranslation(params);
     });
   }
 
-
   @override
-  Future<Either<Failure, TranslationDetailsModel>> getTranslationDetails(params) async {
-    return await RepoImplCallHandler<TranslationDetailsModel>(networkInfo)(() async {
+  Future<Either<Failure, TranslationDetailsModel>> getTranslationDetails(
+      params) async {
+    return await RepoImplCallHandler<TranslationDetailsModel>(networkInfo)(
+        () async {
       return await translationRemoteDataSource.getWordDetails(params);
     });
   }
@@ -43,6 +47,15 @@ class TranslationRepoImpl extends TranslationRepo {
   Future<Either<Failure, void>> suggestWord(params) async {
     return await RepoImplCallHandler<void>(networkInfo)(() async {
       return await translationRemoteDataSource.suggestWord(params);
+    });
+  }
+
+  @override
+  Future<Either<Failure, TranslationModel>> getDictionaryCategoryWords(
+      params) async {
+    return await RepoImplCallHandler<TranslationModel>(networkInfo)(() async {
+      return await translationRemoteDataSource
+          .getDictionaryCategoryWords(params);
     });
   }
 }

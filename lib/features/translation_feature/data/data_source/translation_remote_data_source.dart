@@ -24,7 +24,13 @@ abstract class TranslationRemoteDataSource {
 
   /// Calls the [GET] {word} endpoint.
   /// Throws a [ServerException] for all error codes.
-  Future<LiteralTranslationModel> literalTranslation(Map<String, dynamic> params);
+  Future<LiteralTranslationModel> literalTranslation(
+      Map<String, dynamic> params);
+
+  /// Calls the [GET] {category/:category_id/words} endpoint.
+  /// Throws a [ServerException] for all error codes.
+  Future<TranslationModel> getDictionaryCategoryWords(
+      Map<String, String> params);
 }
 
 class TranslationRemoteDataSourceImpl implements TranslationRemoteDataSource {
@@ -71,5 +77,15 @@ class TranslationRemoteDataSourceImpl implements TranslationRemoteDataSource {
     );
     final data = await RemoteDataSourceCallHandler()(response);
     return LiteralTranslationModel.fromJson(data);
+  }
+
+  @override
+  Future<TranslationModel> getDictionaryCategoryWords(params) async {
+    final response = await networkManager.request(
+      endPoint: '$kCategory/${params['category_id']}/words',
+      method: RequestMethod.get,
+    );
+    final data = await RemoteDataSourceCallHandler()(response);
+    return TranslationModel.fromJson(data);
   }
 }
