@@ -7,7 +7,7 @@ import '../../data/dictionary_categories.dart';
 
 class CategorySelectorWidget extends StatelessWidget {
   final String selectedCategory;
-  final Future<void> Function(String) onCategorySelected;
+  final void Function(String) onCategorySelected;
 
   const CategorySelectorWidget({
     super.key,
@@ -33,7 +33,7 @@ class CategorySelectorWidget extends StatelessWidget {
           final isSelected = selectedCategory == category.id;
 
           return GestureDetector(
-            onTap: () async => await onCategorySelected(category.id),
+            onTap: () => onCategorySelected(category.id),
             child: Container(
               margin: EdgeInsets.only(right: 12.w),
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),

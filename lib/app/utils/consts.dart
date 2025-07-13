@@ -12,9 +12,6 @@ const String kCategory = 'category';
 /// Hive Boxes
 const String kFavoritesBox = 'favoritesBox';
 
-/// SharedPreferences Keys
-const String kSelectedDictionaryCategory = 'selectedDictionaryCategory';
-
 //Static Headers
 Map<String, String> apiHeaders = {
   "Content-Type": "application/json",
