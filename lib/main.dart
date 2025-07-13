@@ -18,6 +18,7 @@ import 'features/translation_feature/data/model/english.dart';
 import 'features/translation_feature/data/model/translation.dart';
 import 'features/settings_feature/presentation/presentation_logic_holder/settings_cubit/settings_cubit.dart';
 import 'features/translation_feature/presentation/presentation_logic_holder/translation_cubit/translation_cubit.dart';
+import 'features/dictionary_feature/presentation/dictionary_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,9 @@ Future<void> main() async {
         ),
         BlocProvider<FavCubit>(
           create: (BuildContext context) => FavCubit(),
+        ),
+        BlocProvider<DictionaryCubit>(
+          create: (BuildContext context) => DictionaryCubit(),
         ),
       ],
       child: const MyApp(),
@@ -86,7 +90,8 @@ class MyApp extends StatelessWidget {
           navigatorKey: getIt<NavHelper>().navigatorKey,
           builder: (context, widget) {
             return MediaQuery(
-              data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: const TextScaler.linear(1.0)),
               child: widget!,
             );
           },
