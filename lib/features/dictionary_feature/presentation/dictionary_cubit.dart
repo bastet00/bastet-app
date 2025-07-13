@@ -17,19 +17,28 @@ class DictionaryCubit extends Cubit<DictionaryState> {
   List<Translation> categoryTranslations = [];
 
   Future<void> getCategoryWords(String categoryId) async {
-    emit(DictionaryLoading());
+    try {
+      emit(DictionaryLoading());
 
-    final response = await getIt<GetDictionaryCategoryWordsUsecase>()(
-      GetDictionaryCategoryWordsUseCaseParams(categoryId: categoryId),
-    );
+      // Clear the list immediately when loading new category
+      categoryTranslations = [];
 
-    response.fold(
-      errorStateHandler,
-      (translationModel) {
-        categoryTranslations = translationModel.translation ?? [];
-      },
-    );
+      final response = await getIt<GetDictionaryCategoryWordsUsecase>()(
+        GetDictionaryCategoryWordsUseCaseParams(categoryId: categoryId),
+      );
 
-    emit(DictionaryInitial());
+      response.fold(
+        errorStateHandler,
+        (translationModel) {
+          categoryTranslations = translationModel.translation ?? [];
+        },
+      );
+
+      emit(DictionaryInitial());
+    } catch (e) {
+      // Handle any unexpected errors
+      categoryTranslations = [];
+      emit(DictionaryInitial());
+    }
   }
 }
