@@ -37,22 +37,20 @@ class TranslationWidget extends StatelessWidget {
     final egyptianEnglishWord = translation?.egyptian?[0].transliteration ?? '';
     final arabic = translation?.arabic?.map((e) => e.word).join('، ');
     final english = translation?.english?.map((e) => e.word).join(', ');
-    final hieroglyphicSigns = translation?.egyptian?[0].hieroglyphicSigns
-        ?.map((e) => e)
-        .join(' ');
-    final hieroglyphics = translation?.egyptian?[0].hieroglyphics
-        ?.map((e) => e)
-        .join(', ');
+    final hieroglyphicSigns =
+        translation?.egyptian?[0].hieroglyphicSigns?.map((e) => e).join(' ');
+    final hieroglyphics =
+        translation?.egyptian?[0].hieroglyphics?.map((e) => e).join(', ');
     final resources =
         translationDetails?.resources?.map((e) => '• $e').join('\n');
     final englishTransliteration =
         translationDetails?.egyptian?[0].transliteration ?? '';
 
     return InkWell(
-      onTap: () {
-        if (!isDetailsScreen && translation?.id != null)
-          navigateTo(TranslationDetailsScreen(translation: translation!));
-      },
+      // onTap: () {
+      //   if (!isDetailsScreen && translation?.id != null)
+      //     navigateTo(TranslationDetailsScreen(translation: translation!));
+      // },
       borderRadius: BorderRadius.circular(6.r),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
@@ -94,12 +92,42 @@ class TranslationWidget extends StatelessWidget {
                     ],
                   ),
                   if (!isDetailsScreen)
-                    TextWidget(
-                      title: hieroglyphicSigns ?? '',
-                      fontWeight: FontWeight.w400,
-                      titleAlign: TextAlign.start,
-                      color: AppColors.primaryColor,
-                      maxLines: 6,
+                    // TextWidget(
+                    //   title: hieroglyphicSigns ?? '',
+                    //   fontWeight: FontWeight.w400,
+                    //   titleAlign: TextAlign.start,
+                    //   color: AppColors.primaryColor,
+                    //   maxLines: 6,
+                    // ),
+                    Row(
+                      children: [
+                        Container(
+                          constraints: BoxConstraints(maxWidth: 235.w),
+                          child: TextWidget(
+                            title: hieroglyphicSigns ?? '',
+                            fontWeight: FontWeight.w400,
+                            titleAlign: TextAlign.start,
+                            color: AppColors.primaryColor,
+                            maxLines: 6,
+                          ),
+                        ),
+                        4.horizontalSpace,
+                        CustomTextButton(
+                          onPressed: () {
+                            // Copy to clipboard
+                            Fluttertoast.cancel();
+                            Clipboard.setData(
+                                ClipboardData(text: hieroglyphicSigns ?? ''));
+                            showToast(msg: 'تم النسخ');
+                          },
+                          icon: ImageWidget(
+                            imageUrl: AppAssets.copy,
+                            width: 15.w,
+                            height: 15.h,
+                            color: AppColors.colorA69670,
+                          ),
+                        ),
+                      ],
                     ),
                   if (!isDetailsScreen)
                     TextWidget(
