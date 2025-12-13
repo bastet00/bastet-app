@@ -118,7 +118,7 @@ class TranslationWidget extends StatelessWidget {
                             Fluttertoast.cancel();
                             Clipboard.setData(
                                 ClipboardData(text: hieroglyphicSigns ?? ''));
-                            showToast(msg: 'تم النسخ');
+                            showToast(msg: AppStrings.copied.tr());
                           },
                           icon: ImageWidget(
                             imageUrl: AppAssets.copy,
