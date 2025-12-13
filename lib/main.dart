@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           title: 'BASTET',
-          theme: appTheme(),
+          theme: appTheme(context.locale),
           debugShowCheckedModeBanner: false,
           navigatorKey: getIt<NavHelper>().navigatorKey,
           builder: (context, widget) {

@@ -1,0 +1,89 @@
+# BASTET App - Cursor Rules
+
+## Project Overview
+This is a Flutter/Dart application for BASTET - an Egyptian hieroglyphics translation app.
+
+## Important Rules
+- Only do what I ask for, don't do anything else I didn't say, even little formating. 
+ 
+## Architecture
+- **Clean Architecture**: Features are organized in `lib/features/` with presentation, domain, and data layers
+- **State Management**: Uses BLoC/Cubit pattern (flutter_bloc)
+- **Dependency Injection**: Uses GetIt (get_it_injection.dart)
+- **Localization**: Uses EasyLocalization with Arabic (ar) and English (en) support
+- **Responsive Design**: Uses flutter_screenutil for screen adaptation
+
+## Code Style & Conventions
+
+### File Structure
+- Features follow: `features/{feature_name}/presentation/`, `domain/`, `data/`
+- Shared utilities in `app/utils/`, `app/widgets/`, `app/themes/`
+- Use feature-based organization, not file-type organization
+
+### Naming Conventions
+- Use camelCase for variables and functions
+- Use PascalCase for classes and widgets
+- Use descriptive names: `TranslationWidget`, `getTranslation()`, `translationModel`
+- Cubit files: `{feature}_cubit.dart` and `{feature}_state.dart`
+
+### State Management
+- Use Cubit for simple state management
+- States should extend Equatable for comparison
+- Use `TranslationCubit.get()` pattern for accessing cubit instances
+- Emit states: `DictionaryLoading()`, `TranslationInitial()`, etc.
+
+### Widgets
+- Prefer StatelessWidget when possible
+- Use ScreenUtil for sizing: `16.w`, `20.h`, `22.sp`
+- Use AppColors for colors: `AppColors.primaryColor`
+- Use AppStrings for text: `AppStrings.dictionary.tr()`
+- Custom widgets in `app/widgets/`: `TextWidget`, `CustomTextButton`, `ImageWidget`
+
+### Localization
+- Always use `.tr()` for translatable strings
+- Check locale: `context.locale.languageCode == "en"` or `== "ar"`
+- Font family: Use "Noto Sans Arabic" only for Arabic locale, null otherwise
+
+### API & Data
+- Use Either<Failure, T> pattern for error handling (dartz)
+- Repository pattern: `TranslationRepo` -> `TranslationRepoImpl` -> `TranslationRemoteDataSource`
+- Models use Hive for local storage
+- Handle errors with `errorStateHandler`
+
+### UI/UX Guidelines
+- Primary color: `AppColors.primaryColor` (#E7B133)
+- Scaffold background: `AppColors.scaffoldBackGround` (#1C1C1C)
+- Container color: `AppColors.containerColor` (#38301C)
+- Use consistent spacing: `20.verticalSpace`, `16.horizontalSpace`
+- Borders: `Border.all(color: AppColors.colorA69670)`
+- Border radius: `BorderRadius.circular(6.r)`
+
+### Translation Feature Specific
+- `Translation` model: Basic translation data from search
+- `TranslationDetailsModel`: Full details with hieroglyphics, resources
+- `hieroglyphicSigns`: List of hieroglyphic signs (from details endpoint)
+- `hieroglyphics`: Gardiner signs (from details endpoint)
+- Main page shows basic translation, details page shows full information
+
+### Common Patterns
+- Navigation: Use `navigateTo()` and `goBack()` from navigation_helper
+- Toast messages: Use `showToast(msg: AppStrings.copied.tr())`
+- Copy to clipboard: `Clipboard.setData(ClipboardData(text: text))`
+- Loading states: Use `Loading()` widget
+- Empty states: Show appropriate messages
+
+## Important Notes
+- Always check for null safety: `translation?.id != null`
+- Use `mounted` check before `setState()` in async operations
+- Prefer composition over inheritance
+- Keep widgets small and focused
+- Extract reusable widgets to `app/widgets/`
+- Follow existing code patterns and structure
+
+## When Making Changes
+- Maintain consistency with existing code style
+- Update both Arabic and English translations if adding new strings
+- Test on both locales (Arabic RTL, English LTR)
+- Ensure responsive design works on different screen sizes
+- Follow the existing error handling patterns
+

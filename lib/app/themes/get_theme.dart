@@ -3,7 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/app_colors.dart';
 
-  ThemeData appTheme() {
+ThemeData appTheme([Locale? locale]) {
+  final isArabic = locale?.languageCode == 'ar';
+  final fontFamily = isArabic ? "Noto Sans Arabic" : null;
+
+  final baseTextTheme = ThemeData.light().textTheme;
+  final textTheme = fontFamily != null
+      ? baseTextTheme.apply(fontFamily: fontFamily)
+      : baseTextTheme;
+
   return ThemeData(
     colorScheme: const ColorScheme.light(
       primary: AppColors.primaryColor,
@@ -31,8 +39,9 @@ import '../utils/app_colors.dart';
       backgroundColor: AppColors.white,
       surfaceTintColor: AppColors.white,
       dividerColor: AppColors.primaryColor,
-      headerHeadlineStyle:TextStyle(
+      headerHeadlineStyle: TextStyle(
         fontSize: 24.sp,
+        fontFamily: fontFamily,
       ),
     ),
     dialogTheme: const DialogThemeData(
@@ -46,8 +55,9 @@ import '../utils/app_colors.dart';
     cardTheme: const CardThemeData(color: Colors.white),
     focusColor: AppColors.descriptionColor,
     hintColor: AppColors.descriptionColor,
-    fontFamily: "Noto Sans Arabic",
-    bottomNavigationBarTheme:const BottomNavigationBarThemeData(
+    fontFamily: fontFamily,
+    textTheme: textTheme,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.black,
     ) ,
      canvasColor: Colors.transparent,
@@ -65,7 +75,7 @@ import '../utils/app_colors.dart';
       elevation: 0,
       titleTextStyle: TextStyle(
         fontSize: 22.sp,
-        fontFamily: "Noto Sans Arabic",
+        fontFamily: fontFamily,
         color: AppColors.white,
       ),
       iconTheme: const IconThemeData(
