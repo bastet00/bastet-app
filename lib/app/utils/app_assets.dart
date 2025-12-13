@@ -23,6 +23,7 @@ class AppAssets{
   static const String convert = "${iconBase}convert.svg";
   static const String emptyFav = "${iconBase}empty_fav.svg";
   static const String search = "${iconBase}search.svg";
+  static const String detail = "${iconBase}detail.svg";
   static const String dictionary = "${iconBase}dictionary.svg";
   static const String foldedArrow = "${iconBase}folded_arrow.svg";
   static const String unfoldedArrow = "${iconBase}unfolded_arrow.svg";

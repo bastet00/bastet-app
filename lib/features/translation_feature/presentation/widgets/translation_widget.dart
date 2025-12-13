@@ -67,38 +67,38 @@ class TranslationWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   20.horizontalSpace,
-                  Stack(
-                    alignment: context.locale.languageCode == "en"
-                        ? Alignment.bottomLeft
-                        : Alignment.bottomRight,
-                    children: [
-                      TextWidget(
-                        title: context.locale.languageCode == "en"
-                            ? egyptianEnglishWord
-                            : egyptianArabicWord ?? '',
-                        color: Colors.transparent,
-                        fontWeight: FontWeight.w700,
-                        underLine: true,
-                        fontSize: isDetailsScreen ? 22.sp : 18.sp,
-                      ),
-                      TextWidget(
-                        title: context.locale.languageCode == "en"
-                            ? egyptianEnglishWord
-                            : egyptianArabicWord,
-                        color: AppColors.primaryColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: isDetailsScreen ? 22.sp : 18.sp,
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      if (!isDetailsScreen && translation?.id != null)
+                        navigateTo(TranslationDetailsScreen(
+                            translation: translation!));
+                    },
+                    child: Stack(
+                      alignment: context.locale.languageCode == "en"
+                          ? Alignment.bottomLeft
+                          : Alignment.bottomRight,
+                      children: [
+                        TextWidget(
+                          title: context.locale.languageCode == "en"
+                              ? egyptianEnglishWord
+                              : egyptianArabicWord ?? '',
+                          color: Colors.transparent,
+                          fontWeight: FontWeight.w700,
+                          underLine: true,
+                          fontSize: isDetailsScreen ? 22.sp : 18.sp,
+                        ),
+                        TextWidget(
+                          title: context.locale.languageCode == "en"
+                              ? egyptianEnglishWord
+                              : egyptianArabicWord,
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w700,
+                          fontSize: isDetailsScreen ? 22.sp : 18.sp,
+                        ),
+                      ],
+                    ),
                   ),
                   if (!isDetailsScreen)
-                    // TextWidget(
-                    //   title: hieroglyphicSigns ?? '',
-                    //   fontWeight: FontWeight.w400,
-                    //   titleAlign: TextAlign.start,
-                    //   color: AppColors.primaryColor,
-                    //   maxLines: 6,
-                    // ),
                     Row(
                       children: [
                         Container(
@@ -191,7 +191,7 @@ class TranslationWidget extends StatelessWidget {
                       title: AppStrings.details.tr(),
                       titleColor: AppColors.white,
                       icon: ImageWidget(
-                        imageUrl: AppAssets.dictionary,
+                        imageUrl: AppAssets.detail,
                         width: 16.w,
                         height: 20.h,
                       ),
