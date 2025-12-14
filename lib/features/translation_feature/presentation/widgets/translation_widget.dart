@@ -93,7 +93,8 @@ class TranslationWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (!isDetailsScreen)
+                  if (!isDetailsScreen &&
+                      (hieroglyphicSigns?.isNotEmpty ?? false))
                     Row(
                       children: [
                         Container(
