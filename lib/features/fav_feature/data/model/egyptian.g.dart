@@ -21,13 +21,14 @@ class EgyptianAdapter extends TypeAdapter<Egyptian> {
       symbol: fields[1] as String?,
       transliteration: fields[2] as String?,
       hieroglyphics: (fields[3] as List?)?.cast<String>(),
+      hieroglyphicSigns: (fields[4] as List?)?.cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Egyptian obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.word)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class EgyptianAdapter extends TypeAdapter<Egyptian> {
       ..writeByte(2)
       ..write(obj.transliteration)
       ..writeByte(3)
-      ..write(obj.hieroglyphics);
+      ..write(obj.hieroglyphics)
+      ..writeByte(4)
+      ..write(obj.hieroglyphicSigns);
   }
 
   @override
