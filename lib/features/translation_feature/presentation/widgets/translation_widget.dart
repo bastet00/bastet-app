@@ -38,19 +38,14 @@ class TranslationWidget extends StatelessWidget {
     final arabic = translation?.arabic?.map((e) => e.word).join('، ');
     final english = translation?.english?.map((e) => e.word).join(', ');
     final hieroglyphicSigns =
-        translation?.egyptian?[0].hieroglyphicSigns?.map((e) => e).join(' ');
-    final hieroglyphics =
-        translation?.egyptian?[0].hieroglyphics?.map((e) => e).join(', ');
+        translation?.egyptian?[0].hieroglyphicSigns?.join(' ');
+    final hieroglyphics = translation?.egyptian?[0].hieroglyphics?.join(', ');
     final resources =
         translationDetails?.resources?.map((e) => '• $e').join('\n');
     final englishTransliteration =
         translationDetails?.egyptian?[0].transliteration ?? '';
 
     return InkWell(
-      // onTap: () {
-      //   if (!isDetailsScreen && translation?.id != null)
-      //     navigateTo(TranslationDetailsScreen(translation: translation!));
-      // },
       borderRadius: BorderRadius.circular(6.r),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
