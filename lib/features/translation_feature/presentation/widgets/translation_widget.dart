@@ -76,7 +76,7 @@ class TranslationWidget extends StatelessWidget {
                         TextWidget(
                           title: context.locale.languageCode == "en"
                               ? egyptianEnglishWord
-                              : egyptianArabicWord ?? '',
+                              : egyptianArabicWord,
                           color: Colors.transparent,
                           fontWeight: FontWeight.w700,
                           underLine: true,
