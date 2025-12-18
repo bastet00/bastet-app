@@ -40,7 +40,7 @@ class AppStrings {
   static const String beautiful = 'beautiful';
 
   /// Translation Widget
-  static const String dictionary = 'dictionary';
+  static const String details = 'details';
   static const String copied = 'copied';
   static const String englishLabel = 'english_label';
   static const String arabicLabel = 'arabic_label';
